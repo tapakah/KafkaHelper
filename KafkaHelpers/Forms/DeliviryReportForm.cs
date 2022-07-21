@@ -13,7 +13,7 @@ namespace KafkaHelpers
 {
     public partial class DeliviryReportForm : Form
     {
-        public DeliviryReport Report = new DeliviryReport();
+        public DeliviryStatus Report = new DeliviryStatus();
 
         public DeliviryReportForm()
         {

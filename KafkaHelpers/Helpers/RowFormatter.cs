@@ -23,10 +23,8 @@ namespace KafkaHelpers
             return string.Format("{0:n1}{1}", number, suffixes[counter]);
         }
 
-        public static DataRow CreateRow(GridRow rw, Terms terms)
+        public static GridRow CreateRow(GridRow rw, Terms terms)
         {
-            DataRow row = ds.Messages.NewRow();
-
             try
             {
                 var _timeStamp = TimeZoneInfo.ConvertTimeFromUtc(rw.Timestamp, TimeZoneInfo.Local);
@@ -59,22 +57,18 @@ namespace KafkaHelpers
                     }
                 }
 
-                row["Id"] = rw.Id;
-                row["Recived"] = _timeStamp;
-                row["Topic"] = rw.Topic;
-                row["Key"] = rw.Key;
-                row["Value"] = rw.Value;
+                return rw;
             }
             catch (Exception ex)
             {
-                row["Id"] = -1;
-                row["Recived"] = "InternalError";
-                row["Topic"] = "KEY:Error grid";
-                row["Key"] = string.Format("SYSTEM:{0}", ex.Message);
-                row["Value"] = DateTime.UtcNow;
+                rw.Id = -1;
+                rw.Timestamp = DateTime.UtcNow;
+                rw.Topic = "KEY:Error grid";
+                rw.Key = string.Format("SYSTEM:{0}", ex.Message);
+                rw.Value = "InternalError";
             }
 
-            return row;
+            return rw;
         }
     }
 }

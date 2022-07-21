@@ -1,13 +1,10 @@
 ﻿using Confluent.Kafka;
 using KafkaHelpers.Model;
-using Moq;
 using Polly;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,19 +15,19 @@ namespace KafkaHelpers
     public partial class MainForm : Form
     {
         private CancellationTokenSource cancelSource;
-        private static string Caption = "KafkaHelper by TaPaKaH";
-        private static int DEFAULT_COUNTER = 100;
-        private static int DELAY_TIMER_STATUS = 1000;
+        private static readonly string Caption = "KafkaHelper by TaPaKaH";
+        private static readonly int DEFAULT_COUNTER = 100;
+        private static readonly int DELAY_TIMER_STATUS = 1000;
         private string kafkaServer = string.Empty;
         private readonly string kafkaServerList = string.Empty;
         private readonly string kafkaTopics = string.Empty;
         private readonly string kafkaChkTopics = string.Empty;
-        private List<string> topics = new List<string>();
-        private Terms terms = new Terms();
-        private KafkaHelper _kafka;
-        private static System.Threading.Timer TTimer;
-        private static string STATUS_READ = "READ";
-        private static string STATUS_WAIT = "WAIT";
+        private readonly List<string> topics = new List<string>();
+        private readonly Terms terms = new Terms();
+        private readonly KafkaHelper _kafka;
+        private static System.Threading.Timer tTimer;
+        private static readonly string STATUS_READ = "READ";
+        private static readonly string STATUS_WAIT = "WAIT";
         private static int ID_COUNTER;
 
         public static event EventHandler<string> StatusTextChanged;
@@ -146,32 +143,6 @@ namespace KafkaHelpers
 
             btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = true;
             btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = false;
-            dataGridViewSubscriber.AutoGenerateColumns = true;
-
-            dataGridViewSubscriber.Columns.Add("Id", "Id");
-            dataGridViewSubscriber.Columns["Id"].DefaultCellStyle.Font = new System.Drawing.Font("Verdana", 7, FontStyle.Regular);
-            dataGridViewSubscriber.Columns["Id"].Width = 40;
-            dataGridViewSubscriber.Columns["Id"].ValueType = typeof(long);
-
-            dataGridViewSubscriber.Columns.Add("Reccived", "TimeStamp");
-            dataGridViewSubscriber.Columns["Reccived"].DefaultCellStyle.Font = new System.Drawing.Font("Verdana", 7, FontStyle.Regular);
-            dataGridViewSubscriber.Columns["Reccived"].Width = 150;
-            dataGridViewSubscriber.Columns["Reccived"].ValueType = typeof(DateTime);
-
-            dataGridViewSubscriber.Columns.Add("Topic", "Topic");
-            dataGridViewSubscriber.Columns["Topic"].DefaultCellStyle.Font = new System.Drawing.Font("Verdana", 7, FontStyle.Bold);
-            dataGridViewSubscriber.Columns["Topic"].Width = 150;
-            dataGridViewSubscriber.Columns["Topic"].ValueType = typeof(string);
-
-            dataGridViewSubscriber.Columns.Add("Key", "Key");
-            dataGridViewSubscriber.Columns["Key"].DefaultCellStyle.Font = new System.Drawing.Font("Verdana", 7, FontStyle.Regular);
-            dataGridViewSubscriber.Columns["Key"].Width = 100;
-            dataGridViewSubscriber.Columns["Key"].ValueType = typeof(string);
-
-            dataGridViewSubscriber.Columns.Add("Value", "Value");
-            dataGridViewSubscriber.Columns["Value"].DefaultCellStyle.Font = new System.Drawing.Font("Verdana", 7, FontStyle.Regular);
-            dataGridViewSubscriber.Columns["Value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewSubscriber.Columns["Value"].ValueType = typeof(string);
 
             _toolStripLabel.Text = "UNSUBSCRIBE";
 
@@ -208,6 +179,11 @@ namespace KafkaHelpers
         }
 
         private async void btnSubscribe_Click(object sender, EventArgs e)
+        {
+            await Subscribe();
+        }
+
+        private async Task Subscribe()
         {
             AddUpdateAppSettings("SelectedServerIndex", ctbKafkaServer.SelectedIndex.ToString());
             tabControl.SelectedTab = tabPageSubsriber;
@@ -254,7 +230,6 @@ namespace KafkaHelpers
             }
 
             _consumerDataSet.Messages.Clear();
-            dataGridViewSubscriber.Rows.Clear();
             ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = false;
             btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = true;
 
@@ -321,7 +296,7 @@ namespace KafkaHelpers
 
                     while (!stoppingToken.IsCancellationRequested)
                     {
-                        TTimer = new System.Threading.Timer(
+                        tTimer = new System.Threading.Timer(
                                         new TimerCallback(TickTimer),
                                         null,
                                         DELAY_TIMER_STATUS,
@@ -334,7 +309,7 @@ namespace KafkaHelpers
                             continue;
                         }
 
-                        TTimer.Change(
+                        tTimer.Change(
                                         Timeout.Infinite,
                                         Timeout.Infinite
                                     );
@@ -396,9 +371,20 @@ namespace KafkaHelpers
         {
             dataGridViewSubscriber.Invoke(new Action(() =>
             {
-                DataRow _r = RowFormatter.CreateRow(row, terms);
+                var rw = RowFormatter.CreateRow(row, terms);
 
-                if (_r != null) dataGridViewSubscriber.Rows.Add(_r.ItemArray);
+                if (rw != null)
+                {
+                    ConsumerDataSet.MessagesRow nRow = _consumerDataSet.Messages.NewMessagesRow();
+
+                    nRow.Id = rw.Id;
+                    nRow.Value = rw.Value;
+                    nRow.Recived = rw.Timestamp;
+                    nRow.Key = rw.Key;
+                    nRow.Topic = rw.Topic;
+
+                    _consumerDataSet.Messages.Rows.Add(nRow);
+                }
             }
             ));
         }
@@ -416,6 +402,11 @@ namespace KafkaHelpers
         }
 
         private void btnReadTopics_Click(object sender, EventArgs e)
+        {
+            ReadTopics();
+        }
+
+        private void ReadTopics()
         {
             var config = new ProducerConfig
             {
@@ -465,14 +456,14 @@ namespace KafkaHelpers
         {
             if (e.RowIndex > 0)
             {
-                DataGridViewRow r = dataGridViewSubscriber.Rows[e.RowIndex];
+                var r = _consumerDataSet.Messages.Rows[e.RowIndex];
 
                 using (MessageDetailForm detail = new MessageDetailForm())
                 {
-                    detail.Entity.Id = Convert.ToInt32(r.Cells["Id"]?.Value);
-                    detail.Entity.Key = r.Cells["Key"].Value?.ToString();
-                    detail.Entity.Topic = r.Cells["Topic"].Value?.ToString();
-                    detail.Entity.Message = r.Cells["Value"].Value?.ToString();
+                    detail.Entity.Id = Convert.ToInt32(r["Id"]);
+                    detail.Entity.Key = r["Key"].ToString();
+                    detail.Entity.Topic = r["Topic"].ToString();
+                    detail.Entity.Message = r["Value"].ToString();
 
                     detail.ShowDialog(this);
                 }
@@ -507,70 +498,41 @@ namespace KafkaHelpers
         {
             int _cnt = Convert.ToInt32(cntToSend.Value);
 
-            MessageDetailEntity _e = new MessageDetailEntity();
-            _e.Topic = cmbProducerTopic.Text;
-            _e.Key = tbProducerKey.Text;
-            _e.Message = tbProducerValue.Text;
+            MessageDetailEntity _e = new MessageDetailEntity
+            {
+                Topic = cmbProducerTopic.Text,
+                Key = tbProducerKey.Text,
+                Message = tbProducerValue.Text
+            };
 
-            if (cancelSource == null)
-            { cancelSource = new CancellationTokenSource(); }
-
-            var mock = new Mock<IProducer<long, string>>();
-            var Testproducer = mock.Object;
-
-            var produceCount = 0;
-            var flushCount = 0;
-
-            mock.Setup(m =>
-                       m.Produce(It.IsAny<string>(), It.IsAny<Message<long, string>>(), It.IsAny<Action<DeliveryReport<long, string>>>()))
-                .Callback<string, Message<long, string>, Action<DeliveryReport<long, string>>>((topic, message, action) =>
-                    {
-                        var result = new DeliveryReport<long, string>
-                        {
-                            Topic = topic,
-                            Partition = 0,
-                            Offset = 0,
-                            Error = new Error(ErrorCode.NoError),
-                            Message = message
-                        };
-                        action.Invoke(result);
-                        produceCount += 1;
-                    });
-            mock.Setup(m => m.Flush(It.IsAny<TimeSpan>())).Returns(0).Callback(() => flushCount += 1);
+            var cancelSource = new CancellationTokenSource();
 
             try
             {
-                using (IProducer<long, string> producer = _kafka.CreateKafkaProducer(kafkaServer))
+                using (IProducer<string, string> producer = _kafka.CreateKafkaProducer(kafkaServer))
                 {
-                    
-                    bool _result = false;
-
-                    DeliviryReport sr = new DeliviryReport
-                    {
-                        Start = DateTime.Now,
-                        MessageSize = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(_e.Message))
-                    };
+                    DeliveryResult<string, string> _result = null;
+                    DeliviryStatus ds = new DeliviryStatus() { Start = DateTime.Now, Count = 0 };
 
                     for (int i = 1; i <= _cnt; i++)
                     {
                         _result = await _kafka.SendToKafka(_e.Key, _e.Topic, _e.Message, producer, cancelSource.Token);
-                        
-                        sr.Count = i;
 
-                        if (!_result) break;
+                        if (_result.Status != PersistenceStatus.Persisted) break;
+                        ds.Count++;
                     }
 
-                    if (!_result)
+                    if (_result.Status != PersistenceStatus.Persisted)
                     {
-                        MessageBox.Show("Send to kafka failed");
+                        MessageBox.Show($"Send to kafka failed {_result.Status}");
                     }
                     else
                     {
-                        sr.Finish = DateTime.Now;
+                        ds.Finish = DateTime.Now;
 
                         using (DeliviryReportForm report = new DeliviryReportForm())
                         {
-                            report.Report = sr;
+                            report.Report = ds;
                             report.ShowDialog(this);
                         }
                     }
@@ -578,13 +540,14 @@ namespace KafkaHelpers
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            dataGridViewSubscriber.Rows.Clear();
+            _consumerDataSet.Messages.Rows.Clear();
         }
 
         private void btnMax_Click(object sender, EventArgs e)
@@ -597,6 +560,14 @@ namespace KafkaHelpers
             if (System.Text.RegularExpressions.Regex.IsMatch(tbCounter.Text, "[^0-9]"))
             {
                 tbCounter.Text = tbCounter.Text.Remove(tbCounter.Text.Length - 1);
+            }
+        }
+
+        private async void ctbKafkaServer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                ReadTopics();
             }
         }
     }
