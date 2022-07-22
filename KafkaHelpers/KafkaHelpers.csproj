@@ -222,6 +222,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images.ico" />
+    <None Include="Resources\view_16.png" />
+    <None Include="Resources\view.png" />
     <None Include="Resources\mail_16.png" />
     <None Include="Resources\garbage_empty.png" />
     <None Include="Resources\stop.png" />

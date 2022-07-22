@@ -124,8 +124,8 @@
   <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mail_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mail_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_ball_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_ball_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,7 +133,10 @@
   <data name="garbage_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\garbage_empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mail_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mail_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="play2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\view_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

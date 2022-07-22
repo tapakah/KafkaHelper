@@ -563,12 +563,35 @@ namespace KafkaHelpers
             }
         }
 
-        private async void ctbKafkaServer_KeyPress(object sender, KeyPressEventArgs e)
+        private void ctbKafkaServer_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 ReadTopics();
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewSubscriber.SelectedRows != null)
+            {
+                var r = _consumerDataSet.Messages.Rows[dataGridViewSubscriber.SelectedRows[0].Index];
+
+                using (MessageDetailForm detail = new MessageDetailForm())
+                {
+                    detail.Entity.Id = Convert.ToInt32(r["Id"]);
+                    detail.Entity.Key = r["Key"].ToString();
+                    detail.Entity.Topic = r["Topic"].ToString();
+                    detail.Entity.Message = r["Value"].ToString();
+
+                    detail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void dataGridViewSubscriber_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
