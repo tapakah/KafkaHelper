@@ -68,13 +68,6 @@
             this._toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this._toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this._tsStatusConsumer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this.btnUnSubscribe2 = new System.Windows.Forms.Button();
             this.btnSubscribe2 = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -87,7 +80,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
+            this._panel = new System.Windows.Forms.Panel();
+            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -95,10 +96,11 @@
             this.groupBoxTime.SuspendLayout();
             this.tabPageSubsriber.SuspendLayout();
             this._statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubscriber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             this.tabPageProducer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
+            this._panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,7 +133,7 @@
             this.chklTopics.Location = new System.Drawing.Point(62, 165);
             this.chklTopics.Name = "chklTopics";
             this.chklTopics.ScrollAlwaysVisible = true;
-            this.chklTopics.Size = new System.Drawing.Size(539, 344);
+            this.chklTopics.Size = new System.Drawing.Size(539, 429);
             this.chklTopics.TabIndex = 5;
             // 
             // tabControl
@@ -145,7 +147,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(901, 545);
+            this.tabControl.Size = new System.Drawing.Size(989, 643);
             this.tabControl.TabIndex = 0;
             // 
             // tabPageSetting
@@ -165,7 +167,7 @@
             this.tabPageSetting.Location = new System.Drawing.Point(4, 22);
             this.tabPageSetting.Name = "tabPageSetting";
             this.tabPageSetting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSetting.Size = new System.Drawing.Size(893, 519);
+            this.tabPageSetting.Size = new System.Drawing.Size(981, 617);
             this.tabPageSetting.TabIndex = 0;
             this.tabPageSetting.Text = "Setting";
             // 
@@ -392,16 +394,13 @@
             // tabPageSubsriber
             // 
             this.tabPageSubsriber.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageSubsriber.Controls.Add(this.btnView);
+            this.tabPageSubsriber.Controls.Add(this._dataGridViewSubscriber);
+            this.tabPageSubsriber.Controls.Add(this._panel);
             this.tabPageSubsriber.Controls.Add(this._statusStrip);
-            this.tabPageSubsriber.Controls.Add(this.dataGridViewSubscriber);
-            this.tabPageSubsriber.Controls.Add(this.btnUnSubscribe2);
-            this.tabPageSubsriber.Controls.Add(this.btnSubscribe2);
-            this.tabPageSubsriber.Controls.Add(this.btnClear);
             this.tabPageSubsriber.Location = new System.Drawing.Point(4, 22);
             this.tabPageSubsriber.Name = "tabPageSubsriber";
             this.tabPageSubsriber.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSubsriber.Size = new System.Drawing.Size(893, 519);
+            this.tabPageSubsriber.Size = new System.Drawing.Size(981, 617);
             this.tabPageSubsriber.TabIndex = 1;
             this.tabPageSubsriber.Text = "Subscriber";
             // 
@@ -426,9 +425,9 @@
             this._toolStripProgressBar,
             this._toolStripStatus,
             this._tsStatusConsumer});
-            this._statusStrip.Location = new System.Drawing.Point(3, 492);
+            this._statusStrip.Location = new System.Drawing.Point(3, 590);
             this._statusStrip.Name = "_statusStrip";
-            this._statusStrip.Size = new System.Drawing.Size(887, 24);
+            this._statusStrip.Size = new System.Drawing.Size(975, 24);
             this._statusStrip.TabIndex = 20;
             this._statusStrip.Text = "statusStrip1";
             // 
@@ -472,97 +471,6 @@
             this._tsStatusConsumer.ForeColor = System.Drawing.Color.Navy;
             this._tsStatusConsumer.Name = "_tsStatusConsumer";
             this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
-            // 
-            // dataGridViewSubscriber
-            // 
-            this.dataGridViewSubscriber.AllowUserToAddRows = false;
-            this.dataGridViewSubscriber.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
-            this.dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewSubscriber.AutoGenerateColumns = false;
-            this.dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSubscriber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.recivedDataGridViewTextBoxColumn,
-            this.topicDataGridViewTextBoxColumn,
-            this.keyDataGridViewTextBoxColumn,
-            this.valueDataGridViewTextBoxColumn});
-            this.dataGridViewSubscriber.DataMember = "Messages";
-            this.dataGridViewSubscriber.DataSource = this._consumerDataSet;
-            this.dataGridViewSubscriber.Location = new System.Drawing.Point(2, 31);
-            this.dataGridViewSubscriber.Name = "dataGridViewSubscriber";
-            this.dataGridViewSubscriber.ReadOnly = true;
-            this.dataGridViewSubscriber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridViewSubscriber.RowHeadersVisible = false;
-            this.dataGridViewSubscriber.RowHeadersWidth = 25;
-            this.dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSubscriber.Size = new System.Drawing.Size(889, 460);
-            this.dataGridViewSubscriber.TabIndex = 4;
-            this.dataGridViewSubscriber.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellContentClick);
-            this.dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 42;
-            // 
-            // recivedDataGridViewTextBoxColumn
-            // 
-            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
-            dataGridViewCellStyle3.Format = "dd.MM.yyyy hh:mm:ss.FFFF";
-            dataGridViewCellStyle3.NullValue = null;
-            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.recivedDataGridViewTextBoxColumn.HeaderText = "Recived";
-            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
-            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.recivedDataGridViewTextBoxColumn.Width = 72;
-            // 
-            // topicDataGridViewTextBoxColumn
-            // 
-            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
-            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
-            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
-            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
-            this.topicDataGridViewTextBoxColumn.Width = 59;
-            // 
-            // keyDataGridViewTextBoxColumn
-            // 
-            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
-            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
-            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.keyDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // _consumerDataSet
-            // 
-            this._consumerDataSet.DataSetName = "ConsumerDataSet";
-            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnUnSubscribe2
             // 
@@ -616,7 +524,7 @@
             this.tabPageProducer.Location = new System.Drawing.Point(4, 22);
             this.tabPageProducer.Name = "tabPageProducer";
             this.tabPageProducer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProducer.Size = new System.Drawing.Size(893, 519);
+            this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
             this.tabPageProducer.TabIndex = 2;
             this.tabPageProducer.Text = "Producer";
             // 
@@ -712,16 +620,119 @@
             this.btnSendMessage.UseVisualStyleBackColor = true;
             this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
             // 
+            // _panel
+            // 
+            this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._panel.Controls.Add(this.btnView);
+            this._panel.Controls.Add(this.btnClear);
+            this._panel.Controls.Add(this.btnSubscribe2);
+            this._panel.Controls.Add(this.btnUnSubscribe2);
+            this._panel.Location = new System.Drawing.Point(3, 6);
+            this._panel.Name = "_panel";
+            this._panel.Size = new System.Drawing.Size(975, 32);
+            this._panel.TabIndex = 21;
+            // 
+            // _dataGridViewSubscriber
+            // 
+            this._dataGridViewSubscriber.AllowUserToAddRows = false;
+            this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
+            this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._dataGridViewSubscriber.AutoGenerateColumns = false;
+            this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this._dataGridViewSubscriber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.recivedDataGridViewTextBoxColumn,
+            this.topicDataGridViewTextBoxColumn,
+            this.keyDataGridViewTextBoxColumn,
+            this.valueDataGridViewTextBoxColumn});
+            this._dataGridViewSubscriber.DataMember = "Messages";
+            this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
+            this._dataGridViewSubscriber.Location = new System.Drawing.Point(9, 44);
+            this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
+            this._dataGridViewSubscriber.ReadOnly = true;
+            this._dataGridViewSubscriber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this._dataGridViewSubscriber.RowHeadersVisible = false;
+            this._dataGridViewSubscriber.RowHeadersWidth = 25;
+            this._dataGridViewSubscriber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
+            this._dataGridViewSubscriber.TabIndex = 22;
+            // 
+            // _consumerDataSet
+            // 
+            this._consumerDataSet.DataSetName = "ConsumerDataSet";
+            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // messagesBindingSource
             // 
             this.messagesBindingSource.DataMember = "Messages";
             this.messagesBindingSource.DataSource = this._consumerDataSet;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 42;
+            // 
+            // recivedDataGridViewTextBoxColumn
+            // 
+            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
+            dataGridViewCellStyle3.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
+            dataGridViewCellStyle3.NullValue = null;
+            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.recivedDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
+            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
+            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.recivedDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // topicDataGridViewTextBoxColumn
+            // 
+            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
+            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
+            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
+            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
+            this.topicDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
+            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.keyDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 546);
+            this.ClientSize = new System.Drawing.Size(989, 644);
             this.Controls.Add(this.tabControl);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -741,11 +752,12 @@
             this.tabPageSubsriber.PerformLayout();
             this._statusStrip.ResumeLayout(false);
             this._statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubscriber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             this.tabPageProducer.ResumeLayout(false);
             this.tabPageProducer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
+            this._panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -762,7 +774,6 @@
         private System.Windows.Forms.Button btnUncheckAll;
         private System.Windows.Forms.Button btnCheckAll;
         private System.Windows.Forms.TabPage tabPageProducer;
-        private System.Windows.Forms.DataGridView dataGridViewSubscriber;
         private System.Windows.Forms.Button btnUnSubscribe;
         private System.Windows.Forms.BindingSource messagesBindingSource;
         private KafkaHelpers.Model.ConsumerDataSet _consumerDataSet;
@@ -800,12 +811,14 @@
         private System.Windows.Forms.TextBox tbCounter;
         private System.Windows.Forms.ToolStripStatusLabel _tsStatusConsumer;
         private System.Windows.Forms.NumericUpDown cntToSend;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Panel _panel;
+        private System.Windows.Forms.DataGridView _dataGridViewSubscriber;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn recivedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn topicDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btnView;
     }
 }
 

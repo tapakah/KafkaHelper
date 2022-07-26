@@ -369,7 +369,7 @@ namespace KafkaHelpers
 
         private void AddRow(GridRow row)
         {
-            dataGridViewSubscriber.Invoke(new Action(() =>
+            _dataGridViewSubscriber.Invoke(new Action(() =>
             {
                 var rw = RowFormatter.CreateRow(row, terms);
 
@@ -573,9 +573,9 @@ namespace KafkaHelpers
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (dataGridViewSubscriber.SelectedRows != null)
+            if (_dataGridViewSubscriber.SelectedRows != null)
             {
-                var r = _consumerDataSet.Messages.Rows[dataGridViewSubscriber.SelectedRows[0].Index];
+                var r = _consumerDataSet.Messages.Rows[_dataGridViewSubscriber.SelectedRows[0].Index];
 
                 using (MessageDetailForm detail = new MessageDetailForm())
                 {

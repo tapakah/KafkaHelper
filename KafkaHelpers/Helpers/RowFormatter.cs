@@ -1,23 +1,22 @@
 ﻿using KafkaHelpers.Model;
 using System;
-using System.Data;
 
 namespace KafkaHelpers
 {
     public static class RowFormatter
     {
-        private static ConsumerDataSet ds = new ConsumerDataSet();
-        
-        static readonly string[] suffixes =
+        private static readonly string[] suffixes =
             { "Bytes", "KB", "MB", "GB", "TB", "PB" };
 
         public static string FormatSize(Int64 bytes)
         {
             int counter = 0;
             decimal number = (decimal)bytes;
+
             while (Math.Round(number / 1024) >= 1)
             {
-                number = number / 1024;
+                number /= 1024;
+
                 counter++;
             }
             return string.Format("{0:n1}{1}", number, suffixes[counter]);
@@ -56,8 +55,6 @@ namespace KafkaHelpers
                         return null;
                     }
                 }
-
-                return rw;
             }
             catch (Exception ex)
             {
@@ -67,6 +64,8 @@ namespace KafkaHelpers
                 rw.Key = string.Format("SYSTEM:{0}", ex.Message);
                 rw.Value = "InternalError";
             }
+
+            rw.Timestamp = TimeZoneInfo.ConvertTimeFromUtc(rw.Timestamp, TimeZoneInfo.Local).ToLocalTime();
 
             return rw;
         }
