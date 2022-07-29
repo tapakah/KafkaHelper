@@ -60,7 +60,18 @@
             this.btnCheckAll = new System.Windows.Forms.Button();
             this.btnSubscribe = new System.Windows.Forms.Button();
             this.tabPageSubsriber = new System.Windows.Forms.TabPage();
+            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
+            this._panel = new System.Windows.Forms.Panel();
             this.btnView = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSubscribe2 = new System.Windows.Forms.Button();
+            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
             this._statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripKafkaServer = new System.Windows.Forms.ToolStripStatusLabel();
             this._toolStripKafkaServerValue = new System.Windows.Forms.ToolStripStatusLabel();
@@ -68,9 +79,6 @@
             this._toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this._toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this._tsStatusConsumer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
-            this.btnSubscribe2 = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
             this.tabPageProducer = new System.Windows.Forms.TabPage();
             this.cntToSend = new System.Windows.Forms.NumericUpDown();
             this.tbProducerValue = new System.Windows.Forms.TextBox();
@@ -80,27 +88,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
-            this._panel = new System.Windows.Forms.Panel();
-            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxTime.SuspendLayout();
             this.tabPageSubsriber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
+            this._panel.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this.tabPageProducer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
-            this._panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -404,17 +404,158 @@
             this.tabPageSubsriber.TabIndex = 1;
             this.tabPageSubsriber.Text = "Subscriber";
             // 
+            // _dataGridViewSubscriber
+            // 
+            this._dataGridViewSubscriber.AllowUserToAddRows = false;
+            this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
+            this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._dataGridViewSubscriber.AutoGenerateColumns = false;
+            this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this._dataGridViewSubscriber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.recivedDataGridViewTextBoxColumn,
+            this.topicDataGridViewTextBoxColumn,
+            this.keyDataGridViewTextBoxColumn,
+            this.valueDataGridViewTextBoxColumn});
+            this._dataGridViewSubscriber.DataMember = "Messages";
+            this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
+            this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
+            this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
+            this._dataGridViewSubscriber.ReadOnly = true;
+            this._dataGridViewSubscriber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this._dataGridViewSubscriber.RowHeadersVisible = false;
+            this._dataGridViewSubscriber.RowHeadersWidth = 25;
+            this._dataGridViewSubscriber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
+            this._dataGridViewSubscriber.TabIndex = 22;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 42;
+            // 
+            // recivedDataGridViewTextBoxColumn
+            // 
+            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
+            dataGridViewCellStyle3.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
+            dataGridViewCellStyle3.NullValue = null;
+            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.recivedDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
+            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
+            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.recivedDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // topicDataGridViewTextBoxColumn
+            // 
+            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
+            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
+            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
+            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
+            this.topicDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
+            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.keyDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // _consumerDataSet
+            // 
+            this._consumerDataSet.DataSetName = "ConsumerDataSet";
+            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // _panel
+            // 
+            this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._panel.Controls.Add(this.btnView);
+            this._panel.Controls.Add(this.btnClear);
+            this._panel.Controls.Add(this.btnSubscribe2);
+            this._panel.Controls.Add(this.btnUnSubscribe2);
+            this._panel.Location = new System.Drawing.Point(3, 6);
+            this._panel.Name = "_panel";
+            this._panel.Size = new System.Drawing.Size(975, 33);
+            this._panel.TabIndex = 21;
+            // 
             // btnView
             // 
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnView.Image = global::KafkaHelpers.Properties.Resources.view_16;
-            this.btnView.Location = new System.Drawing.Point(98, 3);
+            this.btnView.Location = new System.Drawing.Point(98, 4);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(27, 25);
             this.btnView.TabIndex = 3;
             this.btnView.UseVisualStyleBackColor = true;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClear.Image = global::KafkaHelpers.Properties.Resources.garbage_empty;
+            this.btnClear.Location = new System.Drawing.Point(67, 4);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(27, 25);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSubscribe2
+            // 
+            this.btnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.play4;
+            this.btnSubscribe2.Location = new System.Drawing.Point(5, 4);
+            this.btnSubscribe2.Name = "btnSubscribe2";
+            this.btnSubscribe2.Size = new System.Drawing.Size(27, 25);
+            this.btnSubscribe2.TabIndex = 0;
+            this.btnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubscribe2.UseVisualStyleBackColor = true;
+            this.btnSubscribe2.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
+            // btnUnSubscribe2
+            // 
+            this.btnUnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.stop;
+            this.btnUnSubscribe2.Location = new System.Drawing.Point(36, 4);
+            this.btnUnSubscribe2.Name = "btnUnSubscribe2";
+            this.btnUnSubscribe2.Size = new System.Drawing.Size(27, 25);
+            this.btnUnSubscribe2.TabIndex = 1;
+            this.btnUnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUnSubscribe2.UseVisualStyleBackColor = true;
+            this.btnUnSubscribe2.Click += new System.EventHandler(this.btnUnSubscribe_Click);
             // 
             // _statusStrip
             // 
@@ -471,44 +612,6 @@
             this._tsStatusConsumer.ForeColor = System.Drawing.Color.Navy;
             this._tsStatusConsumer.Name = "_tsStatusConsumer";
             this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
-            // 
-            // btnUnSubscribe2
-            // 
-            this.btnUnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.stop;
-            this.btnUnSubscribe2.Location = new System.Drawing.Point(36, 3);
-            this.btnUnSubscribe2.Name = "btnUnSubscribe2";
-            this.btnUnSubscribe2.Size = new System.Drawing.Size(27, 25);
-            this.btnUnSubscribe2.TabIndex = 1;
-            this.btnUnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUnSubscribe2.UseVisualStyleBackColor = true;
-            this.btnUnSubscribe2.Click += new System.EventHandler(this.btnUnSubscribe_Click);
-            // 
-            // btnSubscribe2
-            // 
-            this.btnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.play4;
-            this.btnSubscribe2.Location = new System.Drawing.Point(5, 3);
-            this.btnSubscribe2.Name = "btnSubscribe2";
-            this.btnSubscribe2.Size = new System.Drawing.Size(27, 25);
-            this.btnSubscribe2.TabIndex = 0;
-            this.btnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSubscribe2.UseVisualStyleBackColor = true;
-            this.btnSubscribe2.Click += new System.EventHandler(this.btnSubscribe_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.Image = global::KafkaHelpers.Properties.Resources.garbage_empty;
-            this.btnClear.Location = new System.Drawing.Point(67, 3);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(27, 25);
-            this.btnClear.TabIndex = 2;
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // tabPageProducer
             // 
@@ -620,113 +723,10 @@
             this.btnSendMessage.UseVisualStyleBackColor = true;
             this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
             // 
-            // _panel
-            // 
-            this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._panel.Controls.Add(this.btnView);
-            this._panel.Controls.Add(this.btnClear);
-            this._panel.Controls.Add(this.btnSubscribe2);
-            this._panel.Controls.Add(this.btnUnSubscribe2);
-            this._panel.Location = new System.Drawing.Point(3, 6);
-            this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(975, 32);
-            this._panel.TabIndex = 21;
-            // 
-            // _dataGridViewSubscriber
-            // 
-            this._dataGridViewSubscriber.AllowUserToAddRows = false;
-            this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
-            this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._dataGridViewSubscriber.AutoGenerateColumns = false;
-            this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this._dataGridViewSubscriber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.recivedDataGridViewTextBoxColumn,
-            this.topicDataGridViewTextBoxColumn,
-            this.keyDataGridViewTextBoxColumn,
-            this.valueDataGridViewTextBoxColumn});
-            this._dataGridViewSubscriber.DataMember = "Messages";
-            this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
-            this._dataGridViewSubscriber.Location = new System.Drawing.Point(9, 44);
-            this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
-            this._dataGridViewSubscriber.ReadOnly = true;
-            this._dataGridViewSubscriber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this._dataGridViewSubscriber.RowHeadersVisible = false;
-            this._dataGridViewSubscriber.RowHeadersWidth = 25;
-            this._dataGridViewSubscriber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
-            this._dataGridViewSubscriber.TabIndex = 22;
-            // 
-            // _consumerDataSet
-            // 
-            this._consumerDataSet.DataSetName = "ConsumerDataSet";
-            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // messagesBindingSource
             // 
             this.messagesBindingSource.DataMember = "Messages";
             this.messagesBindingSource.DataSource = this._consumerDataSet;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 42;
-            // 
-            // recivedDataGridViewTextBoxColumn
-            // 
-            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
-            dataGridViewCellStyle3.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
-            dataGridViewCellStyle3.NullValue = null;
-            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.recivedDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
-            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
-            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.recivedDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // topicDataGridViewTextBoxColumn
-            // 
-            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
-            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
-            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
-            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
-            this.topicDataGridViewTextBoxColumn.Width = 59;
-            // 
-            // keyDataGridViewTextBoxColumn
-            // 
-            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
-            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
-            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.keyDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -750,14 +750,14 @@
             this.groupBoxTime.PerformLayout();
             this.tabPageSubsriber.ResumeLayout(false);
             this.tabPageSubsriber.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
+            this._panel.ResumeLayout(false);
             this._statusStrip.ResumeLayout(false);
             this._statusStrip.PerformLayout();
             this.tabPageProducer.ResumeLayout(false);
             this.tabPageProducer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
-            this._panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
