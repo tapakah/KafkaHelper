@@ -59,6 +59,13 @@
             this.btnCheckAll = new System.Windows.Forms.Button();
             this.btnSubscribe = new System.Windows.Forms.Button();
             this.tabPageSubsriber = new System.Windows.Forms.TabPage();
+            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this._panel = new System.Windows.Forms.Panel();
             this.btnView = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -80,13 +87,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
-            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recivedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.topicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
@@ -94,12 +94,12 @@
             this.groupBox2.SuspendLayout();
             this.groupBoxTime.SuspendLayout();
             this.tabPageSubsriber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             this._panel.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this.tabPageProducer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -403,6 +403,90 @@
             this.tabPageSubsriber.TabIndex = 1;
             this.tabPageSubsriber.Text = "Subscriber";
             // 
+            // _dataGridViewSubscriber
+            // 
+            this._dataGridViewSubscriber.AllowUserToAddRows = false;
+            this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
+            this._dataGridViewSubscriber.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
+            this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._dataGridViewSubscriber.AutoGenerateColumns = false;
+            this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
+            this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.recivedDataGridViewTextBoxColumn,
+            this.topicDataGridViewTextBoxColumn,
+            this.keyDataGridViewTextBoxColumn,
+            this.valueDataGridViewTextBoxColumn});
+            this._dataGridViewSubscriber.DataMember = "Messages";
+            this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
+            this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
+            this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
+            this._dataGridViewSubscriber.ReadOnly = true;
+            this._dataGridViewSubscriber.RowHeadersVisible = false;
+            this._dataGridViewSubscriber.RowHeadersWidth = 30;
+            this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
+            this._dataGridViewSubscriber.TabIndex = 22;
+            this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 42;
+            // 
+            // recivedDataGridViewTextBoxColumn
+            // 
+            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
+            dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
+            dataGridViewCellStyle2.NullValue = null;
+            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.recivedDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
+            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
+            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.recivedDataGridViewTextBoxColumn.Width = 88;
+            // 
+            // topicDataGridViewTextBoxColumn
+            // 
+            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
+            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
+            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
+            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
+            this.topicDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
+            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.keyDataGridViewTextBoxColumn.Width = 49;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // _consumerDataSet
+            // 
+            this._consumerDataSet.DataSetName = "ConsumerDataSet";
+            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // _panel
             // 
             this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -580,6 +664,7 @@
             this.tbProducerKey.Name = "tbProducerKey";
             this.tbProducerKey.Size = new System.Drawing.Size(391, 22);
             this.tbProducerKey.TabIndex = 1;
+            this.tbProducerKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbProducerKey_KeyPress);
             // 
             // label6
             // 
@@ -632,90 +717,6 @@
             this.btnSendMessage.UseVisualStyleBackColor = true;
             this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
             // 
-            // _dataGridViewSubscriber
-            // 
-            this._dataGridViewSubscriber.AllowUserToAddRows = false;
-            this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
-            this._dataGridViewSubscriber.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
-            this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._dataGridViewSubscriber.AutoGenerateColumns = false;
-            this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
-            this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.recivedDataGridViewTextBoxColumn,
-            this.topicDataGridViewTextBoxColumn,
-            this.keyDataGridViewTextBoxColumn,
-            this.valueDataGridViewTextBoxColumn});
-            this._dataGridViewSubscriber.DataMember = "Messages";
-            this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
-            this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
-            this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
-            this._dataGridViewSubscriber.ReadOnly = true;
-            this._dataGridViewSubscriber.RowHeadersVisible = false;
-            this._dataGridViewSubscriber.RowHeadersWidth = 30;
-            this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
-            this._dataGridViewSubscriber.TabIndex = 22;
-            this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 42;
-            // 
-            // recivedDataGridViewTextBoxColumn
-            // 
-            this.recivedDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.recivedDataGridViewTextBoxColumn.DataPropertyName = "Recived";
-            dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
-            dataGridViewCellStyle2.NullValue = null;
-            this.recivedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.recivedDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
-            this.recivedDataGridViewTextBoxColumn.Name = "recivedDataGridViewTextBoxColumn";
-            this.recivedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.recivedDataGridViewTextBoxColumn.Width = 88;
-            // 
-            // topicDataGridViewTextBoxColumn
-            // 
-            this.topicDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.topicDataGridViewTextBoxColumn.DataPropertyName = "Topic";
-            this.topicDataGridViewTextBoxColumn.HeaderText = "Topic";
-            this.topicDataGridViewTextBoxColumn.Name = "topicDataGridViewTextBoxColumn";
-            this.topicDataGridViewTextBoxColumn.ReadOnly = true;
-            this.topicDataGridViewTextBoxColumn.Width = 59;
-            // 
-            // keyDataGridViewTextBoxColumn
-            // 
-            this.keyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
-            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
-            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.keyDataGridViewTextBoxColumn.Width = 49;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // _consumerDataSet
-            // 
-            this._consumerDataSet.DataSetName = "ConsumerDataSet";
-            this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // messagesBindingSource
             // 
             this.messagesBindingSource.DataMember = "Messages";
@@ -743,14 +744,14 @@
             this.groupBoxTime.PerformLayout();
             this.tabPageSubsriber.ResumeLayout(false);
             this.tabPageSubsriber.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             this._panel.ResumeLayout(false);
             this._statusStrip.ResumeLayout(false);
             this._statusStrip.PerformLayout();
             this.tabPageProducer.ResumeLayout(false);
             this.tabPageProducer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
             this.ResumeLayout(false);
 

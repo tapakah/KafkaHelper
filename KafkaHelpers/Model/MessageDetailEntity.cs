@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 
 namespace KafkaHelpers
 {
-   public class MessageDetailEntity
+    public class MessageDetailEntity
     {
         private int id;
-        private string key;
+        private long key;
+        private string keystring;
         private string topic;
         private string message;
 
 
         public int Id { get { return id; } set { this.id = value; } }
-        public string Key 
-        { get 
-            { 
-            if (this.key == null) 
-                { return string.Empty; }
-            else
-                {
-                    return this.key ;
-                }
+        public long Key
+        {
+            get
+            {
+
+                return this.key;
             }
 
-            set { this.key = value; } 
+            set { this.key = value; }
         }
+        public string KeyString { get { return keystring; } set { this.keystring = value; } }
         public string Topic { get { return topic; } set { this.topic = value; } }
         public string Message { get { return message; } set { this.message = value; } }
     }

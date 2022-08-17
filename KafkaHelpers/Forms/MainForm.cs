@@ -464,7 +464,7 @@ namespace KafkaHelpers
                 using (MessageDetailForm detail = new MessageDetailForm())
                 {
                     detail.Entity.Id = Convert.ToInt32(r["Id"]);
-                    detail.Entity.Key = r["Key"].ToString();
+                    detail.Entity.KeyString = r["Key"].ToString();
                     detail.Entity.Topic = r["Topic"].ToString();
                     detail.Entity.Message = r["Value"].ToString();
 
@@ -504,7 +504,7 @@ namespace KafkaHelpers
             MessageDetailEntity _e = new MessageDetailEntity
             {
                 Topic = cmbProducerTopic.Text,
-                Key = tbProducerKey.Text,
+                Key = Convert.ToInt64(tbProducerKey.Text),
                 Message = tbProducerValue.Text
             };
 
@@ -512,9 +512,9 @@ namespace KafkaHelpers
 
             try
             {
-                using (IProducer<string, string> producer = _kafka.CreateKafkaProducer(kafkaServer))
+                using (IProducer<long, string> producer = _kafka.CreateKafkaProducer(kafkaServer))
                 {
-                    DeliveryResult<string, string> _result = null;
+                    DeliveryResult<long, string> _result = null;
                     DeliviryStatus ds = new DeliviryStatus() { Start = DateTime.Now, Count = 0 };
 
                     for (int i = 1; i <= _cnt; i++)
@@ -583,7 +583,7 @@ namespace KafkaHelpers
                 using (MessageDetailForm detail = new MessageDetailForm())
                 {
                     detail.Entity.Id = Convert.ToInt32(r["Id"]);
-                    detail.Entity.Key = r["Key"].ToString();
+                    detail.Entity.KeyString = r["Key"].ToString();
                     detail.Entity.Topic = r["Topic"].ToString();
                     detail.Entity.Message = r["Value"].ToString();
 
@@ -595,6 +595,21 @@ namespace KafkaHelpers
         private void dataGridViewSubscriber_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void tbProducerKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

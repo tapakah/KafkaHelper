@@ -9,7 +9,7 @@ namespace KafkaHelpers
 {
     public class KafkaHelper
     {
-        private AsyncPolicy _consumingPolicy;
+        private readonly AsyncPolicy _consumingPolicy;
         private static readonly TimeSpan CANCELLING_SEND_TO_KAFKA_TIME = TimeSpan.FromSeconds(3);
 
         public KafkaHelper(AsyncPolicy consumingPolicy)
@@ -35,7 +35,7 @@ namespace KafkaHelpers
             return consumerBuilder.SetKeyDeserializer(new KeyDeserializer(Encoding.UTF8)).Build();
         }
 
-        public IProducer<string, string> CreateKafkaProducer(string server)
+        public IProducer<long, string> CreateKafkaProducer(string server)
         {
             var config = new ProducerConfig
             {
@@ -49,7 +49,7 @@ namespace KafkaHelpers
                 //EnableBackgroundPoll = true,
             };
 
-            var producerBuilder = new ProducerBuilder<string, string>(config);
+            var producerBuilder = new ProducerBuilder<long, string>(config);
 
             return producerBuilder.Build();
         }
@@ -77,7 +77,7 @@ namespace KafkaHelpers
             return await _consumingPolicy.ExecuteAsync(ConsumeEvent, stoppingToken);
         }
 
-        public bool Send(string topic, IProducer<string, string> kafkaProducer, Message<string, string> message, ref CancellationToken stoppingToken)
+        public bool Send(string topic, IProducer<long, string> kafkaProducer, Message<long, string> message, ref CancellationToken stoppingToken)
         {
             void DefferedKafkaCancelAction(CancellationTokenSource cancellingSource)
             {
@@ -105,14 +105,14 @@ namespace KafkaHelpers
             }
         }
 
-        public async Task<DeliveryResult<string, string>> SendToKafka(
-            string key,
+        public async Task<DeliveryResult<long, string>> SendToKafka(
+            long key,
             string topic,
             string value,
-            IProducer<string, string> kafkaProducer,
+            IProducer<long, string> kafkaProducer,
             CancellationToken stoppingToken)
         {
-            Message<string, string> message = new Message<string, string>
+            Message<long, string> message = new Message<long, string>
             {
                 Key = key,
                 Value = value

@@ -25,7 +25,7 @@ namespace KafkaHelpers
         {
             tbId.Text = _entiry.Id.ToString();
             tbTopic.Text = _entiry.Topic.ToString();
-            tbKey.Text = _entiry.Key.ToString();
+            tbKey.Text = _entiry.KeyString;
             lbSize.Text = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(_entiry.Message));
             try
             {
