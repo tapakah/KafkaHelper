@@ -27,7 +27,8 @@ namespace KafkaHelpers
                 EnableAutoCommit = false,
                 EnableAutoOffsetStore = false,
                 EnablePartitionEof = true,
-                Acks = Acks.All
+                Acks = Acks.All,
+                MaxPartitionFetchBytes = 10485880
             };
 
             var consumerBuilder = new ConsumerBuilder<string, string>(config);
@@ -39,7 +40,8 @@ namespace KafkaHelpers
         {
             var config = new ProducerConfig
             {
-                BootstrapServers = server
+                BootstrapServers = server,
+                MessageMaxBytes = 10485880
                 //Acks = Acks.Leader
                 //EnableIdempotence = true,
                 //MaxInFlight = 1,

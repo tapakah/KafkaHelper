@@ -13,7 +13,7 @@ namespace KafkaHelpers
         private string keystring;
         private string topic;
         private string message;
-
+        private bool defaultJsonParse = true;
 
         public int Id { get { return id; } set { this.id = value; } }
         public long Key
@@ -29,5 +29,6 @@ namespace KafkaHelpers
         public string KeyString { get { return keystring; } set { this.keystring = value; } }
         public string Topic { get { return topic; } set { this.topic = value; } }
         public string Message { get { return message; } set { this.message = value; } }
+        public bool DefaultJsonParse { get { return defaultJsonParse; } set { this.defaultJsonParse = value; } }
     }
 }

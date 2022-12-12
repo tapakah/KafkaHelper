@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -467,7 +468,7 @@ namespace KafkaHelpers
                     detail.Entity.KeyString = r["Key"].ToString();
                     detail.Entity.Topic = r["Topic"].ToString();
                     detail.Entity.Message = r["Value"].ToString();
-
+                    detail.Entity.DefaultJsonParse = chbDefaultJsonParse.Checked;
                     detail.ShowDialog(this);
                 }
             }
@@ -500,12 +501,29 @@ namespace KafkaHelpers
         private async void btnSendMessage_Click(object sender, EventArgs e)
         {
             int _cnt = Convert.ToInt32(cntToSend.Value);
+            string messageText = string.Empty;
+            if (string.IsNullOrEmpty(textBoxFileToSend.Text))
+            {
+                messageText = tbProducerValue.Text;
+            }
+            else
+            {
+                if (File.Exists(textBoxFileToSend.Text))
+                {
+                    messageText = File.ReadAllText(textBoxFileToSend.Text);
+                }
+            }
+
+            if (!Int64.TryParse(tbProducerKey.Text, out long keyValue))
+            {
+                keyValue = 0;
+            }
 
             MessageDetailEntity _e = new MessageDetailEntity
             {
                 Topic = cmbProducerTopic.Text,
-                Key = Convert.ToInt64(tbProducerKey.Text),
-                Message = tbProducerValue.Text
+                Key = keyValue,
+                Message = messageText
             };
 
             var cancelSource = new CancellationTokenSource();
@@ -609,6 +627,23 @@ namespace KafkaHelpers
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void buttonFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+
+            open.Filter = "Text File | *.txt";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+
+                textBoxFileToSend.Text = open.FileName;
+            }
+            else
+            {
+                textBoxFileToSend.Text = String.Empty;
             }
         }
     }

@@ -67,6 +67,7 @@
             this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this._panel = new System.Windows.Forms.Panel();
+            this.chbDefaultJsonParse = new System.Windows.Forms.CheckBox();
             this.btnView = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSubscribe2 = new System.Windows.Forms.Button();
@@ -79,6 +80,8 @@
             this._toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this._tsStatusConsumer = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPageProducer = new System.Windows.Forms.TabPage();
+            this.buttonFile = new System.Windows.Forms.Button();
+            this.textBoxFileToSend = new System.Windows.Forms.TextBox();
             this.cntToSend = new System.Windows.Forms.NumericUpDown();
             this.tbProducerValue = new System.Windows.Forms.TextBox();
             this.tbProducerKey = new System.Windows.Forms.TextBox();
@@ -87,6 +90,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
+            this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
@@ -491,6 +495,7 @@
             // 
             this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._panel.Controls.Add(this.chbDefaultJsonParse);
             this._panel.Controls.Add(this.btnView);
             this._panel.Controls.Add(this.btnClear);
             this._panel.Controls.Add(this.btnSubscribe2);
@@ -499,6 +504,23 @@
             this._panel.Name = "_panel";
             this._panel.Size = new System.Drawing.Size(975, 33);
             this._panel.TabIndex = 21;
+            // 
+            // chbDefaultJsonParse
+            // 
+            this.chbDefaultJsonParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbDefaultJsonParse.AutoSize = true;
+            this.chbDefaultJsonParse.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDefaultJsonParse.Checked = true;
+            this.chbDefaultJsonParse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbDefaultJsonParse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chbDefaultJsonParse.Location = new System.Drawing.Point(774, 9);
+            this.chbDefaultJsonParse.Name = "chbDefaultJsonParse";
+            this.chbDefaultJsonParse.Size = new System.Drawing.Size(196, 17);
+            this.chbDefaultJsonParse.TabIndex = 4;
+            this.chbDefaultJsonParse.Text = "View with default JSON parse ON";
+            this.chbDefaultJsonParse.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.chbDefaultJsonParse.UseVisualStyleBackColor = true;
             // 
             // btnView
             // 
@@ -609,6 +631,8 @@
             // tabPageProducer
             // 
             this.tabPageProducer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageProducer.Controls.Add(this.buttonFile);
+            this.tabPageProducer.Controls.Add(this.textBoxFileToSend);
             this.tabPageProducer.Controls.Add(this.cntToSend);
             this.tabPageProducer.Controls.Add(this.tbProducerValue);
             this.tabPageProducer.Controls.Add(this.tbProducerKey);
@@ -623,6 +647,27 @@
             this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
             this.tabPageProducer.TabIndex = 2;
             this.tabPageProducer.Text = "Producer";
+            // 
+            // buttonFile
+            // 
+            this.buttonFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFile.Image = global::KafkaHelpers.Properties.Resources.paperclip;
+            this.buttonFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFile.Location = new System.Drawing.Point(774, 7);
+            this.buttonFile.Name = "buttonFile";
+            this.buttonFile.Size = new System.Drawing.Size(111, 26);
+            this.buttonFile.TabIndex = 8;
+            this.buttonFile.Text = "File to send";
+            this.buttonFile.UseVisualStyleBackColor = true;
+            this.buttonFile.Click += new System.EventHandler(this.buttonFile_Click);
+            // 
+            // textBoxFileToSend
+            // 
+            this.textBoxFileToSend.Location = new System.Drawing.Point(504, 9);
+            this.textBoxFileToSend.Name = "textBoxFileToSend";
+            this.textBoxFileToSend.ReadOnly = true;
+            this.textBoxFileToSend.Size = new System.Drawing.Size(264, 22);
+            this.textBoxFileToSend.TabIndex = 7;
             // 
             // cntToSend
             // 
@@ -653,9 +698,11 @@
             this.tbProducerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbProducerValue.Location = new System.Drawing.Point(107, 73);
+            this.tbProducerValue.MaxLength = 10000000;
             this.tbProducerValue.Multiline = true;
             this.tbProducerValue.Name = "tbProducerValue";
-            this.tbProducerValue.Size = new System.Drawing.Size(778, 440);
+            this.tbProducerValue.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbProducerValue.Size = new System.Drawing.Size(778, 538);
             this.tbProducerValue.TabIndex = 2;
             // 
             // tbProducerKey
@@ -747,6 +794,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             this._panel.ResumeLayout(false);
+            this._panel.PerformLayout();
             this._statusStrip.ResumeLayout(false);
             this._statusStrip.PerformLayout();
             this.tabPageProducer.ResumeLayout(false);
@@ -813,6 +861,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn topicDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button buttonFile;
+        private System.Windows.Forms.TextBox textBoxFileToSend;
+        private System.Windows.Forms.OpenFileDialog filetoSendDialog;
+        private System.Windows.Forms.CheckBox chbDefaultJsonParse;
     }
 }
 

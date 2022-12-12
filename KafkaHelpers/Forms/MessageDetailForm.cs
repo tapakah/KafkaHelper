@@ -29,7 +29,14 @@ namespace KafkaHelpers
             lbSize.Text = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(_entiry.Message));
             try
             {
-                tbValue.Text = (string)JsonHelper.FormatJson(_entiry.Message.ToString());
+                if (_entiry.DefaultJsonParse)
+                {
+                    tbValue.Text = (string)JsonHelper.FormatJson(_entiry.Message.ToString());
+                }
+                else
+                {
+                    tbValue.Text = _entiry.Message.ToString();
+                }
             }
             catch (Exception)
             {
