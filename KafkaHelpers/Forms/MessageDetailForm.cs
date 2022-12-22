@@ -10,67 +10,68 @@ using System.Windows.Forms;
 
 namespace KafkaHelpers
 {
-    public partial class MessageDetailForm : Form
-    {
-        private MessageDetailEntity _entiry = new MessageDetailEntity();
-        public MessageDetailEntity Entity { get { return _entiry; } }
-
-        public MessageDetailForm()
+        public partial class MessageDetailForm : Form
         {
-            InitializeComponent();
-        }
+                private MessageDetailEntity _entiry = new MessageDetailEntity();
+                public MessageDetailEntity Entity { get { return _entiry; } }
 
-
-        private void MessageDetailForm_Load(object sender, EventArgs e)
-        {
-            tbId.Text = _entiry.Id.ToString();
-            tbTopic.Text = _entiry.Topic.ToString();
-            tbKey.Text = _entiry.KeyString;
-            lbSize.Text = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(_entiry.Message));
-            try
-            {
-                if (_entiry.DefaultJsonParse)
+                public MessageDetailForm()
                 {
-                    tbValue.Text = (string)JsonHelper.FormatJson(_entiry.Message.ToString());
+                        InitializeComponent();
                 }
-                else
+
+
+                private void MessageDetailForm_Load(object sender, EventArgs e)
                 {
-                    tbValue.Text = _entiry.Message.ToString();
+                        tbId.Text = _entiry.Id.ToString();
+                        tbTopic.Text = _entiry.Topic.ToString();
+                        tbKey.Text = _entiry.KeyString;
+                        lbSize.Text = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(_entiry.Message));
+
+                        try
+                        {
+                                if (_entiry.DefaultJsonParse)
+                                {
+                                        tbValue.Text = (string)JsonHelper.FormatJson(_entiry.Message);
+                                }
+                                else
+                                {
+                                        tbValue.Text = _entiry.Message;
+                                }
+                        }
+                        catch (Exception)
+                        {
+                                tbValue.Text = _entiry.Message;
+                        }
+
                 }
-            }
-            catch (Exception)
-            {
-                tbValue.Text = _entiry.Message.ToString();
-            }
-            
-        }
 
-        private void btnJson_Click(object sender, EventArgs e)
-        {
-            try
-            {
-              tbValue.Text =   (string)JsonHelper.FormatJson(_entiry.Message);
-            }
-            catch (Exception)
-            {
-                tbValue.Text = _entiry.Message;
-                throw;
-            }
-        }
+                private void btnJson_Click(object sender, EventArgs e)
+                {
+                        try
+                        {
+                                tbValue.Text = (string)JsonHelper.FormatJson(_entiry.Message);
+                        }
+                        catch (Exception)
+                        {
+                                tbValue.Text = _entiry.Message;
+                                throw;
+                        }
+                }
 
-        protected override bool ProcessDialogKey(Keys keyData)
-        {
-            if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessDialogKey(keyData);
-        }
+                protected override bool ProcessDialogKey(Keys keyData)
+                {
+                        if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
+                        {
+                                this.Close();
+                                return true;
+                        }
+                        return base.ProcessDialogKey(keyData);
+                }
 
-        private void btnTextView_Click(object sender, EventArgs e)
-        {
-            tbValue.Text = _entiry.Message;
+                private void btnTextView_Click(object sender, EventArgs e)
+                {
+                        tbValue.Text = _entiry.Message;
+                }
         }
-    }
 }
