@@ -2,10 +2,10 @@
 {
 
 
-    partial class ConsumerDataSet
-    {
-        partial class MessagesDataTable
+        partial class ConsumerDataSet
         {
+                partial class MessagesDataTable
+                {
+                }
         }
-    }
 }

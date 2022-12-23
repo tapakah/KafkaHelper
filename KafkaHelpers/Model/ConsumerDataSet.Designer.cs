@@ -289,6 +289,8 @@ namespace KafkaHelpers.Model {
             
             private global::System.Data.DataColumn columnValue;
             
+            private global::System.Data.DataColumn columnSize;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public MessagesDataTable() {
@@ -364,6 +366,14 @@ namespace KafkaHelpers.Model {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SizeColumn {
+                get {
+                    return this.columnSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -399,14 +409,15 @@ namespace KafkaHelpers.Model {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessagesRow AddMessagesRow(long Id, System.DateTime Recived, string Topic, string Key, string Value) {
+            public MessagesRow AddMessagesRow(long Id, System.DateTime Recived, string Topic, string Key, string Value, string Size) {
                 MessagesRow rowMessagesRow = ((MessagesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Id,
                         Recived,
                         Topic,
                         Key,
-                        Value};
+                        Value,
+                        Size};
                 rowMessagesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMessagesRow);
                 return rowMessagesRow;
@@ -434,6 +445,7 @@ namespace KafkaHelpers.Model {
                 this.columnTopic = base.Columns["Topic"];
                 this.columnKey = base.Columns["Key"];
                 this.columnValue = base.Columns["Value"];
+                this.columnSize = base.Columns["Size"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -449,6 +461,9 @@ namespace KafkaHelpers.Model {
                 base.Columns.Add(this.columnKey);
                 this.columnValue = new global::System.Data.DataColumn("Value", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnValue);
+                this.columnSize = new global::System.Data.DataColumn("Size", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSize);
+                this.columnSize.DefaultValue = ((string)(""));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -671,6 +686,22 @@ namespace KafkaHelpers.Model {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Size {
+                get {
+                    if (this.IsSizeNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableMessages.SizeColumn]));
+                    }
+                }
+                set {
+                    this[this.tableMessages.SizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsIdNull() {
                 return this.IsNull(this.tableMessages.IdColumn);
             }
@@ -727,6 +758,18 @@ namespace KafkaHelpers.Model {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetValueNull() {
                 this[this.tableMessages.ValueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSizeNull() {
+                return this.IsNull(this.tableMessages.SizeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSizeNull() {
+                this[this.tableMessages.SizeColumn] = global::System.Convert.DBNull;
             }
         }
         

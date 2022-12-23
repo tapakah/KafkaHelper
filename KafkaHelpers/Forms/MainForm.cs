@@ -393,7 +393,7 @@ namespace KafkaHelpers
                                         nRow.Recived = rw.Timestamp;
                                         nRow.Key = rw.Key;
                                         nRow.Topic = rw.Topic;
-
+                                        nRow.Size = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(string.IsNullOrEmpty(rw.Value) ? string.Empty : rw.Value));
                                         _consumerDataSet.Messages.Rows.Add(nRow);
                                 }
                         }
