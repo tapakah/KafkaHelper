@@ -18,23 +18,24 @@ namespace KafkaHelpers
 	{
 		private CancellationTokenSource cancelSource;
 		private static readonly string Caption = "KafkaHelper by TaPaKaH";
-		private static readonly int DEFAULT_COUNTER = 100;
-		private static readonly int DELAY_TIMER_STATUS = 1000;
-		private string kafkaServer = string.Empty;
-		private readonly string kafkaServerList = string.Empty;
-		private readonly string kafkaTopics = string.Empty;
-		private readonly string kafkaChkTopics = string.Empty;
-		private readonly List<string> topics = new List<string>();
-		private readonly Terms terms = new Terms();
-		private readonly KafkaHelper _kafka;
-		private static System.Threading.Timer tTimer;
 		private static readonly string STATUS_READ = "READ";
 		private static readonly string STATUS_WAIT = "WAIT";
 		private static int ID_COUNTER;
-		private static readonly int maxMessageLength = 30000;
+		private static readonly int MAX_MESSAGE_LENGTH = 30000;
 		private static readonly int MAX_TOOLTIP_TEXT = 2000;
+		private static readonly int DEFAULT_ROWS = 2000;
+		private static readonly int DEFAULT_COUNTER = 100;
+		private static readonly int DELAY_TIMER_STATUS = 1000;
+		private string KAFKA_SERVER = string.Empty;
+		private readonly string KAFKA_SERVER_LIST = string.Empty;
+		private readonly string KAFKA_TOPICS = string.Empty;
+		private readonly string KAFKA_CHKED_TOPICS = string.Empty;
+		private readonly Terms terms = new Terms();
+		private readonly KafkaHelper _kafka;
+		private static System.Threading.Timer tTimer;
 		public static event EventHandler<string> StatusTextChanged;
-		List<string> TOPICS = new List<string>();
+		private readonly List<string> TOPICS = new List<string>();
+		private readonly List<string> TopicsSubscriber = new List<string>();
 		public static event EventHandler<string> ConsumerStatusTextChanged;
 
 		private AsyncPolicy CreateConsumingPolicy()
@@ -89,11 +90,11 @@ namespace KafkaHelpers
 		{
 			InitializeComponent();
 
-			kafkaServerList = GetSettingValue("KafkaServerList");
+			KAFKA_SERVER_LIST = GetSettingValue("KafkaServerList");
 
-			if (!string.IsNullOrEmpty(kafkaServerList))
+			if (!string.IsNullOrEmpty(KAFKA_SERVER_LIST))
 			{
-				List<string> kafkaServers = kafkaServerList.Split(',').ToList();
+				List<string> kafkaServers = KAFKA_SERVER_LIST.Split(',').ToList();
 
 				foreach (string kafkaserver in kafkaServers)
 				{
@@ -112,15 +113,15 @@ namespace KafkaHelpers
 					ctbKafkaServer.SelectedItem = ctbKafkaServer.Items[0];
 				}
 
-				kafkaServer = ctbKafkaServer.Text;
+				KAFKA_SERVER = ctbKafkaServer.Text;
 			}
 			dateTimeStart.Enabled = dateTimeEnd.Enabled = chkTimestamp.Checked;
 
-			kafkaTopics = GetSettingValue("KafkaReadTopics");
+			KAFKA_TOPICS = GetSettingValue("KafkaReadTopics");
 
-			if (!string.IsNullOrEmpty(kafkaTopics))
+			if (!string.IsNullOrEmpty(KAFKA_TOPICS))
 			{
-				TOPICS = kafkaTopics.Split(',').ToList();
+				TOPICS = KAFKA_TOPICS.Split(',').Select(x=>x.Trim()).ToList();
 
 				cmbProducerTopic.DataSource = TOPICS;
 
@@ -130,11 +131,11 @@ namespace KafkaHelpers
 				}
 			}
 
-			kafkaChkTopics = GetSettingValue("KafkaTopics");
+			KAFKA_CHKED_TOPICS = GetSettingValue("KafkaTopics");
 
-			if (!string.IsNullOrEmpty(kafkaChkTopics))
+			if (!string.IsNullOrEmpty(KAFKA_CHKED_TOPICS))
 			{
-				List<string> topics = kafkaChkTopics.Split(',').ToList();
+				List<string> topics = KAFKA_CHKED_TOPICS.Split(',').Select(x=>x.Trim()).ToList();
 
 				for (int i = 0; i < chklTopics.Items.Count; i++)
 				{
@@ -155,6 +156,10 @@ namespace KafkaHelpers
 			terms.Counter = DEFAULT_COUNTER;
 
 			tbCounter.Text = terms.Counter.ToString();
+
+			terms.MaxRows = DEFAULT_ROWS;
+
+			tbMaxRows.Text = terms.MaxRows.ToString();
 
 			_dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
@@ -237,24 +242,29 @@ namespace KafkaHelpers
 				terms.Counter = DEFAULT_COUNTER;
 			}
 
+			if (!string.IsNullOrEmpty(tbMaxRows.Text))
+			{
+				terms.MaxRows = Convert.ToInt32(tbMaxRows.Text);
+			}
+			else
+			{
+				terms.MaxRows = DEFAULT_ROWS;
+			}
+
 			_consumerDataSet.Messages.Clear();
 			ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = false;
 			btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = true;
 
-			topics.Clear();
+			TopicsSubscriber.Clear();
+			TopicsSubscriber.AddRange(chklTopics.CheckedItems.Cast<string>().ToList());
 
-			for (int i = 0; i <= chklTopics.CheckedItems.Count - 1; i++)
-			{
-				topics.Add(chklTopics.CheckedItems[i].ToString().Trim());
-			}
+			if (TopicsSubscriber.Count == 0) { return; }
 
-			if (topics.Count == 0) { return; }
-
-			AddUpdateAppSettings("KafkaTopics", String.Join(", ", topics.ToArray()));
+			AddUpdateAppSettings("KafkaTopics", String.Join(", ", TopicsSubscriber.ToArray()));
 
 			_toolStripLabel.Text = STATUS_READ;
 			_tsStatusConsumer.Text = string.Empty;
-			_toolStripKafkaServerValue.Text = kafkaServer;
+			_toolStripKafkaServerValue.Text = KAFKA_SERVER;
 
 			var taskConsume = Task.Run(() => ActivateConsume(cancelSource.Token), cancelSource.Token);
 
@@ -292,13 +302,13 @@ namespace KafkaHelpers
 				SetConsumerStatusText(text);
 			};
 
-			using (IConsumer<string, string> consumer = KafkaHelper.CreateKafkaConsumer(kafkaServer))
+			using (IConsumer<string, string> consumer = KafkaHelper.CreateKafkaConsumer(KAFKA_SERVER))
 			{
 				try
 				{
-					consumer.Subscribe(topics);
+					consumer.Subscribe(TopicsSubscriber);
 
-					AddRow(new GridRow(-1, "Info", "KEY:Consumer Subscribe", string.Format("SYSTEM:{0}", string.Join(", ", topics.ToArray())), DateTime.UtcNow));
+					AddRow(new GridRow(-1, "Info", "KEY:Consumer Subscribe", string.Format("SYSTEM:{0}", string.Join(", ", TopicsSubscriber.ToArray())), DateTime.UtcNow));
 
 					stoppingToken.ThrowIfCancellationRequested();
 
@@ -379,15 +389,21 @@ namespace KafkaHelpers
 		{
 			_dataGridViewSubscriber.Invoke(new Action(() =>
 			{
-				var rw = RowFormatter.CreateRow(row, terms);
+			var rw = RowFormatter.CreateRow(row, terms);
 
-				if (rw != null)
+			if (rw != null)
+			{
+				if (_consumerDataSet.Messages.Rows.Count > terms.MaxRows)
 				{
+						UnSubscribe();
+						return;
+					}
+
 					var message = string.IsNullOrEmpty(rw.Value) ? string.Empty : rw.Value;
 
-					if (message.Length > maxMessageLength)
+					if (message.Length > MAX_MESSAGE_LENGTH)
 					{
-						message = message.Substring(0, message.Length > maxMessageLength ? maxMessageLength : message.Length) + $"[Message was substringed ({message.Length} to {maxMessageLength} )]";
+						message = message.Substring(0, message.Length > MAX_MESSAGE_LENGTH ? MAX_MESSAGE_LENGTH : message.Length) + $"[Message was substringed ({message.Length} to {MAX_MESSAGE_LENGTH} )]";
 					}
 
 					ConsumerDataSet.MessagesRow nRow = _consumerDataSet.Messages.NewMessagesRow();
@@ -398,6 +414,7 @@ namespace KafkaHelpers
 					nRow.Key = rw.Key;
 					nRow.Topic = rw.Topic;
 					nRow.Size = RowFormatter.FormatSize(System.Text.ASCIIEncoding.Unicode.GetByteCount(string.IsNullOrEmpty(rw.Value) ? string.Empty : rw.Value));
+
 					_consumerDataSet.Messages.Rows.Add(nRow);
 				}
 			}
@@ -406,10 +423,16 @@ namespace KafkaHelpers
 
 		private void btnUnSubscribe_Click(object sender, EventArgs e)
 		{
+			UnSubscribe();
+		}
+
+		private void UnSubscribe()
+		{
 			cancelSource.Cancel();
 
 			ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = true;
 			btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = false;
+
 			_toolStripLabel.Text = "UNSUBSCRIBE";
 			_tsStatusConsumer.Text = string.Empty;
 			_toolStripStatus.Text = string.Empty;
@@ -434,7 +457,8 @@ namespace KafkaHelpers
 				{
 					var topicsMeta = adminClient.GetMetadata(TimeSpan.FromSeconds(20)).Topics;
 
-					TOPICS = topicsMeta.Select(x=> x.Topic).ToList();
+					TOPICS.Clear();
+					TOPICS.AddRange(topicsMeta.Select(x => x.Topic.Trim()).ToList());
 
 					FillTopicBox(TOPICS);
 				}
@@ -459,9 +483,9 @@ namespace KafkaHelpers
 			topics.Sort();
 
 			chklTopics.Items.Clear();
-			
+
 			cmbProducerTopic.DataSource = topics;
-			
+
 			foreach (string topic in topics)
 			{
 				chklTopics.Items.Add(topic);
@@ -495,8 +519,8 @@ namespace KafkaHelpers
 
 		private void ctbKafkaServer_Validating(object sender, CancelEventArgs e)
 		{
-			kafkaServer = ctbKafkaServer.Text.Trim();
-			this.Text = string.Concat(Caption, " : ", kafkaServer);
+			KAFKA_SERVER = ctbKafkaServer.Text.Trim();
+			this.Text = string.Concat(Caption, " : ", KAFKA_SERVER);
 			if (!ctbKafkaServer.Items.Contains(ctbKafkaServer.Text.Trim()))
 			{
 				ctbKafkaServer.Items.Add(ctbKafkaServer.Text.Trim());
@@ -544,7 +568,7 @@ namespace KafkaHelpers
 
 			try
 			{
-				using (IProducer<long, string> producer = _kafka.CreateKafkaProducer(kafkaServer))
+				using (IProducer<long, string> producer = _kafka.CreateKafkaProducer(KAFKA_SERVER))
 				{
 					DeliveryResult<long, string> _result = null;
 					DeliviryStatus ds = new DeliviryStatus() { Start = DateTime.Now, Count = 0 };
@@ -595,6 +619,11 @@ namespace KafkaHelpers
 			if (System.Text.RegularExpressions.Regex.IsMatch(tbCounter.Text, "[^0-9]"))
 			{
 				tbCounter.Text = tbCounter.Text.Remove(tbCounter.Text.Length - 1);
+			}
+
+			if (tbCounter.Text.Length == 0)
+			{
+				tbCounter.Text = DEFAULT_COUNTER.ToString();
 			}
 		}
 
@@ -695,23 +724,40 @@ namespace KafkaHelpers
 				result = TOPICS;
 			}
 
-			result.AddRange(chkitems);
+			result.AddRange(chkitems.Distinct());
 
-			result.Sort();
+			List<string> uniq = new List<string>();
+
+			uniq.AddRange(result.Select(x=>x).Distinct().ToList());
+
+			uniq.Sort();
 
 			chklTopics.Items.Clear();
 
 			cmbProducerTopic.DataSource = result;
 
-			foreach (string topic in result.Distinct())
+			foreach (string topic in uniq)
 			{
 				chklTopics.Items.Add(topic);
-				
-				if (chkitems.Find(x=> x == topic) != null )
+
+				if (chkitems.Find(x => x == topic) != null)
 				{
-					chklTopics.SetItemChecked( chklTopics.Items.IndexOf(topic), true );	
+					chklTopics.SetItemChecked(chklTopics.Items.IndexOf(topic), true);
 				}
-				
+
+			}
+		}
+
+		private void tbTop_TextChanged(object sender, EventArgs e)
+		{
+			if (System.Text.RegularExpressions.Regex.IsMatch(tbMaxRows.Text, "[^0-9]"))
+			{
+				tbMaxRows.Text = tbMaxRows.Text.Remove(tbCounter.Text.Length - 1);
+			}
+
+			if (tbMaxRows.Text.Length == 0)
+			{
+				tbMaxRows.Text = DEFAULT_ROWS.ToString();
 			}
 		}
 	}

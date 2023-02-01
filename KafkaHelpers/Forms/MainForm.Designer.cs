@@ -33,29 +33,7 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.chklTopics = new System.Windows.Forms.CheckedListBox();
 			this.tabControl = new System.Windows.Forms.TabControl();
-			this.tabPageSetting = new System.Windows.Forms.TabPage();
-			this.tbFilterTopics = new System.Windows.Forms.TextBox();
-			this.ctbKafkaServer = new System.Windows.Forms.ComboBox();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.tbCounter = new System.Windows.Forms.TextBox();
-			this.tbValue = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.tbKey = new System.Windows.Forms.TextBox();
-			this.groupBoxTime = new System.Windows.Forms.GroupBox();
-			this.btnMax = new System.Windows.Forms.Button();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.chkTimestamp = new System.Windows.Forms.CheckBox();
-			this.dateTimeEnd = new System.Windows.Forms.DateTimePicker();
-			this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
-			this.label9 = new System.Windows.Forms.Label();
-			this.btnUncheckAll = new System.Windows.Forms.Button();
-			this.btnCheckAll = new System.Windows.Forms.Button();
 			this.tabPageSubsriber = new System.Windows.Forms.TabPage();
 			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +63,30 @@
 			this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
 			this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
 			this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.tabPageSetting = new System.Windows.Forms.TabPage();
+			this.tbFilterTopics = new System.Windows.Forms.TextBox();
+			this.ctbKafkaServer = new System.Windows.Forms.ComboBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tbMaxRows = new System.Windows.Forms.TextBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.tbCounter = new System.Windows.Forms.TextBox();
+			this.tbValue = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.tbKey = new System.Windows.Forms.TextBox();
+			this.groupBoxTime = new System.Windows.Forms.GroupBox();
+			this.btnMax = new System.Windows.Forms.Button();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.chkTimestamp = new System.Windows.Forms.CheckBox();
+			this.dateTimeEnd = new System.Windows.Forms.DateTimePicker();
+			this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
+			this.label9 = new System.Windows.Forms.Label();
+			this.btnUncheckAll = new System.Windows.Forms.Button();
+			this.btnCheckAll = new System.Windows.Forms.Button();
+			this.chklTopics = new System.Windows.Forms.CheckedListBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
 			this.btnReadTopics = new System.Windows.Forms.Button();
 			this.btnUnSubscribe = new System.Windows.Forms.Button();
@@ -96,10 +98,6 @@
 			this.buttonFile = new System.Windows.Forms.Button();
 			this.btnSendMessage = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
-			this.tabPageSetting.SuspendLayout();
-			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBoxTime.SuspendLayout();
 			this.tabPageSubsriber.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
@@ -108,39 +106,12 @@
 			this.tabPageProducer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
+			this.tabPageSetting.SuspendLayout();
+			this.groupBox1.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.groupBox2.SuspendLayout();
+			this.groupBoxTime.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label1.Location = new System.Drawing.Point(15, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(42, 13);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "Server:";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label2.Location = new System.Drawing.Point(15, 166);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(42, 13);
-			this.label2.TabIndex = 5;
-			this.label2.Text = "Topics:";
-			// 
-			// chklTopics
-			// 
-			this.chklTopics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.chklTopics.FormattingEnabled = true;
-			this.chklTopics.HorizontalScrollbar = true;
-			this.chklTopics.Location = new System.Drawing.Point(62, 185);
-			this.chklTopics.Name = "chklTopics";
-			this.chklTopics.ScrollAlwaysVisible = true;
-			this.chklTopics.Size = new System.Drawing.Size(539, 429);
-			this.chklTopics.TabIndex = 5;
 			// 
 			// tabControl
 			// 
@@ -155,217 +126,6 @@
 			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(989, 643);
 			this.tabControl.TabIndex = 0;
-			// 
-			// tabPageSetting
-			// 
-			this.tabPageSetting.BackColor = System.Drawing.SystemColors.Control;
-			this.tabPageSetting.Controls.Add(this.label10);
-			this.tabPageSetting.Controls.Add(this.tbFilterTopics);
-			this.tabPageSetting.Controls.Add(this.ctbKafkaServer);
-			this.tabPageSetting.Controls.Add(this.groupBox1);
-			this.tabPageSetting.Controls.Add(this.btnReadTopics);
-			this.tabPageSetting.Controls.Add(this.btnUnSubscribe);
-			this.tabPageSetting.Controls.Add(this.btnUncheckAll);
-			this.tabPageSetting.Controls.Add(this.btnCheckAll);
-			this.tabPageSetting.Controls.Add(this.chklTopics);
-			this.tabPageSetting.Controls.Add(this.label2);
-			this.tabPageSetting.Controls.Add(this.label1);
-			this.tabPageSetting.Controls.Add(this.btnSubscribe);
-			this.tabPageSetting.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tabPageSetting.Location = new System.Drawing.Point(4, 22);
-			this.tabPageSetting.Name = "tabPageSetting";
-			this.tabPageSetting.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSetting.Size = new System.Drawing.Size(981, 617);
-			this.tabPageSetting.TabIndex = 0;
-			this.tabPageSetting.Text = "Setting";
-			// 
-			// tbFilterTopics
-			// 
-			this.tbFilterTopics.Location = new System.Drawing.Point(62, 161);
-			this.tbFilterTopics.Name = "tbFilterTopics";
-			this.tbFilterTopics.Size = new System.Drawing.Size(402, 22);
-			this.tbFilterTopics.TabIndex = 10;
-			this.tbFilterTopics.TextChanged += new System.EventHandler(this.tbFilterTopics_TextChanged);
-			// 
-			// ctbKafkaServer
-			// 
-			this.ctbKafkaServer.FormattingEnabled = true;
-			this.ctbKafkaServer.Location = new System.Drawing.Point(62, 9);
-			this.ctbKafkaServer.Name = "ctbKafkaServer";
-			this.ctbKafkaServer.Size = new System.Drawing.Size(245, 21);
-			this.ctbKafkaServer.TabIndex = 0;
-			this.ctbKafkaServer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ctbKafkaServer_KeyPress);
-			this.ctbKafkaServer.Validating += new System.ComponentModel.CancelEventHandler(this.ctbKafkaServer_Validating);
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Controls.Add(this.groupBox2);
-			this.groupBox1.Controls.Add(this.tbValue);
-			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Controls.Add(this.tbKey);
-			this.groupBox1.Controls.Add(this.groupBoxTime);
-			this.groupBox1.Controls.Add(this.label9);
-			this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.groupBox1.Location = new System.Drawing.Point(62, 34);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(538, 125);
-			this.groupBox1.TabIndex = 4;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Terms";
-			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.Add(this.tbCounter);
-			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.groupBox2.Location = new System.Drawing.Point(408, 19);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(124, 44);
-			this.groupBox2.TabIndex = 18;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Counter";
-			// 
-			// tbCounter
-			// 
-			this.tbCounter.Location = new System.Drawing.Point(6, 15);
-			this.tbCounter.Name = "tbCounter";
-			this.tbCounter.Size = new System.Drawing.Size(112, 22);
-			this.tbCounter.TabIndex = 11;
-			this.tbCounter.TextChanged += new System.EventHandler(this.tbCounter_TextChanged);
-			// 
-			// tbValue
-			// 
-			this.tbValue.Location = new System.Drawing.Point(60, 94);
-			this.tbValue.Name = "tbValue";
-			this.tbValue.Size = new System.Drawing.Size(472, 22);
-			this.tbValue.TabIndex = 1;
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label3.Location = new System.Drawing.Point(16, 97);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(38, 13);
-			this.label3.TabIndex = 21;
-			this.label3.Text = "Value:";
-			// 
-			// tbKey
-			// 
-			this.tbKey.Location = new System.Drawing.Point(60, 70);
-			this.tbKey.Name = "tbKey";
-			this.tbKey.Size = new System.Drawing.Size(472, 22);
-			this.tbKey.TabIndex = 0;
-			// 
-			// groupBoxTime
-			// 
-			this.groupBoxTime.Controls.Add(this.btnMax);
-			this.groupBoxTime.Controls.Add(this.label8);
-			this.groupBoxTime.Controls.Add(this.label7);
-			this.groupBoxTime.Controls.Add(this.chkTimestamp);
-			this.groupBoxTime.Controls.Add(this.dateTimeEnd);
-			this.groupBoxTime.Controls.Add(this.dateTimeStart);
-			this.groupBoxTime.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.groupBoxTime.Location = new System.Drawing.Point(6, 19);
-			this.groupBoxTime.Name = "groupBoxTime";
-			this.groupBoxTime.Size = new System.Drawing.Size(396, 44);
-			this.groupBoxTime.TabIndex = 17;
-			this.groupBoxTime.TabStop = false;
-			this.groupBoxTime.Text = "TimeStamp";
-			// 
-			// btnMax
-			// 
-			this.btnMax.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnMax.Location = new System.Drawing.Point(354, 16);
-			this.btnMax.Name = "btnMax";
-			this.btnMax.Size = new System.Drawing.Size(36, 20);
-			this.btnMax.TabIndex = 19;
-			this.btnMax.Text = "max";
-			this.btnMax.UseVisualStyleBackColor = true;
-			this.btnMax.Click += new System.EventHandler(this.btnMax_Click);
-			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label8.Location = new System.Drawing.Point(186, 20);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(30, 13);
-			this.label8.TabIndex = 18;
-			this.label8.Text = "End:";
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label7.Location = new System.Drawing.Point(15, 20);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(34, 13);
-			this.label7.TabIndex = 17;
-			this.label7.Text = "Start:";
-			// 
-			// chkTimestamp
-			// 
-			this.chkTimestamp.AutoSize = true;
-			this.chkTimestamp.Location = new System.Drawing.Point(79, 0);
-			this.chkTimestamp.Name = "chkTimestamp";
-			this.chkTimestamp.Size = new System.Drawing.Size(15, 14);
-			this.chkTimestamp.TabIndex = 0;
-			this.chkTimestamp.UseVisualStyleBackColor = true;
-			this.chkTimestamp.CheckedChanged += new System.EventHandler(this.chkTimestamp_CheckedChanged);
-			// 
-			// dateTimeEnd
-			// 
-			this.dateTimeEnd.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimeEnd.CustomFormat = "dd-MM-yyyy HH:mm";
-			this.dateTimeEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimeEnd.Location = new System.Drawing.Point(222, 16);
-			this.dateTimeEnd.Name = "dateTimeEnd";
-			this.dateTimeEnd.Size = new System.Drawing.Size(126, 20);
-			this.dateTimeEnd.TabIndex = 2;
-			// 
-			// dateTimeStart
-			// 
-			this.dateTimeStart.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimeStart.CustomFormat = "dd-MM-yyyy HH:mm";
-			this.dateTimeStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimeStart.Location = new System.Drawing.Point(54, 16);
-			this.dateTimeStart.Name = "dateTimeStart";
-			this.dateTimeStart.Size = new System.Drawing.Size(126, 20);
-			this.dateTimeStart.TabIndex = 1;
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label9.Location = new System.Drawing.Point(27, 73);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(29, 13);
-			this.label9.TabIndex = 19;
-			this.label9.Text = "Key:";
-			// 
-			// btnUncheckAll
-			// 
-			this.btnUncheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnUncheckAll.Location = new System.Drawing.Point(22, 221);
-			this.btnUncheckAll.Name = "btnUncheckAll";
-			this.btnUncheckAll.Size = new System.Drawing.Size(35, 23);
-			this.btnUncheckAll.TabIndex = 9;
-			this.btnUncheckAll.Text = "-";
-			this.btnUncheckAll.UseVisualStyleBackColor = true;
-			this.btnUncheckAll.Click += new System.EventHandler(this.btnUncheckAll_Click);
-			// 
-			// btnCheckAll
-			// 
-			this.btnCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnCheckAll.Location = new System.Drawing.Point(22, 193);
-			this.btnCheckAll.Name = "btnCheckAll";
-			this.btnCheckAll.Size = new System.Drawing.Size(35, 23);
-			this.btnCheckAll.TabIndex = 8;
-			this.btnCheckAll.Text = "+";
-			this.btnCheckAll.UseVisualStyleBackColor = true;
-			this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
 			// 
 			// tabPageSubsriber
 			// 
@@ -410,7 +170,7 @@
 			this._dataGridViewSubscriber.RowHeadersVisible = false;
 			this._dataGridViewSubscriber.RowHeadersWidth = 30;
 			this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this._dataGridViewSubscriber.Size = new System.Drawing.Size(976, 543);
+			this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
 			this._dataGridViewSubscriber.TabIndex = 22;
 			this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
 			this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this._dataGridViewSubscriber_CellToolTipTextNeeded);
@@ -485,7 +245,7 @@
 			this._panel.Controls.Add(this.btnUnSubscribe2);
 			this._panel.Location = new System.Drawing.Point(3, 6);
 			this._panel.Name = "_panel";
-			this._panel.Size = new System.Drawing.Size(975, 33);
+			this._panel.Size = new System.Drawing.Size(979, 33);
 			this._panel.TabIndex = 21;
 			// 
 			// chbDefaultJsonParse
@@ -497,7 +257,7 @@
 			this.chbDefaultJsonParse.Checked = true;
 			this.chbDefaultJsonParse.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.chbDefaultJsonParse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.chbDefaultJsonParse.Location = new System.Drawing.Point(774, 9);
+			this.chbDefaultJsonParse.Location = new System.Drawing.Point(923, 9);
 			this.chbDefaultJsonParse.Name = "chbDefaultJsonParse";
 			this.chbDefaultJsonParse.Size = new System.Drawing.Size(196, 17);
 			this.chbDefaultJsonParse.TabIndex = 4;
@@ -676,6 +436,269 @@
 			this.messagesBindingSource.DataMember = "Messages";
 			this.messagesBindingSource.DataSource = this._consumerDataSet;
 			// 
+			// tabPageSetting
+			// 
+			this.tabPageSetting.BackColor = System.Drawing.SystemColors.Control;
+			this.tabPageSetting.Controls.Add(this.label10);
+			this.tabPageSetting.Controls.Add(this.tbFilterTopics);
+			this.tabPageSetting.Controls.Add(this.ctbKafkaServer);
+			this.tabPageSetting.Controls.Add(this.groupBox1);
+			this.tabPageSetting.Controls.Add(this.btnReadTopics);
+			this.tabPageSetting.Controls.Add(this.btnUnSubscribe);
+			this.tabPageSetting.Controls.Add(this.btnUncheckAll);
+			this.tabPageSetting.Controls.Add(this.btnCheckAll);
+			this.tabPageSetting.Controls.Add(this.chklTopics);
+			this.tabPageSetting.Controls.Add(this.label2);
+			this.tabPageSetting.Controls.Add(this.label1);
+			this.tabPageSetting.Controls.Add(this.btnSubscribe);
+			this.tabPageSetting.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tabPageSetting.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSetting.Name = "tabPageSetting";
+			this.tabPageSetting.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSetting.Size = new System.Drawing.Size(981, 617);
+			this.tabPageSetting.TabIndex = 0;
+			this.tabPageSetting.Text = "Setting";
+			// 
+			// tbFilterTopics
+			// 
+			this.tbFilterTopics.Location = new System.Drawing.Point(62, 161);
+			this.tbFilterTopics.Name = "tbFilterTopics";
+			this.tbFilterTopics.Size = new System.Drawing.Size(402, 22);
+			this.tbFilterTopics.TabIndex = 10;
+			this.tbFilterTopics.TextChanged += new System.EventHandler(this.tbFilterTopics_TextChanged);
+			// 
+			// ctbKafkaServer
+			// 
+			this.ctbKafkaServer.FormattingEnabled = true;
+			this.ctbKafkaServer.Location = new System.Drawing.Point(62, 9);
+			this.ctbKafkaServer.Name = "ctbKafkaServer";
+			this.ctbKafkaServer.Size = new System.Drawing.Size(245, 21);
+			this.ctbKafkaServer.TabIndex = 0;
+			this.ctbKafkaServer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ctbKafkaServer_KeyPress);
+			this.ctbKafkaServer.Validating += new System.ComponentModel.CancelEventHandler(this.ctbKafkaServer_Validating);
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.groupBox3);
+			this.groupBox1.Controls.Add(this.groupBox2);
+			this.groupBox1.Controls.Add(this.tbValue);
+			this.groupBox1.Controls.Add(this.label3);
+			this.groupBox1.Controls.Add(this.tbKey);
+			this.groupBox1.Controls.Add(this.groupBoxTime);
+			this.groupBox1.Controls.Add(this.label9);
+			this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBox1.Location = new System.Drawing.Point(62, 34);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(538, 125);
+			this.groupBox1.TabIndex = 4;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Terms";
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.tbMaxRows);
+			this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBox3.Location = new System.Drawing.Point(470, 19);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(65, 44);
+			this.groupBox3.TabIndex = 22;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Rows";
+			// 
+			// tbMaxRows
+			// 
+			this.tbMaxRows.Location = new System.Drawing.Point(6, 15);
+			this.tbMaxRows.Name = "tbMaxRows";
+			this.tbMaxRows.Size = new System.Drawing.Size(53, 22);
+			this.tbMaxRows.TabIndex = 11;
+			this.tbMaxRows.TextChanged += new System.EventHandler(this.tbTop_TextChanged);
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.tbCounter);
+			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBox2.Location = new System.Drawing.Point(404, 19);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(65, 44);
+			this.groupBox2.TabIndex = 18;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Counter";
+			// 
+			// tbCounter
+			// 
+			this.tbCounter.Location = new System.Drawing.Point(6, 15);
+			this.tbCounter.Name = "tbCounter";
+			this.tbCounter.Size = new System.Drawing.Size(53, 22);
+			this.tbCounter.TabIndex = 11;
+			this.tbCounter.TextChanged += new System.EventHandler(this.tbCounter_TextChanged);
+			// 
+			// tbValue
+			// 
+			this.tbValue.Location = new System.Drawing.Point(60, 94);
+			this.tbValue.Name = "tbValue";
+			this.tbValue.Size = new System.Drawing.Size(472, 22);
+			this.tbValue.TabIndex = 1;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label3.Location = new System.Drawing.Point(16, 97);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(38, 13);
+			this.label3.TabIndex = 21;
+			this.label3.Text = "Value:";
+			// 
+			// tbKey
+			// 
+			this.tbKey.Location = new System.Drawing.Point(60, 70);
+			this.tbKey.Name = "tbKey";
+			this.tbKey.Size = new System.Drawing.Size(472, 22);
+			this.tbKey.TabIndex = 0;
+			// 
+			// groupBoxTime
+			// 
+			this.groupBoxTime.Controls.Add(this.btnMax);
+			this.groupBoxTime.Controls.Add(this.label8);
+			this.groupBoxTime.Controls.Add(this.label7);
+			this.groupBoxTime.Controls.Add(this.chkTimestamp);
+			this.groupBoxTime.Controls.Add(this.dateTimeEnd);
+			this.groupBoxTime.Controls.Add(this.dateTimeStart);
+			this.groupBoxTime.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBoxTime.Location = new System.Drawing.Point(6, 19);
+			this.groupBoxTime.Name = "groupBoxTime";
+			this.groupBoxTime.Size = new System.Drawing.Size(396, 44);
+			this.groupBoxTime.TabIndex = 17;
+			this.groupBoxTime.TabStop = false;
+			this.groupBoxTime.Text = "TimeStamp";
+			// 
+			// btnMax
+			// 
+			this.btnMax.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnMax.Location = new System.Drawing.Point(354, 16);
+			this.btnMax.Name = "btnMax";
+			this.btnMax.Size = new System.Drawing.Size(36, 20);
+			this.btnMax.TabIndex = 19;
+			this.btnMax.Text = "max";
+			this.btnMax.UseVisualStyleBackColor = true;
+			this.btnMax.Click += new System.EventHandler(this.btnMax_Click);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label8.Location = new System.Drawing.Point(186, 20);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(30, 13);
+			this.label8.TabIndex = 18;
+			this.label8.Text = "End:";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label7.Location = new System.Drawing.Point(15, 20);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(34, 13);
+			this.label7.TabIndex = 17;
+			this.label7.Text = "Start:";
+			// 
+			// chkTimestamp
+			// 
+			this.chkTimestamp.AutoSize = true;
+			this.chkTimestamp.Location = new System.Drawing.Point(79, 0);
+			this.chkTimestamp.Name = "chkTimestamp";
+			this.chkTimestamp.Size = new System.Drawing.Size(15, 14);
+			this.chkTimestamp.TabIndex = 0;
+			this.chkTimestamp.UseVisualStyleBackColor = true;
+			this.chkTimestamp.CheckedChanged += new System.EventHandler(this.chkTimestamp_CheckedChanged);
+			// 
+			// dateTimeEnd
+			// 
+			this.dateTimeEnd.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateTimeEnd.CustomFormat = "dd-MM-yyyy HH:mm";
+			this.dateTimeEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimeEnd.Location = new System.Drawing.Point(222, 16);
+			this.dateTimeEnd.Name = "dateTimeEnd";
+			this.dateTimeEnd.Size = new System.Drawing.Size(126, 20);
+			this.dateTimeEnd.TabIndex = 2;
+			// 
+			// dateTimeStart
+			// 
+			this.dateTimeStart.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateTimeStart.CustomFormat = "dd-MM-yyyy HH:mm";
+			this.dateTimeStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimeStart.Location = new System.Drawing.Point(54, 16);
+			this.dateTimeStart.Name = "dateTimeStart";
+			this.dateTimeStart.Size = new System.Drawing.Size(126, 20);
+			this.dateTimeStart.TabIndex = 1;
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label9.Location = new System.Drawing.Point(27, 73);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(29, 13);
+			this.label9.TabIndex = 19;
+			this.label9.Text = "Key:";
+			// 
+			// btnUncheckAll
+			// 
+			this.btnUncheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnUncheckAll.Location = new System.Drawing.Point(22, 221);
+			this.btnUncheckAll.Name = "btnUncheckAll";
+			this.btnUncheckAll.Size = new System.Drawing.Size(35, 23);
+			this.btnUncheckAll.TabIndex = 9;
+			this.btnUncheckAll.Text = "-";
+			this.btnUncheckAll.UseVisualStyleBackColor = true;
+			this.btnUncheckAll.Click += new System.EventHandler(this.btnUncheckAll_Click);
+			// 
+			// btnCheckAll
+			// 
+			this.btnCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnCheckAll.Location = new System.Drawing.Point(22, 193);
+			this.btnCheckAll.Name = "btnCheckAll";
+			this.btnCheckAll.Size = new System.Drawing.Size(35, 23);
+			this.btnCheckAll.TabIndex = 8;
+			this.btnCheckAll.Text = "+";
+			this.btnCheckAll.UseVisualStyleBackColor = true;
+			this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
+			// 
+			// chklTopics
+			// 
+			this.chklTopics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.chklTopics.FormattingEnabled = true;
+			this.chklTopics.HorizontalScrollbar = true;
+			this.chklTopics.Location = new System.Drawing.Point(62, 185);
+			this.chklTopics.Name = "chklTopics";
+			this.chklTopics.ScrollAlwaysVisible = true;
+			this.chklTopics.Size = new System.Drawing.Size(539, 429);
+			this.chklTopics.TabIndex = 5;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label2.Location = new System.Drawing.Point(15, 166);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(42, 13);
+			this.label2.TabIndex = 5;
+			this.label2.Text = "Topics:";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.Location = new System.Drawing.Point(15, 9);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(42, 13);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "Server:";
+			// 
 			// label10
 			// 
 			this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -814,14 +837,6 @@
 			this.Text = "KakaHelper by TaPaKaH";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.tabControl.ResumeLayout(false);
-			this.tabPageSetting.ResumeLayout(false);
-			this.tabPageSetting.PerformLayout();
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
-			this.groupBoxTime.ResumeLayout(false);
-			this.groupBoxTime.PerformLayout();
 			this.tabPageSubsriber.ResumeLayout(false);
 			this.tabPageSubsriber.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
@@ -834,6 +849,16 @@
 			this.tabPageProducer.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
+			this.tabPageSetting.ResumeLayout(false);
+			this.tabPageSetting.PerformLayout();
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
+			this.groupBoxTime.ResumeLayout(false);
+			this.groupBoxTime.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -901,6 +926,8 @@
                 private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
 		private System.Windows.Forms.TextBox tbFilterTopics;
 		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.TextBox tbMaxRows;
 	}
 }
 
