@@ -5,6 +5,11 @@ namespace KafkaHelpers
 {
     public static class RowFormatter
     {
+        public static DateTime Trim(this DateTime date, long ticks)
+        {
+            return new DateTime(date.Ticks - (date.Ticks % ticks), date.Kind);
+        }
+
         private static readonly string[] suffixes =
             { "Bytes", "KB", "MB", "GB", "TB", "PB" };
 

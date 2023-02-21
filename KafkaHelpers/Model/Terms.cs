@@ -10,7 +10,8 @@ namespace KafkaHelpers
 		private static string _Value;
 		private static int _Counter;
 		private static int _Top;
-
+		private static bool _IsStatistic;
+		
 		public DateTime? Start
 		{ set { _Start = value; } get { return _Start; } }
 
@@ -28,6 +29,9 @@ namespace KafkaHelpers
 
 		public int MaxRows
 		{ set { _Top = value; } get { return _Top; } }
+
+		public bool IsStatistic
+		{ set { _IsStatistic = value; } get { return _IsStatistic; } }
 
 		public Terms()
 		{

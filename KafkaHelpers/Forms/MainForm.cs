@@ -37,6 +37,7 @@ namespace KafkaHelpers
 		private readonly List<string> TOPICS = new List<string>();
 		private readonly List<string> TopicsSubscriber = new List<string>();
 		public static event EventHandler<string> ConsumerStatusTextChanged;
+		private Statistics Statistic = null;
 
 		private AsyncPolicy CreateConsumingPolicy()
 		{
@@ -121,7 +122,7 @@ namespace KafkaHelpers
 
 			if (!string.IsNullOrEmpty(KAFKA_TOPICS))
 			{
-				TOPICS = KAFKA_TOPICS.Split(',').Select(x=>x.Trim()).ToList();
+				TOPICS = KAFKA_TOPICS.Split(',').Select(x => x.Trim()).ToList();
 
 				cmbProducerTopic.DataSource = TOPICS;
 
@@ -135,7 +136,7 @@ namespace KafkaHelpers
 
 			if (!string.IsNullOrEmpty(KAFKA_CHKED_TOPICS))
 			{
-				List<string> topics = KAFKA_CHKED_TOPICS.Split(',').Select(x=>x.Trim()).ToList();
+				List<string> topics = KAFKA_CHKED_TOPICS.Split(',').Select(x => x.Trim()).ToList();
 
 				for (int i = 0; i < chklTopics.Items.Count; i++)
 				{
@@ -163,6 +164,7 @@ namespace KafkaHelpers
 
 			_dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
+			this.chartTopics.Series.Clear();
 		}
 
 
@@ -251,6 +253,8 @@ namespace KafkaHelpers
 				terms.MaxRows = DEFAULT_ROWS;
 			}
 
+			terms.IsStatistic = rbModeStatistics.Checked;
+
 			_consumerDataSet.Messages.Clear();
 			ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = false;
 			btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = true;
@@ -266,7 +270,9 @@ namespace KafkaHelpers
 			_tsStatusConsumer.Text = string.Empty;
 			_toolStripKafkaServerValue.Text = KAFKA_SERVER;
 
-			var taskConsume = Task.Run(() => ActivateConsume(cancelSource.Token), cancelSource.Token);
+			Statistic = new Statistics(terms.MaxRows);
+
+			var taskConsume = Task.Run(() => ActivateConsume(Statistic, cancelSource.Token), cancelSource.Token);
 
 			try
 			{
@@ -288,7 +294,7 @@ namespace KafkaHelpers
 			SetStatusText(ID_COUNTER.ToString());
 		}
 
-		private async void ActivateConsume(CancellationToken stoppingToken)
+		private async void ActivateConsume(Statistics stats, CancellationToken stoppingToken)
 		{
 			ID_COUNTER = 0;
 
@@ -339,7 +345,7 @@ namespace KafkaHelpers
 
 						try
 						{
-							AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "-1", consumeResult.Message.Value, consumeResult.Message.Timestamp.UtcDateTime));
+							AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "-1", consumeResult.Message.Value, consumeResult.Message.Timestamp.UtcDateTime), stats);
 						}
 						catch
 						{
@@ -385,16 +391,23 @@ namespace KafkaHelpers
 			});
 		}
 
-		private void AddRow(GridRow row)
+		private void AddRow(GridRow row, Statistics stats = null)
 		{
 			_dataGridViewSubscriber.Invoke(new Action(() =>
 			{
-			var rw = RowFormatter.CreateRow(row, terms);
 
-			if (rw != null)
-			{
-				if (_consumerDataSet.Messages.Rows.Count > terms.MaxRows)
+				var rw = RowFormatter.CreateRow(row, terms);
+				
+				if (rw != null)
 				{
+					if (stats != null && terms.IsStatistic)
+					{
+						stats.TimeValues.Add(new DataTopic(rw.Topic, rw.Timestamp));
+						return;
+					}
+
+					if (_consumerDataSet.Messages.Rows.Count > terms.MaxRows)
+					{
 						UnSubscribe();
 						return;
 					}
@@ -437,6 +450,11 @@ namespace KafkaHelpers
 			_tsStatusConsumer.Text = string.Empty;
 			_toolStripStatus.Text = string.Empty;
 			_toolStripProgressBar.Value = 0;
+
+			if (terms.IsStatistic)
+			{
+				Statistic.DrowChart(this.chartTopics);
+			}
 		}
 
 		private void btnReadTopics_Click(object sender, EventArgs e)
@@ -728,7 +746,7 @@ namespace KafkaHelpers
 
 			List<string> uniq = new List<string>();
 
-			uniq.AddRange(result.Select(x=>x).Distinct().ToList());
+			uniq.AddRange(result.Select(x => x).Distinct().ToList());
 
 			uniq.Sort();
 
