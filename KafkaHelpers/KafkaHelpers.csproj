@@ -138,6 +138,27 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls">
+      <HintPath>Dll\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.ChartView">
+      <HintPath>Dll\Telerik.WinControls.ChartView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetro">
+      <HintPath>Dll\Telerik.WinControls.Themes.TelerikMetro.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI">
+      <HintPath>Dll\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design">
+      <HintPath>Dll\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon">
+      <HintPath>Dll\TelerikCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikData">
+      <HintPath>Dll\TelerikData.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +176,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConsumerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Model\DataTopic.cs" />
+    <Compile Include="Model\DateTimeFormatProvider.cs" />
     <Compile Include="Model\GridRow.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\KafkaHelper.cs" />
@@ -187,6 +210,7 @@
     <EmbeddedResource Include="Forms\MessageDetailForm.resx">
       <DependentUpon>MessageDetailForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

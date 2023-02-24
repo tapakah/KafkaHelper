@@ -37,7 +37,6 @@ namespace KafkaHelpers
 		private readonly List<string> TOPICS = new List<string>();
 		private readonly List<string> TopicsSubscriber = new List<string>();
 		public static event EventHandler<string> ConsumerStatusTextChanged;
-		private Statistics Statistic = null;
 
 		private AsyncPolicy CreateConsumingPolicy()
 		{
@@ -164,7 +163,7 @@ namespace KafkaHelpers
 
 			_dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
-			this.chartTopics.Series.Clear();
+			this._radChartView.Series.Clear();
 		}
 
 
@@ -270,9 +269,9 @@ namespace KafkaHelpers
 			_tsStatusConsumer.Text = string.Empty;
 			_toolStripKafkaServerValue.Text = KAFKA_SERVER;
 
-			Statistic = new Statistics(terms.MaxRows);
+			Statistics.Clear();
 
-			var taskConsume = Task.Run(() => ActivateConsume(Statistic, cancelSource.Token), cancelSource.Token);
+			var taskConsume = Task.Run(() => ActivateConsume( cancelSource.Token), cancelSource.Token);
 
 			try
 			{
@@ -294,7 +293,7 @@ namespace KafkaHelpers
 			SetStatusText(ID_COUNTER.ToString());
 		}
 
-		private async void ActivateConsume(Statistics stats, CancellationToken stoppingToken)
+		private async void ActivateConsume(CancellationToken stoppingToken)
 		{
 			ID_COUNTER = 0;
 
@@ -345,7 +344,7 @@ namespace KafkaHelpers
 
 						try
 						{
-							AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "-1", consumeResult.Message.Value, consumeResult.Message.Timestamp.UtcDateTime), stats);
+							AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "-1", consumeResult.Message.Value, consumeResult.Message.Timestamp.UtcDateTime));
 						}
 						catch
 						{
@@ -391,7 +390,7 @@ namespace KafkaHelpers
 			});
 		}
 
-		private void AddRow(GridRow row, Statistics stats = null)
+		private void AddRow(GridRow row)
 		{
 			_dataGridViewSubscriber.Invoke(new Action(() =>
 			{
@@ -400,9 +399,9 @@ namespace KafkaHelpers
 				
 				if (rw != null)
 				{
-					if (stats != null && terms.IsStatistic)
+					if (terms.IsStatistic && rw.Id > 0)
 					{
-						stats.TimeValues.Add(new DataTopic(rw.Topic, rw.Timestamp));
+						Statistics.TimeValues.Add(new DataTopic(rw.Topic, rw.Timestamp));
 						return;
 					}
 
@@ -453,7 +452,7 @@ namespace KafkaHelpers
 
 			if (terms.IsStatistic)
 			{
-				Statistic.DrowChart(this.chartTopics);
+				Statistics.DrowChart(this._radChartView);
 			}
 		}
 

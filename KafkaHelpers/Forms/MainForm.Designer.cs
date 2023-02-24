@@ -30,11 +30,9 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPageSetting = new System.Windows.Forms.TabPage();
@@ -42,6 +40,9 @@
 			this.tbFilterTopics = new System.Windows.Forms.TextBox();
 			this.ctbKafkaServer = new System.Windows.Forms.ComboBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.rbModeStatistics = new System.Windows.Forms.RadioButton();
+			this.rbModeNormal = new System.Windows.Forms.RadioButton();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.tbMaxRows = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -66,6 +67,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnSubscribe = new System.Windows.Forms.Button();
 			this.tabPageSubsriber = new System.Windows.Forms.TabPage();
+			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+			this.recivedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.topicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.keyColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.SizeGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
 			this._panel = new System.Windows.Forms.Panel();
 			this.chbDefaultJsonParse = new System.Windows.Forms.CheckBox();
 			this.btnView = new System.Windows.Forms.Button();
@@ -91,35 +99,26 @@
 			this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
 			this.btnSendMessage = new System.Windows.Forms.Button();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this._radChartView = new Telerik.WinControls.UI.RadChartView();
 			this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
-			this.chartTopics = new System.Windows.Forms.DataVisualization.Charting.Chart();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.rbModeNormal = new System.Windows.Forms.RadioButton();
-			this.rbModeStatistics = new System.Windows.Forms.RadioButton();
-			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-			this.recivedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.topicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.keyColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.SizeGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
 			this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this._telerikMetroTheme = new Telerik.WinControls.Themes.TelerikMetroTheme();
 			this.tabControl.SuspendLayout();
 			this.tabPageSetting.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			this.groupBox4.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxTime.SuspendLayout();
 			this.tabPageSubsriber.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
 			this._panel.SuspendLayout();
 			this._statusStrip.SuspendLayout();
 			this.tabPageProducer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
 			this.tabPage1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.chartTopics)).BeginInit();
-			this.groupBox4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this._radChartView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -205,6 +204,40 @@
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Terms";
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.rbModeStatistics);
+			this.groupBox4.Controls.Add(this.rbModeNormal);
+			this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBox4.Location = new System.Drawing.Point(364, 69);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(168, 47);
+			this.groupBox4.TabIndex = 23;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Mode";
+			// 
+			// rbModeStatistics
+			// 
+			this.rbModeStatistics.AutoSize = true;
+			this.rbModeStatistics.Location = new System.Drawing.Point(89, 21);
+			this.rbModeStatistics.Name = "rbModeStatistics";
+			this.rbModeStatistics.Size = new System.Drawing.Size(70, 17);
+			this.rbModeStatistics.TabIndex = 1;
+			this.rbModeStatistics.Text = "Statistics";
+			this.rbModeStatistics.UseVisualStyleBackColor = true;
+			// 
+			// rbModeNormal
+			// 
+			this.rbModeNormal.AutoSize = true;
+			this.rbModeNormal.Checked = true;
+			this.rbModeNormal.Location = new System.Drawing.Point(21, 21);
+			this.rbModeNormal.Name = "rbModeNormal";
+			this.rbModeNormal.Size = new System.Drawing.Size(47, 17);
+			this.rbModeNormal.TabIndex = 0;
+			this.rbModeNormal.TabStop = true;
+			this.rbModeNormal.Text = "Grid";
+			this.rbModeNormal.UseVisualStyleBackColor = true;
 			// 
 			// groupBox3
 			// 
@@ -464,6 +497,91 @@
 			this.tabPageSubsriber.Size = new System.Drawing.Size(981, 617);
 			this.tabPageSubsriber.TabIndex = 1;
 			this.tabPageSubsriber.Text = "Subscriber";
+			// 
+			// _dataGridViewSubscriber
+			// 
+			this._dataGridViewSubscriber.AllowUserToAddRows = false;
+			this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
+			this._dataGridViewSubscriber.AllowUserToResizeRows = false;
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
+			this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this._dataGridViewSubscriber.AutoGenerateColumns = false;
+			this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
+			this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.recivedColumn,
+            this.topicColumn,
+            this.keyColum,
+            this.SizeGridColumn,
+            this.valueColumn});
+			this._dataGridViewSubscriber.DataMember = "Messages";
+			this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
+			this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
+			this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
+			this._dataGridViewSubscriber.ReadOnly = true;
+			this._dataGridViewSubscriber.RowHeadersVisible = false;
+			this._dataGridViewSubscriber.RowHeadersWidth = 30;
+			this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
+			this._dataGridViewSubscriber.TabIndex = 22;
+			this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
+			this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this._dataGridViewSubscriber_CellToolTipTextNeeded);
+			// 
+			// recivedColumn
+			// 
+			this.recivedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.recivedColumn.DataPropertyName = "Recived";
+			dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
+			dataGridViewCellStyle2.NullValue = null;
+			this.recivedColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.recivedColumn.HeaderText = "TimeStamp";
+			this.recivedColumn.Name = "recivedColumn";
+			this.recivedColumn.ReadOnly = true;
+			this.recivedColumn.Width = 87;
+			// 
+			// topicColumn
+			// 
+			this.topicColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.topicColumn.DataPropertyName = "Topic";
+			this.topicColumn.HeaderText = "Topic";
+			this.topicColumn.Name = "topicColumn";
+			this.topicColumn.ReadOnly = true;
+			this.topicColumn.Width = 58;
+			// 
+			// keyColum
+			// 
+			this.keyColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.keyColum.DataPropertyName = "Key";
+			this.keyColum.HeaderText = "Key";
+			this.keyColum.Name = "keyColum";
+			this.keyColum.ReadOnly = true;
+			this.keyColum.Width = 49;
+			// 
+			// SizeGridColumn
+			// 
+			this.SizeGridColumn.DataPropertyName = "Size";
+			this.SizeGridColumn.HeaderText = "Size";
+			this.SizeGridColumn.Name = "SizeGridColumn";
+			this.SizeGridColumn.ReadOnly = true;
+			this.SizeGridColumn.Width = 52;
+			// 
+			// valueColumn
+			// 
+			this.valueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.valueColumn.DataPropertyName = "Value";
+			this.valueColumn.HeaderText = "Value";
+			this.valueColumn.Name = "valueColumn";
+			this.valueColumn.ReadOnly = true;
+			// 
+			// _consumerDataSet
+			// 
+			this._consumerDataSet.DataSetName = "ConsumerDataSet";
+			this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// _panel
 			// 
@@ -740,7 +858,7 @@
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.chartTopics);
+			this.tabPage1.Controls.Add(this._radChartView);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -749,142 +867,23 @@
 			this.tabPage1.Text = "Statistics";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
-			// chartTopics
+			// _radChartView
 			// 
-			chartArea1.Name = "ChartArea1";
-			this.chartTopics.ChartAreas.Add(chartArea1);
-			this.chartTopics.Dock = System.Windows.Forms.DockStyle.Fill;
-			legend1.Name = "Legend1";
-			this.chartTopics.Legends.Add(legend1);
-			this.chartTopics.Location = new System.Drawing.Point(3, 3);
-			this.chartTopics.Name = "chartTopics";
-			this.chartTopics.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-			series1.ChartArea = "ChartArea1";
-			series1.Legend = "Legend1";
-			series1.Name = "Series1";
-			this.chartTopics.Series.Add(series1);
-			this.chartTopics.Size = new System.Drawing.Size(975, 611);
-			this.chartTopics.TabIndex = 0;
-			this.chartTopics.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.SystemDefault;
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Controls.Add(this.rbModeStatistics);
-			this.groupBox4.Controls.Add(this.rbModeNormal);
-			this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.groupBox4.Location = new System.Drawing.Point(364, 69);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(168, 47);
-			this.groupBox4.TabIndex = 23;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Mode";
-			// 
-			// rbModeNormal
-			// 
-			this.rbModeNormal.AutoSize = true;
-			this.rbModeNormal.Checked = true;
-			this.rbModeNormal.Location = new System.Drawing.Point(6, 21);
-			this.rbModeNormal.Name = "rbModeNormal";
-			this.rbModeNormal.Size = new System.Drawing.Size(64, 17);
-			this.rbModeNormal.TabIndex = 0;
-			this.rbModeNormal.TabStop = true;
-			this.rbModeNormal.Text = "Normal";
-			this.rbModeNormal.UseVisualStyleBackColor = true;
-			// 
-			// rbModeStatistics
-			// 
-			this.rbModeStatistics.AutoSize = true;
-			this.rbModeStatistics.Location = new System.Drawing.Point(89, 21);
-			this.rbModeStatistics.Name = "rbModeStatistics";
-			this.rbModeStatistics.Size = new System.Drawing.Size(70, 17);
-			this.rbModeStatistics.TabIndex = 1;
-			this.rbModeStatistics.Text = "Statistics";
-			this.rbModeStatistics.UseVisualStyleBackColor = true;
-			// 
-			// _dataGridViewSubscriber
-			// 
-			this._dataGridViewSubscriber.AllowUserToAddRows = false;
-			this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
-			this._dataGridViewSubscriber.AllowUserToResizeRows = false;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
-			this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-			this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this._dataGridViewSubscriber.AutoGenerateColumns = false;
-			this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-			this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-			this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
-			this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-			this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.recivedColumn,
-            this.topicColumn,
-            this.keyColum,
-            this.SizeGridColumn,
-            this.valueColumn});
-			this._dataGridViewSubscriber.DataMember = "Messages";
-			this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
-			this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
-			this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
-			this._dataGridViewSubscriber.ReadOnly = true;
-			this._dataGridViewSubscriber.RowHeadersVisible = false;
-			this._dataGridViewSubscriber.RowHeadersWidth = 30;
-			this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
-			this._dataGridViewSubscriber.TabIndex = 22;
-			this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
-			this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this._dataGridViewSubscriber_CellToolTipTextNeeded);
-			// 
-			// recivedColumn
-			// 
-			this.recivedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.recivedColumn.DataPropertyName = "Recived";
-			dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
-			dataGridViewCellStyle2.NullValue = null;
-			this.recivedColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.recivedColumn.HeaderText = "TimeStamp";
-			this.recivedColumn.Name = "recivedColumn";
-			this.recivedColumn.ReadOnly = true;
-			this.recivedColumn.Width = 87;
-			// 
-			// topicColumn
-			// 
-			this.topicColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.topicColumn.DataPropertyName = "Topic";
-			this.topicColumn.HeaderText = "Topic";
-			this.topicColumn.Name = "topicColumn";
-			this.topicColumn.ReadOnly = true;
-			this.topicColumn.Width = 58;
-			// 
-			// keyColum
-			// 
-			this.keyColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.keyColum.DataPropertyName = "Key";
-			this.keyColum.HeaderText = "Key";
-			this.keyColum.Name = "keyColum";
-			this.keyColum.ReadOnly = true;
-			this.keyColum.Width = 49;
-			// 
-			// SizeGridColumn
-			// 
-			this.SizeGridColumn.DataPropertyName = "Size";
-			this.SizeGridColumn.HeaderText = "Size";
-			this.SizeGridColumn.Name = "SizeGridColumn";
-			this.SizeGridColumn.ReadOnly = true;
-			this.SizeGridColumn.Width = 52;
-			// 
-			// valueColumn
-			// 
-			this.valueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.valueColumn.DataPropertyName = "Value";
-			this.valueColumn.HeaderText = "Value";
-			this.valueColumn.Name = "valueColumn";
-			this.valueColumn.ReadOnly = true;
-			// 
-			// _consumerDataSet
-			// 
-			this._consumerDataSet.DataSetName = "ConsumerDataSet";
-			this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+			cartesianArea1.ShowGrid = true;
+			this._radChartView.AreaDesign = cartesianArea1;
+			this._radChartView.AutoScroll = true;
+			this._radChartView.BackColor = System.Drawing.Color.Cornsilk;
+			this._radChartView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this._radChartView.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this._radChartView.Location = new System.Drawing.Point(3, 3);
+			this._radChartView.Name = "_radChartView";
+			this._radChartView.SelectionMode = Telerik.WinControls.UI.ChartSelectionMode.MultipleDataPoints;
+			this._radChartView.ShowPanZoom = true;
+			this._radChartView.ShowToolTip = true;
+			this._radChartView.ShowTrackBall = true;
+			this._radChartView.Size = new System.Drawing.Size(975, 611);
+			this._radChartView.TabIndex = 0;
+			this._radChartView.ThemeName = "TelerikMetro";
 			// 
 			// messagesBindingSource
 			// 
@@ -907,6 +906,8 @@
 			this.tabPageSetting.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.groupBox4.ResumeLayout(false);
+			this.groupBox4.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
@@ -915,6 +916,8 @@
 			this.groupBoxTime.PerformLayout();
 			this.tabPageSubsriber.ResumeLayout(false);
 			this.tabPageSubsriber.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
 			this._panel.ResumeLayout(false);
 			this._panel.PerformLayout();
 			this._statusStrip.ResumeLayout(false);
@@ -923,11 +926,7 @@
 			this.tabPageProducer.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
 			this.tabPage1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.chartTopics)).EndInit();
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this._radChartView)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
@@ -999,10 +998,11 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn keyColum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn SizeGridColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn valueColumn;
-		private System.Windows.Forms.DataVisualization.Charting.Chart chartTopics;
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.RadioButton rbModeStatistics;
 		private System.Windows.Forms.RadioButton rbModeNormal;
+		private Telerik.WinControls.UI.RadChartView _radChartView;
+		private Telerik.WinControls.Themes.TelerikMetroTheme _telerikMetroTheme;
 	}
 }
 
