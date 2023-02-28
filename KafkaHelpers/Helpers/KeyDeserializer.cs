@@ -1,14 +1,8 @@
-﻿using System;
+﻿using Confluent.Kafka;
+using System;
 using System.Buffers.Binary;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
-using System.Threading.Tasks;
-using Confluent.Kafka;
 
 namespace KafkaHelpers
 {
@@ -38,7 +32,6 @@ namespace KafkaHelpers
                 return x.ToString();
             else
                 return sr.ReadToEnd();
-
         }
     }
 }

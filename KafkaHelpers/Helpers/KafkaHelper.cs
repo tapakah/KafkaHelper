@@ -133,8 +133,6 @@ namespace KafkaHelpers
                 string logMessage = $"Error of sending to Kafka data.";
                 throw new InvalidOperationException(logMessage, ex);
             }
-
         }
-
     }
 }

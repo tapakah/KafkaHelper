@@ -2,19 +2,18 @@
 
 namespace KafkaHelpers.Model
 {
-	public class DateTimeFormatProvider : IFormatProvider, ICustomFormatter
-	{
-		public object GetFormat(Type formatType)
-		{
-			return this;
-		}
+    public class DateTimeFormatProvider : IFormatProvider, ICustomFormatter
+    {
+        public object GetFormat(Type formatType)
+        {
+            return this;
+        }
 
-		public string Format(string format, object arg, IFormatProvider formatProvider)
-		{
-			DateTime val = (DateTime)arg;
+        public string Format(string format, object arg, IFormatProvider formatProvider)
+        {
+            DateTime val = (DateTime)arg;
 
-			return val.ToString("HH:mm:ss");
-
-		}
-	}
+            return val.ToString("HH:mm:ss");
+        }
+    }
 }

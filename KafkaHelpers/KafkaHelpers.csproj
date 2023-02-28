@@ -248,6 +248,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images.ico" />
+    <None Include="Resources\kafka.png" />
     <None Include="Resources\pngegg.png" />
     <None Include="Resources\png-clipart-kafka-logo-icons-logos-emojis-tech-companies.png" />
     <None Include="Resources\delete.png" />

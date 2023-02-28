@@ -9,6 +9,7 @@ namespace KafkaHelpers.Model
         public int Count { get; set; }
         public string MessageSize { get; set; }
 
-        public DeliviryStatus() { }
+        public DeliviryStatus()
+        { }
     }
 }

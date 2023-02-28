@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KafkaHelpers
+﻿namespace KafkaHelpers
 {
     public class MessageDetailEntity
     {
@@ -15,20 +9,26 @@ namespace KafkaHelpers
         private string message;
         private bool defaultJsonParse = true;
 
-        public int Id { get { return id; } set { this.id = value; } }
+        public int Id
+        { get { return id; } set { this.id = value; } }
+
         public long Key
         {
             get
             {
-
                 return this.key;
             }
 
             set { this.key = value; }
         }
-        public string KeyString { get { return keystring; } set { this.keystring = value; } }
-        public string Topic { get { return topic; } set { this.topic = value; } }
-        public string Message { get { return message; } set { this.message = value; } }
-        public bool DefaultJsonParse { get { return defaultJsonParse; } set { this.defaultJsonParse = value; } }
+
+        public string KeyString
+        { get { return keystring; } set { this.keystring = value; } }
+        public string Topic
+        { get { return topic; } set { this.topic = value; } }
+        public string Message
+        { get { return message; } set { this.message = value; } }
+        public bool DefaultJsonParse
+        { get { return defaultJsonParse; } set { this.defaultJsonParse = value; } }
     }
 }

@@ -1,5 +1,4 @@
-﻿using KafkaHelpers.Model;
-using System;
+﻿using System;
 
 namespace KafkaHelpers
 {

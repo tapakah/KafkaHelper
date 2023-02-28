@@ -103,6 +103,16 @@ namespace KafkaHelpers.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kafka {
+            get {
+                object obj = ResourceManager.GetObject("kafka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mail_16 {
             get {
                 object obj = ResourceManager.GetObject("mail_16", resourceCulture);

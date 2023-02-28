@@ -2,39 +2,39 @@
 
 namespace KafkaHelpers
 {
-	public class Terms
-	{
-		private static DateTime? _Start;
-		private static DateTime? _End;
-		private static string _Key;
-		private static string _Value;
-		private static int _Counter;
-		private static int _Top;
-		private static bool _IsStatistic;
-		
-		public DateTime? Start
-		{ set { _Start = value; } get { return _Start; } }
+    public class Terms
+    {
+        private static DateTime? _Start;
+        private static DateTime? _End;
+        private static string _Key;
+        private static string _Value;
+        private static int _Counter;
+        private static int _Top;
+        private static bool _IsStatistic;
 
-		public DateTime? End
-		{ set { _End = value; } get { return _End; } }
+        public DateTime? Start
+        { set { _Start = value; } get { return _Start; } }
 
-		public string Key
-		{ set { _Key = value; } get { return _Key; } }
+        public DateTime? End
+        { set { _End = value; } get { return _End; } }
 
-		public string Value
-		{ set { _Value = value; } get { return _Value; } }
+        public string Key
+        { set { _Key = value; } get { return _Key; } }
 
-		public int Counter
-		{ set { _Counter = value; } get { return _Counter; } }
+        public string Value
+        { set { _Value = value; } get { return _Value; } }
 
-		public int MaxRows
-		{ set { _Top = value; } get { return _Top; } }
+        public int Counter
+        { set { _Counter = value; } get { return _Counter; } }
 
-		public bool IsStatistic
-		{ set { _IsStatistic = value; } get { return _IsStatistic; } }
+        public int MaxRows
+        { set { _Top = value; } get { return _Top; } }
 
-		public Terms()
-		{
-		}
-	}
+        public bool IsStatistic
+        { set { _IsStatistic = value; } get { return _IsStatistic; } }
+
+        public Terms()
+        {
+        }
+    }
 }

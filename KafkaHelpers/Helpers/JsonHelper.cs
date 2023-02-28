@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace KafkaHelpers
 {
@@ -29,6 +28,7 @@ namespace KafkaHelpers
                             Enumerable.Range(0, ++indent).ForEach(item => sb.Append(INDENT_STRING));
                         }
                         break;
+
                     case '}':
                     case ']':
                         if (!quoted)
@@ -38,6 +38,7 @@ namespace KafkaHelpers
                         }
                         sb.Append(ch);
                         break;
+
                     case '"':
                         sb.Append(ch);
                         bool escaped = false;
@@ -47,6 +48,7 @@ namespace KafkaHelpers
                         if (!escaped)
                             quoted = !quoted;
                         break;
+
                     case ',':
                         sb.Append(ch);
                         if (!quoted)
@@ -55,11 +57,13 @@ namespace KafkaHelpers
                             Enumerable.Range(0, indent).ForEach(item => sb.Append(INDENT_STRING));
                         }
                         break;
+
                     case ':':
                         sb.Append(ch);
                         if (!quoted)
                             sb.Append(" ");
                         break;
+
                     default:
                         sb.Append(ch);
                         break;
@@ -87,6 +91,7 @@ namespace KafkaHelpers
                             Enumerable.Range(0, ++indent).ForEach(item => sb.Append(INDENT_STRING));
                         }
                         break;
+
                     case '}':
                     case ']':
                         if (!quoted)
@@ -96,6 +101,7 @@ namespace KafkaHelpers
                         }
                         sb.Append(ch);
                         break;
+
                     case '"':
                         sb.Append(ch);
                         bool escaped = false;
@@ -105,6 +111,7 @@ namespace KafkaHelpers
                         if (!escaped)
                             quoted = !quoted;
                         break;
+
                     case ',':
                         sb.Append(ch);
                         if (!quoted)
@@ -113,11 +120,13 @@ namespace KafkaHelpers
                             Enumerable.Range(0, indent).ForEach(item => sb.Append(INDENT_STRING));
                         }
                         break;
+
                     case ':':
                         sb.Append(ch);
                         if (!quoted)
                             sb.Append(" ");
                         break;
+
                     default:
                         sb.Append(ch);
                         break;
@@ -127,7 +136,7 @@ namespace KafkaHelpers
         }
     }
 
-    static class Extensions
+    internal static class Extensions
     {
         public static void ForEach<T>(this IEnumerable<T> ie, Action<T> action)
         {
@@ -137,5 +146,4 @@ namespace KafkaHelpers
             }
         }
     }
-
 }
