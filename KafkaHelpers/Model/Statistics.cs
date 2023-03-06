@@ -18,6 +18,11 @@ namespace KafkaHelpers.Model
     {
         public static List<DataTopic> TimeValues { get; set; } = new List<DataTopic>();
 
+        public static int GetCount()
+        {
+            return TimeValues.Count();
+        }
+
         private static IEnumerable<DateTime> GetTopicValues(this List<DataTopic> data, string topic)
         {
             foreach (var _value in data.Where(x => x.Topic == topic).OrderBy(z => z.Value).Select(y => y.Value))
@@ -87,7 +92,7 @@ namespace KafkaHelpers.Model
             int GetTickInterval()
             {
                 int cnt = TimeValues.Select(x => x.Value.ToString("ddmmss")).Distinct<string>().Count();
-                return cnt / 20;
+                return Math.Max(cnt / 20, cnt);
             }
 
             categoricalAxis.MajorTickInterval = GetTickInterval();

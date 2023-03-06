@@ -205,6 +205,7 @@ namespace KafkaHelpers
             cancelSource = new CancellationTokenSource();
             _toolStripStatus.Text = string.Empty;
             _toolStripProgressBar.Value = 0;
+            _toolStatisticsLabel.Text = "0";
 
             if (chkTimestamp.Checked)
             {
@@ -388,6 +389,11 @@ namespace KafkaHelpers
             {
                 _toolStripStatus.Text = text;
                 _toolStripProgressBar.Value = (_toolStripProgressBar.Value + 1) % 100;
+
+                if (terms.IsStatistic)
+                {
+                    _toolStatisticsLabel.Text = Statistics.GetCount().ToString();
+                }
             });
         }
 
@@ -686,9 +692,10 @@ namespace KafkaHelpers
 
         private void buttonFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog open = new OpenFileDialog();
-
-            open.Filter = "Text File | *.txt";
+            OpenFileDialog open = new OpenFileDialog
+            {
+                Filter = "Text File | *.txt"
+            };
 
             if (open.ShowDialog() == DialogResult.OK)
             {
@@ -700,7 +707,7 @@ namespace KafkaHelpers
             }
         }
 
-        private void _dataGridViewSubscriber_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void dataGridViewSubscriber_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex > 0)
             {
@@ -769,6 +776,11 @@ namespace KafkaHelpers
             {
                 tbMaxRows.Text = DEFAULT_ROWS.ToString();
             }
+        }
+
+        private void _dataGridViewSubscriber_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+
         }
     }
 }

@@ -36,9 +36,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this._pictureKafka = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbFilterTopics = new System.Windows.Forms.TextBox();
             this.ctbKafkaServer = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radModeSwitch = new Telerik.WinControls.UI.RadToggleSwitch();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbMaxRows = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -54,11 +58,14 @@
             this.dateTimeEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnReadTopics = new System.Windows.Forms.Button();
+            this.btnUnSubscribe = new System.Windows.Forms.Button();
             this.btnUncheckAll = new System.Windows.Forms.Button();
             this.btnCheckAll = new System.Windows.Forms.Button();
             this.chklTopics = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSubscribe = new System.Windows.Forms.Button();
             this.tabPageSubsriber = new System.Windows.Forms.TabPage();
             this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
             this.recivedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +76,10 @@
             this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this._panel = new System.Windows.Forms.Panel();
             this.chbDefaultJsonParse = new System.Windows.Forms.CheckBox();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSubscribe2 = new System.Windows.Forms.Button();
+            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
             this._statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripKafkaServer = new System.Windows.Forms.ToolStripStatusLabel();
             this._toolStripKafkaServerValue = new System.Windows.Forms.ToolStripStatusLabel();
@@ -76,7 +87,10 @@
             this._toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this._toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this._tsStatusConsumer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this._toolStatisticsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPageProducer = new System.Windows.Forms.TabPage();
+            this.buttonFile = new System.Windows.Forms.Button();
             this.textBoxFileToSend = new System.Windows.Forms.TextBox();
             this.cntToSend = new System.Windows.Forms.NumericUpDown();
             this.tbProducerValue = new System.Windows.Forms.TextBox();
@@ -85,27 +99,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
+            this.btnSendMessage = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this._radChartView = new Telerik.WinControls.UI.RadChartView();
             this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._telerikMetroTheme = new Telerik.WinControls.Themes.TelerikMetroTheme();
-            this.radModeSwitch = new Telerik.WinControls.UI.RadToggleSwitch();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this._pictureKafka = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnReadTopics = new System.Windows.Forms.Button();
-            this.btnUnSubscribe = new System.Windows.Forms.Button();
-            this.btnSubscribe = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSubscribe2 = new System.Windows.Forms.Button();
-            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
-            this.buttonFile = new System.Windows.Forms.Button();
-            this.btnSendMessage = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureKafka)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxTime.SuspendLayout();
@@ -119,9 +124,6 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._radChartView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._pictureKafka)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -163,6 +165,38 @@
             this.tabPageSetting.TabIndex = 0;
             this.tabPageSetting.Text = "Setting";
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this._pictureKafka);
+            this.panel1.Location = new System.Drawing.Point(607, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(378, 618);
+            this.panel1.TabIndex = 12;
+            // 
+            // _pictureKafka
+            // 
+            this._pictureKafka.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this._pictureKafka.Image = global::KafkaHelpers.Properties.Resources.kafka;
+            this._pictureKafka.Location = new System.Drawing.Point(3, 226);
+            this._pictureKafka.Name = "_pictureKafka";
+            this._pictureKafka.Size = new System.Drawing.Size(369, 166);
+            this._pictureKafka.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this._pictureKafka.TabIndex = 0;
+            this._pictureKafka.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Image = global::KafkaHelpers.Properties.Resources.view_16;
+            this.label10.Location = new System.Drawing.Point(580, 164);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 17);
+            this.label10.TabIndex = 11;
+            // 
             // tbFilterTopics
             // 
             this.tbFilterTopics.Location = new System.Drawing.Point(62, 161);
@@ -198,6 +232,26 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Terms";
+            // 
+            // radModeSwitch
+            // 
+            this.radModeSwitch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radModeSwitch.Location = new System.Drawing.Point(408, 27);
+            this.radModeSwitch.Name = "radModeSwitch";
+            this.radModeSwitch.OffText = "Statistics";
+            this.radModeSwitch.OnText = "Grid";
+            this.radModeSwitch.Size = new System.Drawing.Size(122, 29);
+            this.radModeSwitch.TabIndex = 12;
+            this.radModeSwitch.Text = "radToggleSwitch1";
+            this.radModeSwitch.ThemeName = "ControlDefault";
+            this.radModeSwitch.ThumbTickness = 40;
+            ((Telerik.WinControls.UI.RadToggleSwitchElement)(this.radModeSwitch.GetChildAt(0))).ThumbTickness = 40;
+            ((Telerik.WinControls.UI.RadToggleSwitchElement)(this.radModeSwitch.GetChildAt(0))).ThumbOffset = 82;
+            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
+            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
+            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
+            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).Text = "Grid";
+            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
             // 
             // groupBox3
             // 
@@ -350,6 +404,33 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Key:";
             // 
+            // btnReadTopics
+            // 
+            this.btnReadTopics.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReadTopics.Image = global::KafkaHelpers.Properties.Resources.gear_16;
+            this.btnReadTopics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReadTopics.Location = new System.Drawing.Point(308, 6);
+            this.btnReadTopics.Name = "btnReadTopics";
+            this.btnReadTopics.Size = new System.Drawing.Size(103, 26);
+            this.btnReadTopics.TabIndex = 1;
+            this.btnReadTopics.Text = "Read topics";
+            this.btnReadTopics.UseVisualStyleBackColor = true;
+            this.btnReadTopics.Click += new System.EventHandler(this.btnReadTopics_Click);
+            // 
+            // btnUnSubscribe
+            // 
+            this.btnUnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUnSubscribe.Image = global::KafkaHelpers.Properties.Resources.stop;
+            this.btnUnSubscribe.Location = new System.Drawing.Point(502, 6);
+            this.btnUnSubscribe.Name = "btnUnSubscribe";
+            this.btnUnSubscribe.Size = new System.Drawing.Size(98, 26);
+            this.btnUnSubscribe.TabIndex = 3;
+            this.btnUnSubscribe.Text = "UnSubscribe";
+            this.btnUnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUnSubscribe.UseVisualStyleBackColor = true;
+            this.btnUnSubscribe.Click += new System.EventHandler(this.btnUnSubscribe_Click);
+            // 
             // btnUncheckAll
             // 
             this.btnUncheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -404,6 +485,20 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Server:";
             // 
+            // btnSubscribe
+            // 
+            this.btnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSubscribe.Image = global::KafkaHelpers.Properties.Resources.play4;
+            this.btnSubscribe.Location = new System.Drawing.Point(412, 6);
+            this.btnSubscribe.Name = "btnSubscribe";
+            this.btnSubscribe.Size = new System.Drawing.Size(89, 26);
+            this.btnSubscribe.TabIndex = 2;
+            this.btnSubscribe.Text = "Subscribe";
+            this.btnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubscribe.UseVisualStyleBackColor = true;
+            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
             // tabPageSubsriber
             // 
             this.tabPageSubsriber.BackColor = System.Drawing.SystemColors.Control;
@@ -449,7 +544,7 @@
             this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
             this._dataGridViewSubscriber.TabIndex = 22;
             this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
-            this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this._dataGridViewSubscriber_CellToolTipTextNeeded);
+            this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridViewSubscriber_CellToolTipTextNeeded);
             // 
             // recivedColumn
             // 
@@ -533,6 +628,56 @@
             this.chbDefaultJsonParse.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.chbDefaultJsonParse.UseVisualStyleBackColor = true;
             // 
+            // btnView
+            // 
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnView.Image = global::KafkaHelpers.Properties.Resources.view_16;
+            this.btnView.Location = new System.Drawing.Point(98, 4);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(27, 25);
+            this.btnView.TabIndex = 3;
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClear.Image = global::KafkaHelpers.Properties.Resources.garbage_empty;
+            this.btnClear.Location = new System.Drawing.Point(67, 4);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(27, 25);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSubscribe2
+            // 
+            this.btnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.play4;
+            this.btnSubscribe2.Location = new System.Drawing.Point(5, 4);
+            this.btnSubscribe2.Name = "btnSubscribe2";
+            this.btnSubscribe2.Size = new System.Drawing.Size(27, 25);
+            this.btnSubscribe2.TabIndex = 0;
+            this.btnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubscribe2.UseVisualStyleBackColor = true;
+            this.btnSubscribe2.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
+            // btnUnSubscribe2
+            // 
+            this.btnUnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.stop;
+            this.btnUnSubscribe2.Location = new System.Drawing.Point(36, 4);
+            this.btnUnSubscribe2.Name = "btnUnSubscribe2";
+            this.btnUnSubscribe2.Size = new System.Drawing.Size(27, 25);
+            this.btnUnSubscribe2.TabIndex = 1;
+            this.btnUnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUnSubscribe2.UseVisualStyleBackColor = true;
+            this.btnUnSubscribe2.Click += new System.EventHandler(this.btnUnSubscribe_Click);
+            // 
             // _statusStrip
             // 
             this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -541,7 +686,9 @@
             this._toolStripLabel,
             this._toolStripProgressBar,
             this._toolStripStatus,
-            this._tsStatusConsumer});
+            this._tsStatusConsumer,
+            this.toolStripStatusLabel1,
+            this._toolStatisticsLabel});
             this._statusStrip.Location = new System.Drawing.Point(3, 590);
             this._statusStrip.Name = "_statusStrip";
             this._statusStrip.Size = new System.Drawing.Size(975, 24);
@@ -589,6 +736,21 @@
             this._tsStatusConsumer.Name = "_tsStatusConsumer";
             this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Navy;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(51, 19);
+            this.toolStripStatusLabel1.Text = "Statistis:";
+            // 
+            // _toolStatisticsLabel
+            // 
+            this._toolStatisticsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._toolStatisticsLabel.Name = "_toolStatisticsLabel";
+            this._toolStatisticsLabel.Size = new System.Drawing.Size(14, 19);
+            this._toolStatisticsLabel.Text = "0";
+            // 
             // tabPageProducer
             // 
             this.tabPageProducer.BackColor = System.Drawing.SystemColors.Control;
@@ -608,6 +770,19 @@
             this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
             this.tabPageProducer.TabIndex = 2;
             this.tabPageProducer.Text = "Producer";
+            // 
+            // buttonFile
+            // 
+            this.buttonFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFile.Image = global::KafkaHelpers.Properties.Resources.paperclip;
+            this.buttonFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFile.Location = new System.Drawing.Point(774, 7);
+            this.buttonFile.Name = "buttonFile";
+            this.buttonFile.Size = new System.Drawing.Size(111, 26);
+            this.buttonFile.TabIndex = 8;
+            this.buttonFile.Text = "File to send";
+            this.buttonFile.UseVisualStyleBackColor = true;
+            this.buttonFile.Click += new System.EventHandler(this.buttonFile_Click);
             // 
             // textBoxFileToSend
             // 
@@ -699,6 +874,19 @@
             this.cmbProducerTopic.Size = new System.Drawing.Size(391, 21);
             this.cmbProducerTopic.TabIndex = 0;
             // 
+            // btnSendMessage
+            // 
+            this.btnSendMessage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSendMessage.Image = global::KafkaHelpers.Properties.Resources.mail_16;
+            this.btnSendMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendMessage.Location = new System.Drawing.Point(774, 36);
+            this.btnSendMessage.Name = "btnSendMessage";
+            this.btnSendMessage.Size = new System.Drawing.Size(111, 26);
+            this.btnSendMessage.TabIndex = 3;
+            this.btnSendMessage.Text = "Send";
+            this.btnSendMessage.UseVisualStyleBackColor = true;
+            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this._radChartView);
@@ -733,175 +921,6 @@
             this.messagesBindingSource.DataMember = "Messages";
             this.messagesBindingSource.DataSource = this._consumerDataSet;
             // 
-            // radModeSwitch
-            // 
-            this.radModeSwitch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radModeSwitch.Location = new System.Drawing.Point(408, 27);
-            this.radModeSwitch.Name = "radModeSwitch";
-            this.radModeSwitch.OffText = "Statistics";
-            this.radModeSwitch.OnText = "Grid";
-            this.radModeSwitch.Size = new System.Drawing.Size(122, 29);
-            this.radModeSwitch.TabIndex = 12;
-            this.radModeSwitch.Text = "radToggleSwitch1";
-            this.radModeSwitch.ThemeName = "ControlDefault";
-            this.radModeSwitch.ThumbTickness = 40;
-            ((Telerik.WinControls.UI.RadToggleSwitchElement)(this.radModeSwitch.GetChildAt(0))).ThumbTickness = 40;
-            ((Telerik.WinControls.UI.RadToggleSwitchElement)(this.radModeSwitch.GetChildAt(0))).ThumbOffset = 82;
-            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).Text = "Grid";
-            ((Telerik.WinControls.UI.ToggleSwitchPartElement)(this.radModeSwitch.GetChildAt(0).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Cornsilk;
-            this.panel1.Controls.Add(this._pictureKafka);
-            this.panel1.Location = new System.Drawing.Point(607, -1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 618);
-            this.panel1.TabIndex = 12;
-            // 
-            // _pictureKafka
-            // 
-            this._pictureKafka.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this._pictureKafka.Image = global::KafkaHelpers.Properties.Resources.kafka;
-            this._pictureKafka.Location = new System.Drawing.Point(3, 226);
-            this._pictureKafka.Name = "_pictureKafka";
-            this._pictureKafka.Size = new System.Drawing.Size(369, 166);
-            this._pictureKafka.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this._pictureKafka.TabIndex = 0;
-            this._pictureKafka.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Image = global::KafkaHelpers.Properties.Resources.view_16;
-            this.label10.Location = new System.Drawing.Point(580, 164);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(21, 17);
-            this.label10.TabIndex = 11;
-            // 
-            // btnReadTopics
-            // 
-            this.btnReadTopics.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadTopics.Image = global::KafkaHelpers.Properties.Resources.gear_16;
-            this.btnReadTopics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReadTopics.Location = new System.Drawing.Point(308, 6);
-            this.btnReadTopics.Name = "btnReadTopics";
-            this.btnReadTopics.Size = new System.Drawing.Size(103, 26);
-            this.btnReadTopics.TabIndex = 1;
-            this.btnReadTopics.Text = "Read topics";
-            this.btnReadTopics.UseVisualStyleBackColor = true;
-            this.btnReadTopics.Click += new System.EventHandler(this.btnReadTopics_Click);
-            // 
-            // btnUnSubscribe
-            // 
-            this.btnUnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUnSubscribe.Image = global::KafkaHelpers.Properties.Resources.stop;
-            this.btnUnSubscribe.Location = new System.Drawing.Point(502, 6);
-            this.btnUnSubscribe.Name = "btnUnSubscribe";
-            this.btnUnSubscribe.Size = new System.Drawing.Size(98, 26);
-            this.btnUnSubscribe.TabIndex = 3;
-            this.btnUnSubscribe.Text = "UnSubscribe";
-            this.btnUnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUnSubscribe.UseVisualStyleBackColor = true;
-            this.btnUnSubscribe.Click += new System.EventHandler(this.btnUnSubscribe_Click);
-            // 
-            // btnSubscribe
-            // 
-            this.btnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSubscribe.Image = global::KafkaHelpers.Properties.Resources.play4;
-            this.btnSubscribe.Location = new System.Drawing.Point(412, 6);
-            this.btnSubscribe.Name = "btnSubscribe";
-            this.btnSubscribe.Size = new System.Drawing.Size(89, 26);
-            this.btnSubscribe.TabIndex = 2;
-            this.btnSubscribe.Text = "Subscribe";
-            this.btnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSubscribe.UseVisualStyleBackColor = true;
-            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
-            // 
-            // btnView
-            // 
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnView.Image = global::KafkaHelpers.Properties.Resources.view_16;
-            this.btnView.Location = new System.Drawing.Point(98, 4);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(27, 25);
-            this.btnView.TabIndex = 3;
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.Image = global::KafkaHelpers.Properties.Resources.garbage_empty;
-            this.btnClear.Location = new System.Drawing.Point(67, 4);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(27, 25);
-            this.btnClear.TabIndex = 2;
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnSubscribe2
-            // 
-            this.btnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.play4;
-            this.btnSubscribe2.Location = new System.Drawing.Point(5, 4);
-            this.btnSubscribe2.Name = "btnSubscribe2";
-            this.btnSubscribe2.Size = new System.Drawing.Size(27, 25);
-            this.btnSubscribe2.TabIndex = 0;
-            this.btnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSubscribe2.UseVisualStyleBackColor = true;
-            this.btnSubscribe2.Click += new System.EventHandler(this.btnSubscribe_Click);
-            // 
-            // btnUnSubscribe2
-            // 
-            this.btnUnSubscribe2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUnSubscribe2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUnSubscribe2.Image = global::KafkaHelpers.Properties.Resources.stop;
-            this.btnUnSubscribe2.Location = new System.Drawing.Point(36, 4);
-            this.btnUnSubscribe2.Name = "btnUnSubscribe2";
-            this.btnUnSubscribe2.Size = new System.Drawing.Size(27, 25);
-            this.btnUnSubscribe2.TabIndex = 1;
-            this.btnUnSubscribe2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUnSubscribe2.UseVisualStyleBackColor = true;
-            this.btnUnSubscribe2.Click += new System.EventHandler(this.btnUnSubscribe_Click);
-            // 
-            // buttonFile
-            // 
-            this.buttonFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonFile.Image = global::KafkaHelpers.Properties.Resources.paperclip;
-            this.buttonFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFile.Location = new System.Drawing.Point(774, 7);
-            this.buttonFile.Name = "buttonFile";
-            this.buttonFile.Size = new System.Drawing.Size(111, 26);
-            this.buttonFile.TabIndex = 8;
-            this.buttonFile.Text = "File to send";
-            this.buttonFile.UseVisualStyleBackColor = true;
-            this.buttonFile.Click += new System.EventHandler(this.buttonFile_Click);
-            // 
-            // btnSendMessage
-            // 
-            this.btnSendMessage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSendMessage.Image = global::KafkaHelpers.Properties.Resources.mail_16;
-            this.btnSendMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSendMessage.Location = new System.Drawing.Point(774, 36);
-            this.btnSendMessage.Name = "btnSendMessage";
-            this.btnSendMessage.Size = new System.Drawing.Size(111, 26);
-            this.btnSendMessage.TabIndex = 3;
-            this.btnSendMessage.Text = "Send";
-            this.btnSendMessage.UseVisualStyleBackColor = true;
-            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -916,8 +935,11 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageSetting.ResumeLayout(false);
             this.tabPageSetting.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._pictureKafka)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -938,9 +960,6 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._radChartView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._pictureKafka)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -1016,6 +1035,8 @@
         private Telerik.WinControls.UI.RadToggleSwitch radModeSwitch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox _pictureKafka;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel _toolStatisticsLabel;
     }
 }
 
