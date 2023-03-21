@@ -103,9 +103,9 @@ namespace KafkaHelpers.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap kafka {
+        internal static System.Drawing.Bitmap kafka_hehper_1 {
             get {
-                object obj = ResourceManager.GetObject("kafka", resourceCulture);
+                object obj = ResourceManager.GetObject("kafka hehper 1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

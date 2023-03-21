@@ -34,13 +34,13 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbTopic = new System.Windows.Forms.TextBox();
             this.tbKey = new System.Windows.Forms.TextBox();
-            this.tbValue = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnJson = new System.Windows.Forms.Button();
-            this.btnTextView = new System.Windows.Forms.Button();
             this.lbSize = new System.Windows.Forms.Label();
+            this.messagePanel = new System.Windows.Forms.Panel();
+            this.btnTextView = new System.Windows.Forms.Button();
+            this.btnJson = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbId
@@ -68,18 +68,6 @@
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(284, 22);
             this.tbKey.TabIndex = 2;
-            // 
-            // tbValue
-            // 
-            this.tbValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbValue.Location = new System.Drawing.Point(6, 45);
-            this.tbValue.Multiline = true;
-            this.tbValue.Name = "tbValue";
-            this.tbValue.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbValue.Size = new System.Drawing.Size(933, 675);
-            this.tbValue.TabIndex = 4;
             // 
             // label1
             // 
@@ -111,16 +99,24 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Key";
             // 
-            // btnJson
+            // lbSize
             // 
-            this.btnJson.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnJson.Location = new System.Drawing.Point(735, 19);
-            this.btnJson.Name = "btnJson";
-            this.btnJson.Size = new System.Drawing.Size(73, 22);
-            this.btnJson.TabIndex = 3;
-            this.btnJson.Text = "JsonView";
-            this.btnJson.UseVisualStyleBackColor = true;
-            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
+            this.lbSize.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbSize.Location = new System.Drawing.Point(649, 3);
+            this.lbSize.Name = "lbSize";
+            this.lbSize.Size = new System.Drawing.Size(80, 14);
+            this.lbSize.TabIndex = 9;
+            this.lbSize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // messagePanel
+            // 
+            this.messagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.messagePanel.Location = new System.Drawing.Point(6, 47);
+            this.messagePanel.Name = "messagePanel";
+            this.messagePanel.Size = new System.Drawing.Size(928, 664);
+            this.messagePanel.TabIndex = 10;
             // 
             // btnTextView
             // 
@@ -133,27 +129,29 @@
             this.btnTextView.UseVisualStyleBackColor = true;
             this.btnTextView.Click += new System.EventHandler(this.btnTextView_Click);
             // 
-            // lbSize
+            // btnJson
             // 
-            this.lbSize.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbSize.Location = new System.Drawing.Point(649, 3);
-            this.lbSize.Name = "lbSize";
-            this.lbSize.Size = new System.Drawing.Size(80, 14);
-            this.lbSize.TabIndex = 9;
-            this.lbSize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnJson.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnJson.Location = new System.Drawing.Point(735, 19);
+            this.btnJson.Name = "btnJson";
+            this.btnJson.Size = new System.Drawing.Size(73, 22);
+            this.btnJson.TabIndex = 3;
+            this.btnJson.Text = "JsonView";
+            this.btnJson.UseVisualStyleBackColor = true;
+            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
             // 
             // MessageDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 723);
+            this.Controls.Add(this.messagePanel);
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.btnTextView);
             this.Controls.Add(this.btnJson);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbValue);
             this.Controls.Add(this.tbKey);
             this.Controls.Add(this.tbTopic);
             this.Controls.Add(this.tbId);
@@ -175,12 +173,12 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox tbTopic;
         private System.Windows.Forms.TextBox tbKey;
-        private System.Windows.Forms.TextBox tbValue;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnJson;
-        private System.Windows.Forms.Button btnTextView;
         private System.Windows.Forms.Label lbSize;
+        private System.Windows.Forms.Panel messagePanel;
+        private System.Windows.Forms.Button btnTextView;
+        private System.Windows.Forms.Button btnJson;
     }
 }

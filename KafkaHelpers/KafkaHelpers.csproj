@@ -49,6 +49,9 @@
     <Reference Include="Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
       <HintPath>..\packages\Polly.7.2.3\lib\net472\Polly.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -227,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images.ico" />
+    <None Include="Resources\kafla-logo.png" />
+    <None Include="Resources\kafka hehper 1.png" />
+    <None Include="Resources\kafka hehper.png" />
+    <None Include="Resources\helper.png" />
+    <None Include="Resources\DALL_E_2023-03-17_10.33.06_-_draw_text__Helper__strong_style_Graffiti-removebg-preview.png" />
+    <None Include="Resources\DALL_E_2023-03-17_10.39.22_-_draw_text__KAFKA__strong_style_Graffiti-removebg-preview.png" />
     <None Include="Resources\kafka.png" />
     <None Include="Resources\pngegg.png" />
     <None Include="Resources\png-clipart-kafka-logo-icons-logos-emojis-tech-companies.png" />
