@@ -50,10 +50,10 @@ namespace KafkaHelpers
                     }
                 }
 
-                if (!string.IsNullOrEmpty(terms.Value))
+                if (!string.IsNullOrEmpty(terms.Message))
                 {
                     if (string.IsNullOrEmpty(rw.Value)
-                        || !rw.Value.Contains(terms.Value)
+                        || !rw.Value.Contains(terms.Message)
                         && !rw.Value.Contains("SYSTEM:"))
                     {
                         return null;

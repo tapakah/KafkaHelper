@@ -7,9 +7,9 @@ namespace KafkaHelpers
 {
     public partial class MessageDetailForm : Form
     {
-        private MessageDetailEntity _entiry = new MessageDetailEntity();
+        private MessageEntity<string> _entiry = new MessageEntity<string>();
 
-        public MessageDetailEntity Entity
+        public MessageEntity<string> Entity
         {
             get { return _entiry; }
         }

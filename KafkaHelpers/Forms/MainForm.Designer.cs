@@ -30,13 +30,21 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
+            this.radMessageSetting = new Telerik.WinControls.UI.RadCollapsiblePanel();
+            this.rbKey = new Telerik.WinControls.UI.RadGroupBox();
+            this.rbKeyIgnore = new Telerik.WinControls.UI.RadRadioButton();
+            this.rbKeyInt = new Telerik.WinControls.UI.RadRadioButton();
+            this.rbKeyString = new Telerik.WinControls.UI.RadRadioButton();
+            this.rbKeyLong = new Telerik.WinControls.UI.RadRadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbFilterTopics = new System.Windows.Forms.TextBox();
             this.ctbKafkaServer = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,14 +64,28 @@
             this.dateTimeEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnReadTopics = new System.Windows.Forms.Button();
+            this.btnUnSubscribe = new System.Windows.Forms.Button();
             this.btnUncheckAll = new System.Windows.Forms.Button();
             this.btnCheckAll = new System.Windows.Forms.Button();
             this.chklTopics = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSubscribe = new System.Windows.Forms.Button();
             this.tabPageSubsriber = new System.Windows.Forms.TabPage();
+            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+            this.recivedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.keyColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this._panel = new System.Windows.Forms.Panel();
             this.chbDefaultJsonParse = new System.Windows.Forms.CheckBox();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSubscribe2 = new System.Windows.Forms.Button();
+            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
             this._statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripKafkaServer = new System.Windows.Forms.ToolStripStatusLabel();
             this._toolStripKafkaServerValue = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,6 +96,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this._toolStatisticsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPageProducer = new System.Windows.Forms.TabPage();
+            this.buttonFile = new System.Windows.Forms.Button();
             this.textBoxFileToSend = new System.Windows.Forms.TextBox();
             this.cntToSend = new System.Windows.Forms.NumericUpDown();
             this.tbProducerValue = new System.Windows.Forms.TextBox();
@@ -82,48 +105,42 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProducerTopic = new System.Windows.Forms.ComboBox();
+            this.btnSendMessage = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this._radChartView = new Telerik.WinControls.UI.RadChartView();
             this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
             this._telerikMetroTheme = new Telerik.WinControls.Themes.TelerikMetroTheme();
-            this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-            this.recivedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.topicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.keyColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
             this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnReadTopics = new System.Windows.Forms.Button();
-            this.btnUnSubscribe = new System.Windows.Forms.Button();
-            this.btnSubscribe = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSubscribe2 = new System.Windows.Forms.Button();
-            this.btnUnSubscribe2 = new System.Windows.Forms.Button();
-            this.buttonFile = new System.Windows.Forms.Button();
-            this.btnSendMessage = new System.Windows.Forms.Button();
+            this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017 = new Telerik.WinControls.RootRadElement();
+            this.tbResult = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radMessageSetting)).BeginInit();
+            this.radMessageSetting.PanelContainer.SuspendLayout();
+            this.radMessageSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKey)).BeginInit();
+            this.rbKey.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyIgnore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyInt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyString)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyLong)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxTime.SuspendLayout();
             this.tabPageSubsriber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             this._panel.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this.tabPageProducer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._radChartView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -144,6 +161,7 @@
             // tabPageSetting
             // 
             this.tabPageSetting.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageSetting.Controls.Add(this.radMessageSetting);
             this.tabPageSetting.Controls.Add(this.panel1);
             this.tabPageSetting.Controls.Add(this.label10);
             this.tabPageSetting.Controls.Add(this.tbFilterTopics);
@@ -165,6 +183,82 @@
             this.tabPageSetting.TabIndex = 0;
             this.tabPageSetting.Text = "Setting";
             // 
+            // radMessageSetting
+            // 
+            this.radMessageSetting.EnableAnimation = false;
+            this.radMessageSetting.EnableTheming = false;
+            this.radMessageSetting.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.radMessageSetting.HeaderText = "Key type ";
+            this.radMessageSetting.IsExpanded = false;
+            this.radMessageSetting.Location = new System.Drawing.Point(443, 161);
+            this.radMessageSetting.Name = "radMessageSetting";
+            this.radMessageSetting.OwnerBoundsCache = new System.Drawing.Rectangle(443, 161, 149, 153);
+            // 
+            // radMessageSetting.PanelContainer
+            // 
+            this.radMessageSetting.PanelContainer.Controls.Add(this.rbKey);
+            this.radMessageSetting.PanelContainer.Size = new System.Drawing.Size(0, 0);
+            this.radMessageSetting.Size = new System.Drawing.Size(149, 21);
+            this.radMessageSetting.TabIndex = 3;
+            // 
+            // rbKey
+            // 
+            this.rbKey.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.rbKey.Controls.Add(this.rbKeyIgnore);
+            this.rbKey.Controls.Add(this.rbKeyInt);
+            this.rbKey.Controls.Add(this.rbKeyString);
+            this.rbKey.Controls.Add(this.rbKeyLong);
+            this.rbKey.HeaderText = "Key type";
+            this.rbKey.Location = new System.Drawing.Point(3, 3);
+            this.rbKey.Name = "rbKey";
+            this.rbKey.Size = new System.Drawing.Size(139, 117);
+            this.rbKey.TabIndex = 0;
+            this.rbKey.Text = "Key type";
+            // 
+            // rbKeyIgnore
+            // 
+            this.rbKeyIgnore.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.rbKeyIgnore.Location = new System.Drawing.Point(13, 93);
+            this.rbKeyIgnore.Name = "rbKeyIgnore";
+            this.rbKeyIgnore.Size = new System.Drawing.Size(55, 18);
+            this.rbKeyIgnore.TabIndex = 3;
+            this.rbKeyIgnore.TabStop = false;
+            this.rbKeyIgnore.Text = "ignore";
+            // 
+            // rbKeyInt
+            // 
+            this.rbKeyInt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.rbKeyInt.Location = new System.Drawing.Point(13, 69);
+            this.rbKeyInt.Name = "rbKeyInt";
+            this.rbKeyInt.Size = new System.Drawing.Size(35, 18);
+            this.rbKeyInt.TabIndex = 2;
+            this.rbKeyInt.TabStop = false;
+            this.rbKeyInt.Text = "int";
+            this.rbKeyInt.CheckStateChanged += new System.EventHandler(this.rbMessageType_CheckStateChanged);
+            // 
+            // rbKeyString
+            // 
+            this.rbKeyString.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.rbKeyString.Location = new System.Drawing.Point(13, 21);
+            this.rbKeyString.Name = "rbKeyString";
+            this.rbKeyString.Size = new System.Drawing.Size(51, 18);
+            this.rbKeyString.TabIndex = 0;
+            this.rbKeyString.TabStop = false;
+            this.rbKeyString.Text = "string";
+            this.rbKeyString.CheckStateChanged += new System.EventHandler(this.rbMessageType_CheckStateChanged);
+            // 
+            // rbKeyLong
+            // 
+            this.rbKeyLong.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rbKeyLong.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.rbKeyLong.Location = new System.Drawing.Point(13, 45);
+            this.rbKeyLong.Name = "rbKeyLong";
+            this.rbKeyLong.Size = new System.Drawing.Size(44, 18);
+            this.rbKeyLong.TabIndex = 1;
+            this.rbKeyLong.Text = "long";
+            this.rbKeyLong.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            this.rbKeyLong.CheckStateChanged += new System.EventHandler(this.rbMessageType_CheckStateChanged);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -177,11 +271,31 @@
             this.panel1.Size = new System.Drawing.Size(378, 618);
             this.panel1.TabIndex = 12;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = global::KafkaHelpers.Properties.Resources.kafka_hehper_1;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 186);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(373, 259);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Image = global::KafkaHelpers.Properties.Resources.view_16;
+            this.label10.Location = new System.Drawing.Point(65, 164);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 17);
+            this.label10.TabIndex = 11;
+            // 
             // tbFilterTopics
             // 
-            this.tbFilterTopics.Location = new System.Drawing.Point(62, 161);
+            this.tbFilterTopics.Location = new System.Drawing.Point(90, 161);
             this.tbFilterTopics.Name = "tbFilterTopics";
-            this.tbFilterTopics.Size = new System.Drawing.Size(512, 22);
+            this.tbFilterTopics.Size = new System.Drawing.Size(347, 22);
             this.tbFilterTopics.TabIndex = 10;
             this.tbFilterTopics.TextChanged += new System.EventHandler(this.tbFilterTopics_TextChanged);
             // 
@@ -384,6 +498,33 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Key:";
             // 
+            // btnReadTopics
+            // 
+            this.btnReadTopics.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReadTopics.Image = global::KafkaHelpers.Properties.Resources.gear_16;
+            this.btnReadTopics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReadTopics.Location = new System.Drawing.Point(308, 6);
+            this.btnReadTopics.Name = "btnReadTopics";
+            this.btnReadTopics.Size = new System.Drawing.Size(103, 26);
+            this.btnReadTopics.TabIndex = 1;
+            this.btnReadTopics.Text = "Read topics";
+            this.btnReadTopics.UseVisualStyleBackColor = true;
+            this.btnReadTopics.Click += new System.EventHandler(this.btnReadTopics_Click);
+            // 
+            // btnUnSubscribe
+            // 
+            this.btnUnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUnSubscribe.Image = global::KafkaHelpers.Properties.Resources.stop;
+            this.btnUnSubscribe.Location = new System.Drawing.Point(502, 6);
+            this.btnUnSubscribe.Name = "btnUnSubscribe";
+            this.btnUnSubscribe.Size = new System.Drawing.Size(98, 26);
+            this.btnUnSubscribe.TabIndex = 3;
+            this.btnUnSubscribe.Text = "UnSubscribe";
+            this.btnUnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUnSubscribe.UseVisualStyleBackColor = true;
+            this.btnUnSubscribe.Click += new System.EventHandler(this.btnUnSubscribe_Click);
+            // 
             // btnUncheckAll
             // 
             this.btnUncheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -438,6 +579,20 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Server:";
             // 
+            // btnSubscribe
+            // 
+            this.btnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSubscribe.Image = global::KafkaHelpers.Properties.Resources.play4;
+            this.btnSubscribe.Location = new System.Drawing.Point(412, 6);
+            this.btnSubscribe.Name = "btnSubscribe";
+            this.btnSubscribe.Size = new System.Drawing.Size(89, 26);
+            this.btnSubscribe.TabIndex = 2;
+            this.btnSubscribe.Text = "Subscribe";
+            this.btnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubscribe.UseVisualStyleBackColor = true;
+            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
             // tabPageSubsriber
             // 
             this.tabPageSubsriber.BackColor = System.Drawing.SystemColors.Control;
@@ -450,249 +605,6 @@
             this.tabPageSubsriber.Size = new System.Drawing.Size(981, 617);
             this.tabPageSubsriber.TabIndex = 1;
             this.tabPageSubsriber.Text = "Subscriber";
-            // 
-            // _panel
-            // 
-            this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._panel.Controls.Add(this.chbDefaultJsonParse);
-            this._panel.Controls.Add(this.btnView);
-            this._panel.Controls.Add(this.btnClear);
-            this._panel.Controls.Add(this.btnSubscribe2);
-            this._panel.Controls.Add(this.btnUnSubscribe2);
-            this._panel.Location = new System.Drawing.Point(3, 6);
-            this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(979, 33);
-            this._panel.TabIndex = 21;
-            // 
-            // chbDefaultJsonParse
-            // 
-            this.chbDefaultJsonParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chbDefaultJsonParse.AutoSize = true;
-            this.chbDefaultJsonParse.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chbDefaultJsonParse.Checked = true;
-            this.chbDefaultJsonParse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbDefaultJsonParse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chbDefaultJsonParse.Location = new System.Drawing.Point(779, 9);
-            this.chbDefaultJsonParse.Name = "chbDefaultJsonParse";
-            this.chbDefaultJsonParse.Size = new System.Drawing.Size(196, 17);
-            this.chbDefaultJsonParse.TabIndex = 4;
-            this.chbDefaultJsonParse.Text = "View with default JSON parse ON";
-            this.chbDefaultJsonParse.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.chbDefaultJsonParse.UseVisualStyleBackColor = true;
-            // 
-            // _statusStrip
-            // 
-            this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripKafkaServer,
-            this._toolStripKafkaServerValue,
-            this._toolStripLabel,
-            this._toolStripProgressBar,
-            this._toolStripStatus,
-            this._tsStatusConsumer,
-            this.toolStripStatusLabel1,
-            this._toolStatisticsLabel});
-            this._statusStrip.Location = new System.Drawing.Point(3, 590);
-            this._statusStrip.Name = "_statusStrip";
-            this._statusStrip.Size = new System.Drawing.Size(975, 24);
-            this._statusStrip.TabIndex = 20;
-            this._statusStrip.Text = "statusStrip1";
-            // 
-            // toolStripKafkaServer
-            // 
-            this.toolStripKafkaServer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripKafkaServer.Name = "toolStripKafkaServer";
-            this.toolStripKafkaServer.Size = new System.Drawing.Size(43, 19);
-            this.toolStripKafkaServer.Text = "Server:";
-            // 
-            // _toolStripKafkaServerValue
-            // 
-            this._toolStripKafkaServerValue.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this._toolStripKafkaServerValue.Name = "_toolStripKafkaServerValue";
-            this._toolStripKafkaServerValue.Size = new System.Drawing.Size(0, 19);
-            // 
-            // _toolStripLabel
-            // 
-            this._toolStripLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this._toolStripLabel.ForeColor = System.Drawing.Color.Navy;
-            this._toolStripLabel.Name = "_toolStripLabel";
-            this._toolStripLabel.Size = new System.Drawing.Size(56, 19);
-            this._toolStripLabel.Text = "Message:";
-            // 
-            // _toolStripProgressBar
-            // 
-            this._toolStripProgressBar.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this._toolStripProgressBar.Name = "_toolStripProgressBar";
-            this._toolStripProgressBar.Size = new System.Drawing.Size(100, 18);
-            this._toolStripProgressBar.Step = 1;
-            // 
-            // _toolStripStatus
-            // 
-            this._toolStripStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._toolStripStatus.Name = "_toolStripStatus";
-            this._toolStripStatus.Size = new System.Drawing.Size(0, 19);
-            // 
-            // _tsStatusConsumer
-            // 
-            this._tsStatusConsumer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this._tsStatusConsumer.ForeColor = System.Drawing.Color.Navy;
-            this._tsStatusConsumer.Name = "_tsStatusConsumer";
-            this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Navy;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(51, 19);
-            this.toolStripStatusLabel1.Text = "Statistis:";
-            // 
-            // _toolStatisticsLabel
-            // 
-            this._toolStatisticsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._toolStatisticsLabel.Name = "_toolStatisticsLabel";
-            this._toolStatisticsLabel.Size = new System.Drawing.Size(14, 19);
-            this._toolStatisticsLabel.Text = "0";
-            // 
-            // tabPageProducer
-            // 
-            this.tabPageProducer.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageProducer.Controls.Add(this.buttonFile);
-            this.tabPageProducer.Controls.Add(this.textBoxFileToSend);
-            this.tabPageProducer.Controls.Add(this.cntToSend);
-            this.tabPageProducer.Controls.Add(this.tbProducerValue);
-            this.tabPageProducer.Controls.Add(this.tbProducerKey);
-            this.tabPageProducer.Controls.Add(this.label6);
-            this.tabPageProducer.Controls.Add(this.label5);
-            this.tabPageProducer.Controls.Add(this.label4);
-            this.tabPageProducer.Controls.Add(this.cmbProducerTopic);
-            this.tabPageProducer.Controls.Add(this.btnSendMessage);
-            this.tabPageProducer.Location = new System.Drawing.Point(4, 22);
-            this.tabPageProducer.Name = "tabPageProducer";
-            this.tabPageProducer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
-            this.tabPageProducer.TabIndex = 2;
-            this.tabPageProducer.Text = "Producer";
-            // 
-            // textBoxFileToSend
-            // 
-            this.textBoxFileToSend.Location = new System.Drawing.Point(504, 9);
-            this.textBoxFileToSend.Name = "textBoxFileToSend";
-            this.textBoxFileToSend.ReadOnly = true;
-            this.textBoxFileToSend.Size = new System.Drawing.Size(264, 22);
-            this.textBoxFileToSend.TabIndex = 7;
-            // 
-            // cntToSend
-            // 
-            this.cntToSend.Location = new System.Drawing.Point(648, 38);
-            this.cntToSend.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.cntToSend.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cntToSend.Name = "cntToSend";
-            this.cntToSend.Size = new System.Drawing.Size(120, 22);
-            this.cntToSend.TabIndex = 6;
-            this.cntToSend.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.cntToSend.ThousandsSeparator = true;
-            this.cntToSend.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // tbProducerValue
-            // 
-            this.tbProducerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbProducerValue.Location = new System.Drawing.Point(107, 73);
-            this.tbProducerValue.MaxLength = 10000000;
-            this.tbProducerValue.Multiline = true;
-            this.tbProducerValue.Name = "tbProducerValue";
-            this.tbProducerValue.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbProducerValue.Size = new System.Drawing.Size(778, 538);
-            this.tbProducerValue.TabIndex = 2;
-            // 
-            // tbProducerKey
-            // 
-            this.tbProducerKey.Location = new System.Drawing.Point(107, 38);
-            this.tbProducerKey.Name = "tbProducerKey";
-            this.tbProducerKey.Size = new System.Drawing.Size(391, 22);
-            this.tbProducerKey.TabIndex = 1;
-            this.tbProducerKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbProducerKey_KeyPress);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(5, 73);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Message value:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(16, 42);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Message key:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(8, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Message topic:";
-            // 
-            // cmbProducerTopic
-            // 
-            this.cmbProducerTopic.FormattingEnabled = true;
-            this.cmbProducerTopic.Location = new System.Drawing.Point(107, 10);
-            this.cmbProducerTopic.Name = "cmbProducerTopic";
-            this.cmbProducerTopic.Size = new System.Drawing.Size(391, 21);
-            this.cmbProducerTopic.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this._radChartView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(981, 617);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Statistics";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // _radChartView
-            // 
-            cartesianArea1.ShowGrid = true;
-            this._radChartView.AreaDesign = cartesianArea1;
-            this._radChartView.AutoScroll = true;
-            this._radChartView.BackColor = System.Drawing.Color.Cornsilk;
-            this._radChartView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._radChartView.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._radChartView.Location = new System.Drawing.Point(3, 3);
-            this._radChartView.Name = "_radChartView";
-            this._radChartView.SelectionMode = Telerik.WinControls.UI.ChartSelectionMode.MultipleDataPoints;
-            this._radChartView.ShowPanZoom = true;
-            this._radChartView.ShowToolTip = true;
-            this._radChartView.ShowTrackBall = true;
-            this._radChartView.Size = new System.Drawing.Size(975, 611);
-            this._radChartView.TabIndex = 0;
-            this._radChartView.ThemeName = "TelerikMetro";
             // 
             // _dataGridViewSubscriber
             // 
@@ -780,71 +692,36 @@
             this._consumerDataSet.DataSetName = "ConsumerDataSet";
             this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // messagesBindingSource
+            // _panel
             // 
-            this.messagesBindingSource.DataMember = "Messages";
-            this.messagesBindingSource.DataSource = this._consumerDataSet;
+            this._panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._panel.Controls.Add(this.chbDefaultJsonParse);
+            this._panel.Controls.Add(this.btnView);
+            this._panel.Controls.Add(this.btnClear);
+            this._panel.Controls.Add(this.btnSubscribe2);
+            this._panel.Controls.Add(this.btnUnSubscribe2);
+            this._panel.Location = new System.Drawing.Point(3, 6);
+            this._panel.Name = "_panel";
+            this._panel.Size = new System.Drawing.Size(979, 33);
+            this._panel.TabIndex = 21;
             // 
-            // pictureBox1
+            // chbDefaultJsonParse
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = global::KafkaHelpers.Properties.Resources.kafka_hehper_1;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 186);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(373, 259);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Image = global::KafkaHelpers.Properties.Resources.view_16;
-            this.label10.Location = new System.Drawing.Point(580, 164);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(21, 17);
-            this.label10.TabIndex = 11;
-            // 
-            // btnReadTopics
-            // 
-            this.btnReadTopics.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadTopics.Image = global::KafkaHelpers.Properties.Resources.gear_16;
-            this.btnReadTopics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReadTopics.Location = new System.Drawing.Point(308, 6);
-            this.btnReadTopics.Name = "btnReadTopics";
-            this.btnReadTopics.Size = new System.Drawing.Size(103, 26);
-            this.btnReadTopics.TabIndex = 1;
-            this.btnReadTopics.Text = "Read topics";
-            this.btnReadTopics.UseVisualStyleBackColor = true;
-            this.btnReadTopics.Click += new System.EventHandler(this.btnReadTopics_Click);
-            // 
-            // btnUnSubscribe
-            // 
-            this.btnUnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUnSubscribe.Image = global::KafkaHelpers.Properties.Resources.stop;
-            this.btnUnSubscribe.Location = new System.Drawing.Point(502, 6);
-            this.btnUnSubscribe.Name = "btnUnSubscribe";
-            this.btnUnSubscribe.Size = new System.Drawing.Size(98, 26);
-            this.btnUnSubscribe.TabIndex = 3;
-            this.btnUnSubscribe.Text = "UnSubscribe";
-            this.btnUnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUnSubscribe.UseVisualStyleBackColor = true;
-            this.btnUnSubscribe.Click += new System.EventHandler(this.btnUnSubscribe_Click);
-            // 
-            // btnSubscribe
-            // 
-            this.btnSubscribe.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSubscribe.Image = global::KafkaHelpers.Properties.Resources.play4;
-            this.btnSubscribe.Location = new System.Drawing.Point(412, 6);
-            this.btnSubscribe.Name = "btnSubscribe";
-            this.btnSubscribe.Size = new System.Drawing.Size(89, 26);
-            this.btnSubscribe.TabIndex = 2;
-            this.btnSubscribe.Text = "Subscribe";
-            this.btnSubscribe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubscribe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSubscribe.UseVisualStyleBackColor = true;
-            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            this.chbDefaultJsonParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbDefaultJsonParse.AutoSize = true;
+            this.chbDefaultJsonParse.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDefaultJsonParse.Checked = true;
+            this.chbDefaultJsonParse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbDefaultJsonParse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chbDefaultJsonParse.Location = new System.Drawing.Point(779, 9);
+            this.chbDefaultJsonParse.Name = "chbDefaultJsonParse";
+            this.chbDefaultJsonParse.Size = new System.Drawing.Size(196, 17);
+            this.chbDefaultJsonParse.TabIndex = 4;
+            this.chbDefaultJsonParse.Text = "View with default JSON parse ON";
+            this.chbDefaultJsonParse.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.chbDefaultJsonParse.UseVisualStyleBackColor = true;
             // 
             // btnView
             // 
@@ -896,6 +773,100 @@
             this.btnUnSubscribe2.UseVisualStyleBackColor = true;
             this.btnUnSubscribe2.Click += new System.EventHandler(this.btnUnSubscribe_Click);
             // 
+            // _statusStrip
+            // 
+            this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripKafkaServer,
+            this._toolStripKafkaServerValue,
+            this._toolStripLabel,
+            this._toolStripProgressBar,
+            this._toolStripStatus,
+            this._tsStatusConsumer,
+            this.toolStripStatusLabel1,
+            this._toolStatisticsLabel});
+            this._statusStrip.Location = new System.Drawing.Point(3, 590);
+            this._statusStrip.Name = "_statusStrip";
+            this._statusStrip.Size = new System.Drawing.Size(975, 24);
+            this._statusStrip.TabIndex = 20;
+            this._statusStrip.Text = "statusStrip1";
+            // 
+            // toolStripKafkaServer
+            // 
+            this.toolStripKafkaServer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripKafkaServer.Name = "toolStripKafkaServer";
+            this.toolStripKafkaServer.Size = new System.Drawing.Size(43, 19);
+            this.toolStripKafkaServer.Text = "Server:";
+            // 
+            // _toolStripKafkaServerValue
+            // 
+            this._toolStripKafkaServerValue.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this._toolStripKafkaServerValue.Name = "_toolStripKafkaServerValue";
+            this._toolStripKafkaServerValue.Size = new System.Drawing.Size(0, 19);
+            // 
+            // _toolStripLabel
+            // 
+            this._toolStripLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this._toolStripLabel.ForeColor = System.Drawing.Color.Navy;
+            this._toolStripLabel.Name = "_toolStripLabel";
+            this._toolStripLabel.Size = new System.Drawing.Size(56, 19);
+            this._toolStripLabel.Text = "Message:";
+            // 
+            // _toolStripProgressBar
+            // 
+            this._toolStripProgressBar.MergeAction = System.Windows.Forms.MergeAction.Replace;
+            this._toolStripProgressBar.Name = "_toolStripProgressBar";
+            this._toolStripProgressBar.Size = new System.Drawing.Size(100, 18);
+            this._toolStripProgressBar.Step = 1;
+            // 
+            // _toolStripStatus
+            // 
+            this._toolStripStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._toolStripStatus.Name = "_toolStripStatus";
+            this._toolStripStatus.Size = new System.Drawing.Size(0, 19);
+            // 
+            // _tsStatusConsumer
+            // 
+            this._tsStatusConsumer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this._tsStatusConsumer.ForeColor = System.Drawing.Color.Navy;
+            this._tsStatusConsumer.Name = "_tsStatusConsumer";
+            this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Navy;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(51, 19);
+            this.toolStripStatusLabel1.Text = "Statistis:";
+            // 
+            // _toolStatisticsLabel
+            // 
+            this._toolStatisticsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._toolStatisticsLabel.Name = "_toolStatisticsLabel";
+            this._toolStatisticsLabel.Size = new System.Drawing.Size(14, 19);
+            this._toolStatisticsLabel.Text = "0";
+            // 
+            // tabPageProducer
+            // 
+            this.tabPageProducer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageProducer.Controls.Add(this.tbResult);
+            this.tabPageProducer.Controls.Add(this.buttonFile);
+            this.tabPageProducer.Controls.Add(this.textBoxFileToSend);
+            this.tabPageProducer.Controls.Add(this.cntToSend);
+            this.tabPageProducer.Controls.Add(this.tbProducerValue);
+            this.tabPageProducer.Controls.Add(this.tbProducerKey);
+            this.tabPageProducer.Controls.Add(this.label6);
+            this.tabPageProducer.Controls.Add(this.label5);
+            this.tabPageProducer.Controls.Add(this.label4);
+            this.tabPageProducer.Controls.Add(this.cmbProducerTopic);
+            this.tabPageProducer.Controls.Add(this.btnSendMessage);
+            this.tabPageProducer.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProducer.Name = "tabPageProducer";
+            this.tabPageProducer.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
+            this.tabPageProducer.TabIndex = 2;
+            this.tabPageProducer.Text = "Producer";
+            // 
             // buttonFile
             // 
             this.buttonFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -909,6 +880,95 @@
             this.buttonFile.UseVisualStyleBackColor = true;
             this.buttonFile.Click += new System.EventHandler(this.buttonFile_Click);
             // 
+            // textBoxFileToSend
+            // 
+            this.textBoxFileToSend.Location = new System.Drawing.Point(504, 9);
+            this.textBoxFileToSend.Name = "textBoxFileToSend";
+            this.textBoxFileToSend.ReadOnly = true;
+            this.textBoxFileToSend.Size = new System.Drawing.Size(264, 22);
+            this.textBoxFileToSend.TabIndex = 7;
+            // 
+            // cntToSend
+            // 
+            this.cntToSend.Location = new System.Drawing.Point(648, 38);
+            this.cntToSend.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.cntToSend.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cntToSend.Name = "cntToSend";
+            this.cntToSend.Size = new System.Drawing.Size(120, 22);
+            this.cntToSend.TabIndex = 6;
+            this.cntToSend.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cntToSend.ThousandsSeparator = true;
+            this.cntToSend.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // tbProducerValue
+            // 
+            this.tbProducerValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbProducerValue.Location = new System.Drawing.Point(107, 73);
+            this.tbProducerValue.MaxLength = 10000000;
+            this.tbProducerValue.Multiline = true;
+            this.tbProducerValue.Name = "tbProducerValue";
+            this.tbProducerValue.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbProducerValue.Size = new System.Drawing.Size(778, 451);
+            this.tbProducerValue.TabIndex = 2;
+            // 
+            // tbProducerKey
+            // 
+            this.tbProducerKey.Location = new System.Drawing.Point(107, 38);
+            this.tbProducerKey.Name = "tbProducerKey";
+            this.tbProducerKey.Size = new System.Drawing.Size(391, 22);
+            this.tbProducerKey.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(5, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Message value:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(16, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Message key:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(8, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Message topic:";
+            // 
+            // cmbProducerTopic
+            // 
+            this.cmbProducerTopic.FormattingEnabled = true;
+            this.cmbProducerTopic.Location = new System.Drawing.Point(107, 10);
+            this.cmbProducerTopic.Name = "cmbProducerTopic";
+            this.cmbProducerTopic.Size = new System.Drawing.Size(391, 21);
+            this.cmbProducerTopic.TabIndex = 0;
+            // 
             // btnSendMessage
             // 
             this.btnSendMessage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -921,6 +981,58 @@
             this.btnSendMessage.Text = "Send";
             this.btnSendMessage.UseVisualStyleBackColor = true;
             this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this._radChartView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(981, 617);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Statistics";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // _radChartView
+            // 
+            cartesianArea1.ShowGrid = true;
+            this._radChartView.AreaDesign = cartesianArea1;
+            this._radChartView.AutoScroll = true;
+            this._radChartView.BackColor = System.Drawing.Color.Cornsilk;
+            this._radChartView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._radChartView.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._radChartView.Location = new System.Drawing.Point(3, 3);
+            this._radChartView.Name = "_radChartView";
+            this._radChartView.SelectionMode = Telerik.WinControls.UI.ChartSelectionMode.MultipleDataPoints;
+            this._radChartView.ShowPanZoom = true;
+            this._radChartView.ShowToolTip = true;
+            this._radChartView.ShowTrackBall = true;
+            this._radChartView.Size = new System.Drawing.Size(975, 611);
+            this._radChartView.TabIndex = 0;
+            this._radChartView.ThemeName = "TelerikMetro";
+            // 
+            // messagesBindingSource
+            // 
+            this.messagesBindingSource.DataMember = "Messages";
+            this.messagesBindingSource.DataSource = this._consumerDataSet;
+            // 
+            // object_e312bac3_151b_4c5a_91ba_fa2dfce57017
+            // 
+            this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.Name = "object_e312bac3_151b_4c5a_91ba_fa2dfce57017";
+            this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchHorizontally = true;
+            this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchVertically = true;
+            // 
+            // tbResult
+            // 
+            this.tbResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbResult.BackColor = System.Drawing.SystemColors.Control;
+            this.tbResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbResult.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tbResult.Location = new System.Drawing.Point(107, 530);
+            this.tbResult.Multiline = true;
+            this.tbResult.Name = "tbResult";
+            this.tbResult.Size = new System.Drawing.Size(778, 78);
+            this.tbResult.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -936,7 +1048,18 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageSetting.ResumeLayout(false);
             this.tabPageSetting.PerformLayout();
+            this.radMessageSetting.PanelContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radMessageSetting)).EndInit();
+            this.radMessageSetting.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rbKey)).EndInit();
+            this.rbKey.ResumeLayout(false);
+            this.rbKey.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyIgnore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyInt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyString)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbKeyLong)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radModeSwitch)).EndInit();
@@ -948,6 +1071,8 @@
             this.groupBoxTime.PerformLayout();
             this.tabPageSubsriber.ResumeLayout(false);
             this.tabPageSubsriber.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             this._panel.ResumeLayout(false);
             this._panel.PerformLayout();
             this._statusStrip.ResumeLayout(false);
@@ -957,10 +1082,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cntToSend)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._radChartView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -1038,6 +1160,14 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel _toolStatisticsLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private Telerik.WinControls.UI.RadCollapsiblePanel radMessageSetting;
+        private Telerik.WinControls.UI.RadRadioButton rbKeyInt;
+        private Telerik.WinControls.UI.RadRadioButton rbKeyLong;
+        private Telerik.WinControls.UI.RadRadioButton rbKeyString;
+        private Telerik.WinControls.UI.RadGroupBox rbKey;
+        private Telerik.WinControls.RootRadElement object_e312bac3_151b_4c5a_91ba_fa2dfce57017;
+        private Telerik.WinControls.UI.RadRadioButton rbKeyIgnore;
+        private System.Windows.Forms.TextBox tbResult;
     }
 }
 

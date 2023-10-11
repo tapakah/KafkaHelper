@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,7 +30,9 @@ namespace KafkaHelpers
         private readonly string KAFKA_SERVER_LIST = string.Empty;
         private readonly string KAFKA_TOPICS = string.Empty;
         private readonly string KAFKA_CHKED_TOPICS = string.Empty;
-        private readonly Terms terms = new Terms();
+        private string KAFKA_KEY_TYPE = string.Empty;
+
+        private Terms setting = new Terms();
         private readonly KafkaHelper _kafka;
         private static System.Threading.Timer tTimer;
 
@@ -148,6 +151,26 @@ namespace KafkaHelpers
                 }
             }
 
+            KAFKA_KEY_TYPE = GetSettingValue("KafkaKeyType");
+
+            switch (KAFKA_KEY_TYPE)
+            {
+                case "ignore":
+                    rbKeyIgnore.IsChecked = true;
+                    break;
+                case "long":
+                    rbKeyLong.IsChecked = true;
+                    break;
+                case "int":
+                    rbKeyInt.IsChecked = true;
+                    break;
+                default:
+                    rbKeyString.IsChecked = true;
+                    break;
+            }
+
+            rbMessageType_CheckStateChanged(null, null);
+
             btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = true;
             btnUnSubscribe.Enabled = btnUnSubscribe2.Enabled = false;
 
@@ -155,13 +178,13 @@ namespace KafkaHelpers
 
             _kafka = new KafkaHelper(CreateConsumingPolicy());
 
-            terms.Counter = DEFAULT_COUNTER;
+            setting.Counter = DEFAULT_COUNTER;
 
-            tbCounter.Text = terms.Counter.ToString();
+            tbCounter.Text = setting.Counter.ToString();
 
-            terms.MaxRows = DEFAULT_ROWS;
+            setting.MaxRows = DEFAULT_ROWS;
 
-            tbMaxRows.Text = terms.MaxRows.ToString();
+            tbMaxRows.Text = setting.MaxRows.ToString();
 
             _dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
@@ -209,52 +232,52 @@ namespace KafkaHelpers
 
             if (chkTimestamp.Checked)
             {
-                terms.Start = dateTimeStart.Value;
-                terms.End = dateTimeEnd.Value;
+                setting.Start = dateTimeStart.Value;
+                setting.End = dateTimeEnd.Value;
             }
             else
             {
-                terms.Start = null;
-                terms.End = null;
+                setting.Start = null;
+                setting.End = null;
             }
 
             if (!string.IsNullOrEmpty(tbKey.Text))
             {
-                terms.Key = tbKey.Text;
+                setting.Key = tbKey.Text;
             }
             else
             {
-                terms.Key = null;
+                setting.Key = null;
             }
 
             if (!string.IsNullOrEmpty(tbValue.Text))
             {
-                terms.Value = tbValue.Text;
+                setting.Message = tbValue.Text;
             }
             else
             {
-                terms.Value = null;
+                setting.Message = null;
             }
 
             if (!string.IsNullOrEmpty(tbCounter.Text))
             {
-                terms.Counter = Convert.ToInt32(tbCounter.Text);
+                setting.Counter = Convert.ToInt32(tbCounter.Text);
             }
             else
             {
-                terms.Counter = DEFAULT_COUNTER;
+                setting.Counter = DEFAULT_COUNTER;
             }
 
             if (!string.IsNullOrEmpty(tbMaxRows.Text))
             {
-                terms.MaxRows = Convert.ToInt32(tbMaxRows.Text);
+                setting.MaxRows = Convert.ToInt32(tbMaxRows.Text);
             }
             else
             {
-                terms.MaxRows = DEFAULT_ROWS;
+                setting.MaxRows = DEFAULT_ROWS;
             }
 
-            terms.IsStatistic = !radModeSwitch.Value;
+            setting.IsStatistic = !radModeSwitch.Value;
 
             _consumerDataSet.Messages.Clear();
             ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = false;
@@ -273,7 +296,32 @@ namespace KafkaHelpers
 
             Statistics.Clear();
 
-            var taskConsume = Task.Run(() => ActivateConsume(cancelSource.Token), cancelSource.Token);
+            if (rbKeyString.IsChecked) KAFKA_KEY_TYPE = "string";
+            else if (rbKeyLong.IsChecked) KAFKA_KEY_TYPE = "long";
+            else if (rbKeyInt.IsChecked) KAFKA_KEY_TYPE = "int";
+            else if (rbKeyIgnore.IsChecked) KAFKA_KEY_TYPE = "ignore";
+
+            var taskConsume = Task.Run(() =>
+            {
+                switch (KAFKA_KEY_TYPE)
+                {
+                    case "ignore":
+                        ActivateConsume<Ignore, string>(cancelSource.Token);
+                        break;
+                    case "int":
+                        ActivateConsume<int, string>(cancelSource.Token);
+                        break;
+
+                    case "long":
+                        ActivateConsume<long, string>(cancelSource.Token);
+                        break;
+                    default:
+                        ActivateConsume<string, string>(cancelSource.Token);
+                        break;
+                }
+            }, cancelSource.Token);
+
+            AddUpdateAppSettings("KafkaKeyType", KAFKA_KEY_TYPE);
 
             try
             {
@@ -295,7 +343,7 @@ namespace KafkaHelpers
             SetStatusText(ID_COUNTER.ToString());
         }
 
-        private async void ActivateConsume(CancellationToken stoppingToken)
+        private async void ActivateConsume<TKey, TMessage>(CancellationToken stoppingToken)
         {
             ID_COUNTER = 0;
 
@@ -309,7 +357,7 @@ namespace KafkaHelpers
                 SetConsumerStatusText(text);
             };
 
-            using (IConsumer<string, string> consumer = KafkaHelper.CreateKafkaConsumer(KAFKA_SERVER))
+            using (IConsumer<TKey, TMessage> consumer = KafkaHelper.CreateKafkaConsumer<TKey, TMessage>(KAFKA_SERVER))
             {
                 try
                 {
@@ -341,16 +389,24 @@ namespace KafkaHelpers
 
                         ID_COUNTER++;
 
-                        if (ID_COUNTER % terms.Counter == 0) StatusTextChanged?.Invoke(this, ID_COUNTER.ToString());
+                        if (ID_COUNTER % setting.Counter == 0) StatusTextChanged?.Invoke(this, ID_COUNTER.ToString());
                         if (_toolStripLabel.Text != STATUS_READ) ConsumerStatusTextChanged?.Invoke(this, STATUS_READ);
 
                         try
                         {
-                            AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "-1", consumeResult.Message.Value, consumeResult.Message.Timestamp.UtcDateTime));
+                            AddRow(new GridRow(ID_COUNTER,
+                                                consumeResult.Topic,
+                                                consumeResult.Message.Key != null ? consumeResult.Message.Key.ToString() : string.Empty,
+                                                consumeResult.Message.Value != null ? consumeResult.Message.Value.ToString() : string.Empty,
+                                                consumeResult.Message.Timestamp.UtcDateTime));
                         }
                         catch
                         {
-                            AddRow(new GridRow(ID_COUNTER, consumeResult.Topic, consumeResult.Message.Key ?? "is null", consumeResult.Message.Value ?? "is null", DateTime.UtcNow));
+                            AddRow(new GridRow(ID_COUNTER,
+                                                consumeResult.Topic,
+                                                consumeResult.Message.Key != null ? consumeResult.Message.Key.ToString() : string.Empty,
+                                                consumeResult.Message.Value != null ? consumeResult.Message.Value.ToString() : string.Empty,
+                                                DateTime.UtcNow));
                         }
 
                         if (stoppingToken.IsCancellationRequested)
@@ -390,7 +446,7 @@ namespace KafkaHelpers
                 _toolStripStatus.Text = text;
                 _toolStripProgressBar.Value = (_toolStripProgressBar.Value + 1) % 100;
 
-                if (terms.IsStatistic)
+                if (setting.IsStatistic)
                 {
                     _toolStatisticsLabel.Text = Statistics.GetCount().ToString();
                 }
@@ -401,17 +457,17 @@ namespace KafkaHelpers
         {
             _dataGridViewSubscriber.Invoke(new Action(() =>
             {
-                var rw = RowFormatter.CreateRow(row, terms);
+                var rw = RowFormatter.CreateRow(row, setting);
 
                 if (rw != null)
                 {
-                    if (terms.IsStatistic && rw.Id > 0)
+                    if (setting.IsStatistic && rw.Id > 0)
                     {
                         Statistics.TimeValues.Add(new DataTopic(rw.Topic, rw.Timestamp));
                         return;
                     }
 
-                    if (_consumerDataSet.Messages.Rows.Count > terms.MaxRows)
+                    if (_consumerDataSet.Messages.Rows.Count > setting.MaxRows)
                     {
                         UnSubscribe();
                         return;
@@ -456,7 +512,7 @@ namespace KafkaHelpers
             _toolStripStatus.Text = string.Empty;
             _toolStripProgressBar.Value = 0;
 
-            if (terms.IsStatistic)
+            if (setting.IsStatistic)
             {
                 Statistics.DrowChart(this._radChartView);
             }
@@ -561,6 +617,8 @@ namespace KafkaHelpers
 
         private async void btnSendMessage_Click(object sender, EventArgs e)
         {
+            BindDeliveryResult(null);
+
             int _cnt = Convert.ToInt32(cntToSend.Value);
             string messageText = string.Empty;
             if (string.IsNullOrEmpty(textBoxFileToSend.Text))
@@ -575,48 +633,40 @@ namespace KafkaHelpers
                 }
             }
 
-            if (!Int64.TryParse(tbProducerKey.Text, out long keyValue))
-            {
-                keyValue = 0;
-            }
+            var message = _kafka.GetMessage(KAFKA_KEY_TYPE);            
 
-            MessageDetailEntity _e = new MessageDetailEntity
-            {
-                Topic = cmbProducerTopic.Text,
-                Key = keyValue,
-                Message = messageText
-            };
+            message.Topic = cmbProducerTopic.Text;
+            message.KeyString = tbProducerKey.Text;
+            message.Message = messageText;
 
             var cancelSource = new CancellationTokenSource();
 
             try
             {
-                using (IProducer<long, string> producer = _kafka.CreateKafkaProducer(KAFKA_SERVER))
+                var deliveryResult = _kafka.GetDeliviryResult(KAFKA_KEY_TYPE);
+                var producer = _kafka.GetProducer(KAFKA_SERVER, KAFKA_KEY_TYPE);
+
+                using (producer)
                 {
-                    DeliveryResult<long, string> _result = null;
                     DeliviryStatus ds = new DeliviryStatus() { Start = DateTime.Now, Count = 0 };
 
                     for (int i = 1; i <= _cnt; i++)
                     {
-                        _result = await _kafka.SendToKafka(_e.Key, _e.Topic, _e.Message, producer, cancelSource.Token);
+                        deliveryResult = await _kafka.SendToKafka(message.Key, message.Topic, message.Message, producer, cancelSource.Token);
 
-                        if (_result.Status != PersistenceStatus.Persisted) break;
+                        if (deliveryResult.Status != PersistenceStatus.Persisted) break;
                         ds.Count++;
                     }
 
-                    if (_result.Status != PersistenceStatus.Persisted)
+                    if (deliveryResult.Status != PersistenceStatus.Persisted)
                     {
-                        MessageBox.Show($"Send to kafka failed {_result.Status}");
+                        MessageBox.Show($"Send to kafka failed {deliveryResult.Status}");
                     }
                     else
                     {
                         ds.Finish = DateTime.Now;
 
-                        using (DeliviryReportForm report = new DeliviryReportForm())
-                        {
-                            report.Report = ds;
-                            report.ShowDialog(this);
-                        }
+                        BindDeliveryResult(ds);
                     }
                 }
             }
@@ -778,9 +828,32 @@ namespace KafkaHelpers
             }
         }
 
-        private void _dataGridViewSubscriber_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void rbMessageType_CheckStateChanged(object sender, EventArgs e)
         {
+            if (rbKeyString.IsChecked) KAFKA_KEY_TYPE = "string";
+            else if (rbKeyLong.IsChecked) KAFKA_KEY_TYPE = "long";
+            else if (rbKeyInt.IsChecked) KAFKA_KEY_TYPE = "int";
+            else if (rbKeyIgnore.IsChecked) KAFKA_KEY_TYPE = "ignore";
 
+            radMessageSetting.HeaderText = string.Format("Key type [{0}]", KAFKA_KEY_TYPE);
+        }
+
+
+        private void BindDeliveryResult(DeliviryStatus delivery)
+        {            
+            if (delivery== null)
+            {
+                tbResult.Text = string.Empty;
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("Message sended: {0}", delivery.Count.ToString()));
+            sb.AppendLine(string.Format("Message size: {0}", delivery.MessageSize));
+            sb.AppendLine(string.Format("Total time: {0}ms", (delivery.Finish - delivery.Start).TotalMilliseconds));
+            sb.AppendLine(string.Format("AVG time: {0}ms", ((delivery.Finish - delivery.Start).TotalMilliseconds) / delivery.Count).ToString());
+
+            tbResult.Text = sb.ToString();
         }
     }
 }

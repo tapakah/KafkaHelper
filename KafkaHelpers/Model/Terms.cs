@@ -7,10 +7,12 @@ namespace KafkaHelpers
         private static DateTime? _Start;
         private static DateTime? _End;
         private static string _Key;
-        private static string _Value;
+        private static string _Message;
         private static int _Counter;
         private static int _Top;
         private static bool _IsStatistic;
+        private dynamic _KeyType = string.Empty;
+        private dynamic _MessageType = string.Empty;
 
         public DateTime? Start
         { set { _Start = value; } get { return _Start; } }
@@ -21,8 +23,8 @@ namespace KafkaHelpers
         public string Key
         { set { _Key = value; } get { return _Key; } }
 
-        public string Value
-        { set { _Value = value; } get { return _Value; } }
+        public string Message
+        { set { _Message = value; } get { return _Message; } }
 
         public int Counter
         { set { _Counter = value; } get { return _Counter; } }
@@ -32,6 +34,12 @@ namespace KafkaHelpers
 
         public bool IsStatistic
         { set { _IsStatistic = value; } get { return _IsStatistic; } }
+
+        public dynamic KeyType
+        { set { _KeyType = value; } get { return _KeyType; } }
+
+        public dynamic MessageType
+        { set { _MessageType = value; } get { return _MessageType; } }
 
         public Terms()
         {
