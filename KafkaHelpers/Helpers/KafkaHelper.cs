@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using KafkaHelpers.Model;
 using Polly;
 using System;
 using System.Threading;
@@ -16,9 +17,16 @@ namespace KafkaHelpers
             _consumingPolicy = consumingPolicy;
         }
 
-        public static IConsumer<TKey, TMessage> CreateKafkaConsumer<TKey, TMessage>(string server)
+        public static IConsumer<TKey, TMessage> CreateKafkaConsumer<TKey, TMessage>(string server, KafkaSettingEntity setting)
         {
-            var config = new ConsumerConfig
+            ConsumerConfig config = GetConsumerConfig(server, setting);
+            var consumerBuilder = new ConsumerBuilder<TKey, TMessage>(config);
+            return consumerBuilder.Build();
+        }
+
+        public static ConsumerConfig GetConsumerConfig(string server, KafkaSettingEntity setting)
+        {
+            return new ConsumerConfig
             {
                 BootstrapServers = server,
                 GroupId = string.Concat("KafkaHelpers", DateTime.Now.ToString("mmss")),
@@ -27,88 +35,45 @@ namespace KafkaHelpers
                 EnableAutoOffsetStore = false,
                 EnablePartitionEof = true,
                 Acks = Acks.All,
-                MaxPartitionFetchBytes = 10485880
+                MaxPartitionFetchBytes = 10485880,
+
+                SecurityProtocol = KafkaSettingEntity.SettingToSecurityProtocol(setting.SecurityProtocol),
+                SslCaLocation = setting.SslCaLocation,
+                SslCertificateLocation = setting.SslCertificateLocation,
+                SslKeyLocation = setting.SslKeyLocation,
+                SslKeyPassword = setting.SslKeyPassword,
+
+                SaslMechanism = KafkaSettingEntity.SettingToSaslMechanism(setting.SaslMechanism),
+                SaslUsername = setting.SaslUsername,
+                SaslPassword = setting.SaslPassword
             };
-
-            var consumerBuilder = new ConsumerBuilder<TKey, TMessage>(config);
-
-            //consumerBuilder.SetKeyDeserializer();
-            return consumerBuilder.Build();
         }
 
-        public IProducer<TKey, TMessage> CreateKafkaProducer<TKey, TMessage>(string server)
+        public IProducer<TKey, TMessage> CreateKafkaProducer<TKey, TMessage>(string server, KafkaSettingEntity setting)
         {
-            var config = new ProducerConfig
-            {
-                BootstrapServers = server,
-                MessageMaxBytes = 10485880
-            };
-
+            ProducerConfig config = GetProducerConfig(server, setting);
             var producerBuilder = new ProducerBuilder<TKey, TMessage>(config);
-
-            //producerBuilder.SetKeySerializer(SerializationType.);
             return producerBuilder.Build();
         }
 
-        //private class VarKeySerializer<TKey> : ISerializer<TKey>
-        //{
-        //    public byte[] Serialize(TKey data, SerializationContext context)
-        //    {
-        //        if (data == null)
-        //        {
-        //            return null;
-        //        }
+        public static ProducerConfig GetProducerConfig(string server, KafkaSettingEntity setting)
+        {
+            return new ProducerConfig
+            {
+                BootstrapServers = server,
+                MessageMaxBytes = 10485880,
 
-        //        if (typeof(TKey) == typeof(Ignore))
-        //        {
-        //            return null;
-        //        }
-        //        else if (typeof(TKey) == typeof(int))
-        //        {
-        //            int intValue = (int)(object)data;
-        //            return BitConverter.GetBytes(intValue);
-        //        }
-        //        else if (typeof(TKey) == typeof(long))
-        //        {
-        //            long longValue = (long)(object)data;
-        //            return BitConverter.GetBytes(longValue);
-        //        }
-        //        else return Encoding.UTF8.GetBytes(data.ToString());
-        //    }
-        //}
+                SecurityProtocol = KafkaSettingEntity.SettingToSecurityProtocol(setting.SecurityProtocol),
+                SslCaLocation = setting.SslCaLocation,
+                SslCertificateLocation = setting.SslCertificateLocation,
+                SslKeyLocation = setting.SslKeyLocation,
+                SslKeyPassword = setting.SslKeyPassword,
 
-        //private class VarKeyDeserialize<TKey> : IDeserializer<TKey>
-        //{
-        //    public TKey Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
-        //    {
-        //        if (isNull)
-        //        {
-        //            return default(TKey);
-        //        }
-        //        Deserializers.Int64
-        //        if (typeof(TKey) == typeof(Ignore))
-        //        {
-        //            return default(TKey);
-        //        }
-        //        else if (typeof(TKey) == typeof(int) && data.Length == 4)
-        //        {
-        //            return (TKey)(object)BitConverter.ToInt32(data.ToArray(),0);
-        //        }
-        //        else if (typeof(TKey) == typeof(int) && data.Length < 4)
-        //        {
-        //            throw new SerializationException("Insufficient data to deserialize as int.");
-        //        }
-        //        else if (typeof(TKey) == typeof(long) && data.Length == 8)
-        //        {
-        //            return (TKey)(object)BitConverter.ToInt64(data.ToArray(), 0);
-        //        }
-        //        else if (typeof(TKey) == typeof(long) && data.Length < 8)
-        //        {
-        //            throw new SerializationException("Insufficient data to deserialize as long.");
-        //        }
-        //        else return (TKey)(object)Encoding.UTF8.GetString(data.ToArray());
-        //    }
-        //}
+                SaslMechanism = KafkaSettingEntity.SettingToSaslMechanism(setting.SaslMechanism),
+                SaslUsername = setting.SaslUsername,
+                SaslPassword = setting.SaslPassword
+            };
+        }
 
         public async Task<ConsumeResult<TKey, TMessage>> ConsumeMessage<TKey, TMessage>(
             IConsumer<TKey, TMessage> consumer,
@@ -239,30 +204,30 @@ namespace KafkaHelpers
             return result;
         }
 
-        private IProducer<TKey, TValue> CreateProducer<TKey, TValue>(string server)
+        private IProducer<TKey, TValue> CreateProducer<TKey, TValue>(string server, KafkaSettingEntity setting)
         {
-            return this.CreateKafkaProducer<TKey, TValue>(server);
+            return this.CreateKafkaProducer<TKey, TValue>(server, setting);
         }
 
-        public dynamic GetProducer(string server, string keyType)
+        public dynamic GetProducer(string server, string keyType, KafkaSettingEntity setting)
         {
             dynamic producer;
             switch (keyType)
             {
                 case "int":
-                    producer = CreateProducer<int, string>(server);
+                    producer = CreateProducer<int, string>(server, setting);
                     break;
 
                 case "long":
-                    producer = CreateProducer<long, string>(server);
+                    producer = CreateProducer<long, string>(server, setting);
                     break;
 
                 case "ignore":
-                    producer = CreateProducer<Null, string>(server);
+                    producer = CreateProducer<Null, string>(server, setting);
                     break;
 
                 default:
-                    producer = CreateProducer<string, string>(server);
+                    producer = CreateProducer<string, string>(server, setting);
                     break;
             };
 

@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using KafkaHelpers.Forms;
 using KafkaHelpers.Model;
 using Polly;
 using System;
@@ -11,28 +12,38 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Telerik.WinControls.UI.ValueMapper;
+using System.Windows.Input;
+using Newtonsoft.Json;
+using System.Collections;
 
 namespace KafkaHelpers
 {
     public partial class MainForm : Form
     {
         private CancellationTokenSource cancelSource;
-        private static readonly string Caption = "KafkaHelper by TaPaKaH";
-        private static readonly string STATUS_READ = "READ";
-        private static readonly string STATUS_WAIT = "WAIT";
+        private const string Caption = "KafkaHelper by TaPaKaH";
+        private const string STATUS_READ = "READ";
+        private const string STATUS_WAIT = "WAIT";
         private static int ID_COUNTER;
-        private static readonly int MAX_MESSAGE_LENGTH = 30000;
-        private static readonly int MAX_TOOLTIP_TEXT = 2000;
-        private static readonly int DEFAULT_ROWS = 2000;
-        private static readonly int DEFAULT_COUNTER = 100;
-        private static readonly int DELAY_TIMER_STATUS = 1000;
+        private const int MAX_MESSAGE_LENGTH = 30000;
+        private const int MAX_TOOLTIP_TEXT = 2000;
+        private const int DEFAULT_ROWS = 2000;
+        private const int DEFAULT_COUNTER = 100;
+        private const int DELAY_TIMER_STATUS = 1000;
         private string KAFKA_SERVER = string.Empty;
         private readonly string KAFKA_SERVER_LIST = string.Empty;
         private readonly string KAFKA_TOPICS = string.Empty;
         private readonly string KAFKA_CHKED_TOPICS = string.Empty;
         private string KAFKA_KEY_TYPE = string.Empty;
+        private const string KAFKA_SETTING_CONFIG = "KafkaSettingList";
 
-        private Terms setting = new Terms();
+        private Terms settingTerms = new Terms();
+
+        private KafkaSettingEntity kafkaSetting { get; set; }
+        private KafkaSettingEntity KafkaSetting { get { return kafkaSetting; } }
+
+
         private readonly KafkaHelper _kafka;
         private static System.Threading.Timer tTimer;
 
@@ -119,6 +130,7 @@ namespace KafkaHelpers
                 }
 
                 KAFKA_SERVER = ctbKafkaServer.Text;
+                kafkaSetting = RetrieveCurrentKafkaSettingFromAppSettings();
             }
             dateTimeStart.Enabled = dateTimeEnd.Enabled = chkTimestamp.Checked;
 
@@ -178,13 +190,13 @@ namespace KafkaHelpers
 
             _kafka = new KafkaHelper(CreateConsumingPolicy());
 
-            setting.Counter = DEFAULT_COUNTER;
+            settingTerms.Counter = DEFAULT_COUNTER;
 
-            tbCounter.Text = setting.Counter.ToString();
+            tbCounter.Text = settingTerms.Counter.ToString();
 
-            setting.MaxRows = DEFAULT_ROWS;
+            settingTerms.MaxRows = DEFAULT_ROWS;
 
-            tbMaxRows.Text = setting.MaxRows.ToString();
+            tbMaxRows.Text = settingTerms.MaxRows.ToString();
 
             _dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
@@ -232,52 +244,52 @@ namespace KafkaHelpers
 
             if (chkTimestamp.Checked)
             {
-                setting.Start = dateTimeStart.Value;
-                setting.End = dateTimeEnd.Value;
+                settingTerms.Start = dateTimeStart.Value;
+                settingTerms.End = dateTimeEnd.Value;
             }
             else
             {
-                setting.Start = null;
-                setting.End = null;
+                settingTerms.Start = null;
+                settingTerms.End = null;
             }
 
             if (!string.IsNullOrEmpty(tbKey.Text))
             {
-                setting.Key = tbKey.Text;
+                settingTerms.Key = tbKey.Text;
             }
             else
             {
-                setting.Key = null;
+                settingTerms.Key = null;
             }
 
             if (!string.IsNullOrEmpty(tbValue.Text))
             {
-                setting.Message = tbValue.Text;
+                settingTerms.Message = tbValue.Text;
             }
             else
             {
-                setting.Message = null;
+                settingTerms.Message = null;
             }
 
             if (!string.IsNullOrEmpty(tbCounter.Text))
             {
-                setting.Counter = Convert.ToInt32(tbCounter.Text);
+                settingTerms.Counter = Convert.ToInt32(tbCounter.Text);
             }
             else
             {
-                setting.Counter = DEFAULT_COUNTER;
+                settingTerms.Counter = DEFAULT_COUNTER;
             }
 
             if (!string.IsNullOrEmpty(tbMaxRows.Text))
             {
-                setting.MaxRows = Convert.ToInt32(tbMaxRows.Text);
+                settingTerms.MaxRows = Convert.ToInt32(tbMaxRows.Text);
             }
             else
             {
-                setting.MaxRows = DEFAULT_ROWS;
+                settingTerms.MaxRows = DEFAULT_ROWS;
             }
 
-            setting.IsStatistic = !radModeSwitch.Value;
+            settingTerms.IsStatistic = !radModeSwitch.Value;
 
             _consumerDataSet.Messages.Clear();
             ctbKafkaServer.Enabled = btnCheckAll.Enabled = btnUncheckAll.Enabled = btnSubscribe.Enabled = btnSubscribe2.Enabled = chklTopics.Enabled = false;
@@ -357,7 +369,7 @@ namespace KafkaHelpers
                 SetConsumerStatusText(text);
             };
 
-            using (IConsumer<TKey, TMessage> consumer = KafkaHelper.CreateKafkaConsumer<TKey, TMessage>(KAFKA_SERVER))
+            using (IConsumer<TKey, TMessage> consumer = KafkaHelper.CreateKafkaConsumer<TKey, TMessage>(KAFKA_SERVER, KafkaSetting))
             {
                 try
                 {
@@ -389,7 +401,7 @@ namespace KafkaHelpers
 
                         ID_COUNTER++;
 
-                        if (ID_COUNTER % setting.Counter == 0) StatusTextChanged?.Invoke(this, ID_COUNTER.ToString());
+                        if (ID_COUNTER % settingTerms.Counter == 0) StatusTextChanged?.Invoke(this, ID_COUNTER.ToString());
                         if (_toolStripLabel.Text != STATUS_READ) ConsumerStatusTextChanged?.Invoke(this, STATUS_READ);
 
                         try
@@ -446,7 +458,7 @@ namespace KafkaHelpers
                 _toolStripStatus.Text = text;
                 _toolStripProgressBar.Value = (_toolStripProgressBar.Value + 1) % 100;
 
-                if (setting.IsStatistic)
+                if (settingTerms.IsStatistic)
                 {
                     _toolStatisticsLabel.Text = Statistics.GetCount().ToString();
                 }
@@ -457,17 +469,17 @@ namespace KafkaHelpers
         {
             _dataGridViewSubscriber.Invoke(new Action(() =>
             {
-                var rw = RowFormatter.CreateRow(row, setting);
+                var rw = RowFormatter.CreateRow(row, settingTerms);
 
                 if (rw != null)
                 {
-                    if (setting.IsStatistic && rw.Id > 0)
+                    if (settingTerms.IsStatistic && rw.Id > 0)
                     {
                         Statistics.TimeValues.Add(new DataTopic(rw.Topic, rw.Timestamp));
                         return;
                     }
 
-                    if (_consumerDataSet.Messages.Rows.Count > setting.MaxRows)
+                    if (_consumerDataSet.Messages.Rows.Count > settingTerms.MaxRows)
                     {
                         UnSubscribe();
                         return;
@@ -512,7 +524,7 @@ namespace KafkaHelpers
             _toolStripStatus.Text = string.Empty;
             _toolStripProgressBar.Value = 0;
 
-            if (setting.IsStatistic)
+            if (settingTerms.IsStatistic)
             {
                 Statistics.DrowChart(this._radChartView);
             }
@@ -525,10 +537,9 @@ namespace KafkaHelpers
 
         private void ReadTopics()
         {
-            var config = new ProducerConfig
-            {
-                BootstrapServers = ctbKafkaServer.Text
-            };
+            TOPICS.Clear();
+
+            var config = KafkaHelper.GetProducerConfig(ctbKafkaServer.Text, KafkaSetting);
 
             try
             {
@@ -554,6 +565,7 @@ namespace KafkaHelpers
             finally
             {
                 AddUpdateAppSettings("SelectedServerIndex", ctbKafkaServer.SelectedIndex.ToString());
+                FillTopicBox(TOPICS);
             }
         }
 
@@ -577,14 +589,14 @@ namespace KafkaHelpers
         {
             if (e.RowIndex > 0)
             {
-                var r = _consumerDataSet.Messages.Rows[e.RowIndex];
+                var gv = _dataGridViewSubscriber.Rows[e.RowIndex];
 
                 using (MessageDetailForm detail = new MessageDetailForm())
                 {
-                    detail.Entity.Id = Convert.ToInt32(r["Id"]);
-                    detail.Entity.KeyString = r["Key"].ToString();
-                    detail.Entity.Topic = r["Topic"].ToString();
-                    detail.Entity.Message = r["Value"].ToString();
+                    detail.Entity.Id = e.RowIndex;
+                    detail.Entity.KeyString = gv.Cells["Key"].Value.ToString();
+                    detail.Entity.Topic = gv.Cells["Topic"].Value.ToString();
+                    detail.Entity.Message = gv.Cells["Value"].Value.ToString();
                     detail.Entity.DefaultJsonParse = chbDefaultJsonParse.Checked;
                     detail.ShowDialog(this);
                 }
@@ -597,6 +609,11 @@ namespace KafkaHelpers
         }
 
         private void ctbKafkaServer_Validating(object sender, CancelEventArgs e)
+        {
+            StoreKafkaServer();
+        }
+
+        private void StoreKafkaServer()
         {
             KAFKA_SERVER = ctbKafkaServer.Text.Trim();
             this.Text = string.Concat(Caption, " : ", KAFKA_SERVER);
@@ -612,6 +629,7 @@ namespace KafkaHelpers
                 items[i] = ctbKafkaServer.Items[i].ToString();
             }
 
+            kafkaSetting = RetrieveCurrentKafkaSettingFromAppSettings();
             AddUpdateAppSettings("KafkaServerList", String.Join(",", items.ToArray()));
         }
 
@@ -633,7 +651,7 @@ namespace KafkaHelpers
                 }
             }
 
-            var message = _kafka.GetMessage(KAFKA_KEY_TYPE);            
+            var message = _kafka.GetMessage(KAFKA_KEY_TYPE);
 
             message.Topic = cmbProducerTopic.Text;
             message.KeyString = tbProducerKey.Text;
@@ -644,7 +662,7 @@ namespace KafkaHelpers
             try
             {
                 var deliveryResult = _kafka.GetDeliviryResult(KAFKA_KEY_TYPE);
-                var producer = _kafka.GetProducer(KAFKA_SERVER, KAFKA_KEY_TYPE);
+                var producer = _kafka.GetProducer(KAFKA_SERVER, KAFKA_KEY_TYPE, KafkaSetting);
 
                 using (producer)
                 {
@@ -840,20 +858,123 @@ namespace KafkaHelpers
 
 
         private void BindDeliveryResult(DeliviryStatus delivery)
-        {            
-            if (delivery== null)
+        {
+            if (delivery == null)
             {
                 tbResult.Text = string.Empty;
                 return;
             }
 
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("TimeStamp: {0}", delivery.Finish.ToString()));
             sb.AppendLine(string.Format("Message sended: {0}", delivery.Count.ToString()));
             sb.AppendLine(string.Format("Message size: {0}", delivery.MessageSize));
             sb.AppendLine(string.Format("Total time: {0}ms", (delivery.Finish - delivery.Start).TotalMilliseconds));
             sb.AppendLine(string.Format("AVG time: {0}ms", ((delivery.Finish - delivery.Start).TotalMilliseconds) / delivery.Count).ToString());
 
             tbResult.Text = sb.ToString();
+        }
+
+        private void btn_Setting_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(KAFKA_SERVER))
+            {
+                throw new ArgumentException("Server name");
+            }
+
+            kafkaSetting = RetrieveCurrentKafkaSettingFromAppSettings();
+
+            if (kafkaSetting.ServerName == null)
+            {
+                kafkaSetting.ServerName = KAFKA_SERVER;
+            }
+
+            using (KafkaSettingForm settingForm = new KafkaSettingForm())
+            {
+                settingForm.Text = $"Kafka setting: {KAFKA_SERVER}";
+                settingForm.Setting = kafkaSetting;
+                settingForm.ShowDialog(this);
+                TrySaveKafkaSettingToConfig(settingForm.Setting);
+            }
+
+            kafkaSetting = RetrieveCurrentKafkaSettingFromAppSettings();
+        }
+
+        private void TrySaveKafkaSettingToConfig(KafkaSettingEntity setting)
+        {
+            try
+            {
+                var lstConfig = RetrieveKafkaSettingListFromAppSettings();
+                AddOrUpdateKafkaSetting(lstConfig, setting);
+
+                var settingToStore = JsonConvert.SerializeObject(lstConfig);
+                AddUpdateAppSettings(KAFKA_SETTING_CONFIG, settingToStore);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"TrySaveKafkaSettingToConfig has error: {ex.Message}");
+            }
+        }
+
+        private static List<KafkaSettingEntity> RetrieveKafkaSettingListFromAppSettings()
+        {
+            string jsonStringFromConfig = ConfigurationManager.AppSettings[KAFKA_SETTING_CONFIG];
+            if (string.IsNullOrEmpty(jsonStringFromConfig))
+            {
+                return new List<KafkaSettingEntity>();
+            }
+
+            return JsonConvert.DeserializeObject<List<KafkaSettingEntity>>(jsonStringFromConfig);
+        }
+
+        private KafkaSettingEntity RetrieveCurrentKafkaSettingFromAppSettings()
+        {
+            try
+            {
+                string jsonStringFromConfig = ConfigurationManager.AppSettings[KAFKA_SETTING_CONFIG];
+
+                if (!string.IsNullOrEmpty(jsonStringFromConfig))
+                {
+                    var settingLst = JsonConvert.DeserializeObject<List<KafkaSettingEntity>>(jsonStringFromConfig);
+                    var existingSetting = settingLst.Find(s => s.ServerName == KAFKA_SERVER);
+
+                    if (existingSetting != null)
+                    {
+                        return existingSetting;
+                    }
+                }
+            }
+            catch
+            {
+                // empty
+            }
+
+            return new KafkaSettingEntity();
+        }
+
+        private static void AddOrUpdateKafkaSetting(List<KafkaSettingEntity> list, KafkaSettingEntity setting)
+        {
+            var existingSetting = list.Find(s => s.ServerName == setting.ServerName);
+            if (existingSetting != null)
+            {
+                existingSetting.SecurityProtocol = setting.SecurityProtocol;
+                existingSetting.SslCaLocation = setting.SslCaLocation;
+                existingSetting.SslCertificateLocation = setting.SslCertificateLocation;
+                existingSetting.SslKeyLocation = setting.SslKeyLocation;
+                existingSetting.SslKeyPassword = setting.SslKeyPassword;
+                existingSetting.SaslMechanism = setting.SaslMechanism;
+                existingSetting.SaslUsername = setting.SaslUsername;
+                existingSetting.SaslPassword = setting.SaslPassword;
+            }
+            else
+            {
+                list.Add(setting);
+            }
+        }
+
+        private void ctbKafkaServer_SelectedValueChanged(object sender, EventArgs e)
+        {
+            StoreKafkaServer();
         }
     }
 }

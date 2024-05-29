@@ -1,9 +1,11 @@
-Telerik.WinControls.Themes.TelerikMetroTheme, Telerik.WinControls.Themes.TelerikMetro, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
-Telerik.WinControls.UI.RadToggleButton, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
-Telerik.WinControls.UI.RadChartView, Telerik.WinControls.ChartView, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
 Telerik.WinControls.UI.RadDropDownButton, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
 Telerik.WinControls.UI.RadGroupBox, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
 Telerik.WinControls.UI.RadToggleSwitch, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
 Telerik.WinControls.UI.RadRadioButton, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
-Telerik.WinControls.UI.RadCollapsiblePanel, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
 Telerik.WinControls.UI.RadPanel, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.UI.RadCollapsiblePanel, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.UI.RadDropDownList, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.UI.RadToggleButton, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.UI.RadTextBox, Telerik.WinControls.UI, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.Themes.TelerikMetroTheme, Telerik.WinControls.Themes.TelerikMetro, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
+Telerik.WinControls.UI.RadChartView, Telerik.WinControls.ChartView, Version=2017.1.117.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e
