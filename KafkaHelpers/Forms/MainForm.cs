@@ -12,10 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Telerik.WinControls.UI.ValueMapper;
-using System.Windows.Input;
 using Newtonsoft.Json;
-using System.Collections;
 
 namespace KafkaHelpers
 {
@@ -555,9 +552,16 @@ namespace KafkaHelpers
             }
             catch (Confluent.Kafka.KafkaException ex)
             {
+                var message = $"{ex.Message}.\r\n";
+
+                if (ex.Error != null)
+                {
+                    message += $"{ex.Error.Reason}, IsFatal: {ex.Error.IsFatal}, Code: {ex.Error.Code}";
+                }
+
                 MessageBox.Show(
-                                ex.Message,
-                                "Error Kafka",
+                                message,
+                                "KafkaException",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error
                                 );
@@ -879,7 +883,7 @@ namespace KafkaHelpers
         {
             if (string.IsNullOrEmpty(KAFKA_SERVER))
             {
-                throw new ArgumentException("Server name");
+                throw new ArgumentException("Server name is empty.");
             }
 
             kafkaSetting = RetrieveCurrentKafkaSettingFromAppSettings();

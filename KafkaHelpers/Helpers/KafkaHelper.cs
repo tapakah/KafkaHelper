@@ -42,7 +42,7 @@ namespace KafkaHelpers
                 SslCertificateLocation = setting.SslCertificateLocation,
                 SslKeyLocation = setting.SslKeyLocation,
                 SslKeyPassword = setting.SslKeyPassword,
-
+    
                 SaslMechanism = KafkaSettingEntity.SettingToSaslMechanism(setting.SaslMechanism),
                 SaslUsername = setting.SaslUsername,
                 SaslPassword = setting.SaslPassword

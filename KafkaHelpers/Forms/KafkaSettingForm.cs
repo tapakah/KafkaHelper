@@ -16,7 +16,7 @@ namespace KafkaHelpers.Forms
     {
         private KafkaSettingEntity _setting { get; set; }
         public KafkaSettingEntity Setting { get { return _setting; } set { _setting = value; } }
-
+        private static bool isSaved = false;
         public KafkaSettingForm()
         {
             InitializeComponent();
@@ -24,6 +24,7 @@ namespace KafkaHelpers.Forms
 
         private void KafkaSettingForm_Load(object sender, EventArgs e)
         {
+            isSaved = false;
             lstSecurityProtocol.SelectedValue = Setting.SecurityProtocol ?? KafkaProtocol.PLAINTEXT;
             tbSslCaLocation.Text = Setting.SslCaLocation;
             tbSslCertificateLocation.Text = Setting.SslCertificateLocation;
@@ -36,6 +37,18 @@ namespace KafkaHelpers.Forms
         }
 
         private void KafkaSettingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isSaved) return;
+
+            DialogResult result = MessageBox.Show("Do you want save settings?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                StoreSettings();
+            }            
+        }
+
+        private void StoreSettings()
         {
             Setting.SecurityProtocol = lstSecurityProtocol.SelectedItem != null ? lstSecurityProtocol.SelectedItem.Text : null;
             Setting.SslCaLocation = string.IsNullOrEmpty(tbSslCaLocation.Text) ? null : tbSslCaLocation.Text;
@@ -58,6 +71,13 @@ namespace KafkaHelpers.Forms
             };
 
             KafkaSettingForm_Load(this, null);
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {            
+            StoreSettings();
+            isSaved = true;
+            this.Close();
         }
     }
 }
