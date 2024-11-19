@@ -28,266 +28,289 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem9 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem10 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem11 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem12 = new Telerik.WinControls.UI.RadListDataItem();
-            this.lstSecurityProtocol = new Telerik.WinControls.UI.RadDropDownList();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbSslCertificateLocation = new System.Windows.Forms.Label();
-            this.lbSslKeyLocation = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lstSaslMechanism = new Telerik.WinControls.UI.RadDropDownList();
-            this.lbSaslUsername = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbSslCaLocation = new Telerik.WinControls.UI.RadTextBox();
-            this.tbSslCertificateLocation = new Telerik.WinControls.UI.RadTextBox();
-            this.tbSslKeyLocation = new Telerik.WinControls.UI.RadTextBox();
-            this.tbSslKeyPassword = new Telerik.WinControls.UI.RadTextBox();
-            this.tbSaslUsername = new Telerik.WinControls.UI.RadTextBox();
-            this.tbSaslPassword = new Telerik.WinControls.UI.RadTextBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btn_Save = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.lstSecurityProtocol)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lstSaslMechanism)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslCaLocation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslCertificateLocation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslKeyLocation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslKeyPassword)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaslUsername)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaslPassword)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // lstSecurityProtocol
-            // 
-            this.lstSecurityProtocol.DropDownAnimationEnabled = false;
-            this.lstSecurityProtocol.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-            radListDataItem5.Text = "plaintext";
-            radListDataItem6.Text = "ssl";
-            radListDataItem7.Text = "sasl_plaintext";
-            radListDataItem8.Text = "sasl_ssl";
-            this.lstSecurityProtocol.Items.Add(radListDataItem5);
-            this.lstSecurityProtocol.Items.Add(radListDataItem6);
-            this.lstSecurityProtocol.Items.Add(radListDataItem7);
-            this.lstSecurityProtocol.Items.Add(radListDataItem8);
-            this.lstSecurityProtocol.Location = new System.Drawing.Point(148, 3);
-            this.lstSecurityProtocol.Name = "lstSecurityProtocol";
-            this.lstSecurityProtocol.Size = new System.Drawing.Size(125, 20);
-            this.lstSecurityProtocol.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(12, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(130, 13);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "security.protocol:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "ssl.ca.location:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbSslCertificateLocation
-            // 
-            this.lbSslCertificateLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbSslCertificateLocation.Location = new System.Drawing.Point(12, 56);
-            this.lbSslCertificateLocation.Name = "lbSslCertificateLocation";
-            this.lbSslCertificateLocation.Size = new System.Drawing.Size(130, 13);
-            this.lbSslCertificateLocation.TabIndex = 20;
-            this.lbSslCertificateLocation.Text = "ssl.certificate.location:";
-            this.lbSslCertificateLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbSslKeyLocation
-            // 
-            this.lbSslKeyLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbSslKeyLocation.Location = new System.Drawing.Point(12, 80);
-            this.lbSslKeyLocation.Name = "lbSslKeyLocation";
-            this.lbSslKeyLocation.Size = new System.Drawing.Size(130, 13);
-            this.lbSslKeyLocation.TabIndex = 21;
-            this.lbSslKeyLocation.Text = "ssl.key.location:";
-            this.lbSslKeyLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(12, 106);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "ssl.key.password:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(12, 130);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "sasl.mechanism:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lstSaslMechanism
-            // 
-            this.lstSaslMechanism.DropDownAnimationEnabled = false;
-            this.lstSaslMechanism.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-            radListDataItem9.Text = "GSSAPI";
-            radListDataItem10.Text = "PLAIN";
-            radListDataItem11.Text = "SCRAM-SHA-256";
-            radListDataItem12.Text = "SCRAM-SHA-512";
-            this.lstSaslMechanism.Items.Add(radListDataItem9);
-            this.lstSaslMechanism.Items.Add(radListDataItem10);
-            this.lstSaslMechanism.Items.Add(radListDataItem11);
-            this.lstSaslMechanism.Items.Add(radListDataItem12);
-            this.lstSaslMechanism.Location = new System.Drawing.Point(148, 126);
-            this.lstSaslMechanism.Name = "lstSaslMechanism";
-            this.lstSaslMechanism.Size = new System.Drawing.Size(125, 20);
-            this.lstSaslMechanism.TabIndex = 5;
-            // 
-            // lbSaslUsername
-            // 
-            this.lbSaslUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbSaslUsername.Location = new System.Drawing.Point(12, 155);
-            this.lbSaslUsername.Name = "lbSaslUsername";
-            this.lbSaslUsername.Size = new System.Drawing.Size(130, 13);
-            this.lbSaslUsername.TabIndex = 25;
-            this.lbSaslUsername.Text = "sasl.username:";
-            this.lbSaslUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(12, 182);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(130, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "sasl.password:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tbSslCaLocation
-            // 
-            this.tbSslCaLocation.Location = new System.Drawing.Point(148, 28);
-            this.tbSslCaLocation.Name = "tbSslCaLocation";
-            this.tbSslCaLocation.Size = new System.Drawing.Size(356, 20);
-            this.tbSslCaLocation.TabIndex = 1;
-            // 
-            // tbSslCertificateLocation
-            // 
-            this.tbSslCertificateLocation.Location = new System.Drawing.Point(148, 52);
-            this.tbSslCertificateLocation.Name = "tbSslCertificateLocation";
-            this.tbSslCertificateLocation.Size = new System.Drawing.Size(356, 20);
-            this.tbSslCertificateLocation.TabIndex = 2;
-            // 
-            // tbSslKeyLocation
-            // 
-            this.tbSslKeyLocation.Location = new System.Drawing.Point(148, 76);
-            this.tbSslKeyLocation.Name = "tbSslKeyLocation";
-            this.tbSslKeyLocation.Size = new System.Drawing.Size(356, 20);
-            this.tbSslKeyLocation.TabIndex = 3;
-            // 
-            // tbSslKeyPassword
-            // 
-            this.tbSslKeyPassword.Location = new System.Drawing.Point(148, 102);
-            this.tbSslKeyPassword.Name = "tbSslKeyPassword";
-            this.tbSslKeyPassword.Size = new System.Drawing.Size(356, 20);
-            this.tbSslKeyPassword.TabIndex = 4;
-            // 
-            // tbSaslUsername
-            // 
-            this.tbSaslUsername.Location = new System.Drawing.Point(148, 151);
-            this.tbSaslUsername.Name = "tbSaslUsername";
-            this.tbSaslUsername.Size = new System.Drawing.Size(356, 20);
-            this.tbSaslUsername.TabIndex = 6;
-            // 
-            // tbSaslPassword
-            // 
-            this.tbSaslPassword.Location = new System.Drawing.Point(148, 178);
-            this.tbSaslPassword.Name = "tbSaslPassword";
-            this.tbSaslPassword.Size = new System.Drawing.Size(356, 20);
-            this.tbSaslPassword.TabIndex = 7;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.Location = new System.Drawing.Point(384, 3);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(57, 22);
-            this.btnClear.TabIndex = 8;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_Save.Location = new System.Drawing.Point(447, 3);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(57, 22);
-            this.btn_Save.TabIndex = 9;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            // 
-            // KafkaSettingForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(509, 202);
-            this.Controls.Add(this.btn_Save);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.tbSaslPassword);
-            this.Controls.Add(this.tbSaslUsername);
-            this.Controls.Add(this.tbSslKeyPassword);
-            this.Controls.Add(this.tbSslKeyLocation);
-            this.Controls.Add(this.tbSslCertificateLocation);
-            this.Controls.Add(this.tbSslCaLocation);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.lbSaslUsername);
-            this.Controls.Add(this.lstSaslMechanism);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbSslKeyLocation);
-            this.Controls.Add(this.lbSslCertificateLocation);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.lstSecurityProtocol);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "KafkaSettingForm";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Settings";
-            this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KafkaSettingForm_FormClosing);
-            this.Load += new System.EventHandler(this.KafkaSettingForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.lstSecurityProtocol)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lstSaslMechanism)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslCaLocation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslCertificateLocation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslKeyLocation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSslKeyPassword)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaslUsername)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaslPassword)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
+			Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
+			this.lstSecurityProtocol = new Telerik.WinControls.UI.RadDropDownList();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lbSslCertificateLocation = new System.Windows.Forms.Label();
+			this.lbSslKeyLocation = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.lstSaslMechanism = new Telerik.WinControls.UI.RadDropDownList();
+			this.lbSaslUsername = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.tbSslCaLocation = new Telerik.WinControls.UI.RadTextBox();
+			this.tbSslCertificateLocation = new Telerik.WinControls.UI.RadTextBox();
+			this.tbSslKeyLocation = new Telerik.WinControls.UI.RadTextBox();
+			this.tbSslKeyPassword = new Telerik.WinControls.UI.RadTextBox();
+			this.tbSaslUsername = new Telerik.WinControls.UI.RadTextBox();
+			this.tbSaslPassword = new Telerik.WinControls.UI.RadTextBox();
+			this.btnClear = new System.Windows.Forms.Button();
+			this.btn_Save = new System.Windows.Forms.Button();
+			this.label2 = new System.Windows.Forms.Label();
+			this.tbDebug = new Telerik.WinControls.UI.RadTextBox();
+			((System.ComponentModel.ISupportInitialize)(this.lstSecurityProtocol)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.lstSaslMechanism)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslCaLocation)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslCertificateLocation)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslKeyLocation)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslKeyPassword)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSaslUsername)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSaslPassword)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbDebug)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// lstSecurityProtocol
+			// 
+			this.lstSecurityProtocol.DropDownAnimationEnabled = false;
+			this.lstSecurityProtocol.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+			radListDataItem1.Text = "plaintext";
+			radListDataItem2.Text = "ssl";
+			radListDataItem3.Text = "sasl_plaintext";
+			radListDataItem4.Text = "sasl_ssl";
+			this.lstSecurityProtocol.Items.Add(radListDataItem1);
+			this.lstSecurityProtocol.Items.Add(radListDataItem2);
+			this.lstSecurityProtocol.Items.Add(radListDataItem3);
+			this.lstSecurityProtocol.Items.Add(radListDataItem4);
+			this.lstSecurityProtocol.Location = new System.Drawing.Point(148, 3);
+			this.lstSecurityProtocol.Name = "lstSecurityProtocol";
+			this.lstSecurityProtocol.Size = new System.Drawing.Size(125, 20);
+			this.lstSecurityProtocol.TabIndex = 0;
+			// 
+			// label7
+			// 
+			this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label7.Location = new System.Drawing.Point(12, 7);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(130, 13);
+			this.label7.TabIndex = 18;
+			this.label7.Text = "security.protocol:";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label1
+			// 
+			this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.Location = new System.Drawing.Point(12, 32);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(130, 13);
+			this.label1.TabIndex = 19;
+			this.label1.Text = "ssl.ca.location:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// lbSslCertificateLocation
+			// 
+			this.lbSslCertificateLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lbSslCertificateLocation.Location = new System.Drawing.Point(12, 56);
+			this.lbSslCertificateLocation.Name = "lbSslCertificateLocation";
+			this.lbSslCertificateLocation.Size = new System.Drawing.Size(130, 13);
+			this.lbSslCertificateLocation.TabIndex = 20;
+			this.lbSslCertificateLocation.Text = "ssl.certificate.location:";
+			this.lbSslCertificateLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// lbSslKeyLocation
+			// 
+			this.lbSslKeyLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lbSslKeyLocation.Location = new System.Drawing.Point(12, 80);
+			this.lbSslKeyLocation.Name = "lbSslKeyLocation";
+			this.lbSslKeyLocation.Size = new System.Drawing.Size(130, 13);
+			this.lbSslKeyLocation.TabIndex = 21;
+			this.lbSslKeyLocation.Text = "ssl.key.location:";
+			this.lbSslKeyLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label4
+			// 
+			this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label4.Location = new System.Drawing.Point(12, 106);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(130, 13);
+			this.label4.TabIndex = 22;
+			this.label4.Text = "ssl.key.password:";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label5
+			// 
+			this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label5.Location = new System.Drawing.Point(12, 130);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(130, 13);
+			this.label5.TabIndex = 23;
+			this.label5.Text = "sasl.mechanism:";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// lstSaslMechanism
+			// 
+			this.lstSaslMechanism.DropDownAnimationEnabled = false;
+			this.lstSaslMechanism.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+			radListDataItem5.Text = "GSSAPI";
+			radListDataItem6.Text = "PLAIN";
+			radListDataItem7.Text = "SCRAM-SHA-256";
+			radListDataItem8.Text = "SCRAM-SHA-512";
+			this.lstSaslMechanism.Items.Add(radListDataItem5);
+			this.lstSaslMechanism.Items.Add(radListDataItem6);
+			this.lstSaslMechanism.Items.Add(radListDataItem7);
+			this.lstSaslMechanism.Items.Add(radListDataItem8);
+			this.lstSaslMechanism.Location = new System.Drawing.Point(148, 126);
+			this.lstSaslMechanism.Name = "lstSaslMechanism";
+			this.lstSaslMechanism.Size = new System.Drawing.Size(125, 20);
+			this.lstSaslMechanism.TabIndex = 5;
+			// 
+			// lbSaslUsername
+			// 
+			this.lbSaslUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lbSaslUsername.Location = new System.Drawing.Point(12, 155);
+			this.lbSaslUsername.Name = "lbSaslUsername";
+			this.lbSaslUsername.Size = new System.Drawing.Size(130, 13);
+			this.lbSaslUsername.TabIndex = 25;
+			this.lbSaslUsername.Text = "sasl.username:";
+			this.lbSaslUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label8
+			// 
+			this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label8.Location = new System.Drawing.Point(12, 182);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(130, 13);
+			this.label8.TabIndex = 26;
+			this.label8.Text = "sasl.password:";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// tbSslCaLocation
+			// 
+			this.tbSslCaLocation.Location = new System.Drawing.Point(148, 28);
+			this.tbSslCaLocation.Name = "tbSslCaLocation";
+			this.tbSslCaLocation.Size = new System.Drawing.Size(356, 20);
+			this.tbSslCaLocation.TabIndex = 1;
+			// 
+			// tbSslCertificateLocation
+			// 
+			this.tbSslCertificateLocation.Location = new System.Drawing.Point(148, 52);
+			this.tbSslCertificateLocation.Name = "tbSslCertificateLocation";
+			this.tbSslCertificateLocation.Size = new System.Drawing.Size(356, 20);
+			this.tbSslCertificateLocation.TabIndex = 2;
+			// 
+			// tbSslKeyLocation
+			// 
+			this.tbSslKeyLocation.Location = new System.Drawing.Point(148, 76);
+			this.tbSslKeyLocation.Name = "tbSslKeyLocation";
+			this.tbSslKeyLocation.Size = new System.Drawing.Size(356, 20);
+			this.tbSslKeyLocation.TabIndex = 3;
+			// 
+			// tbSslKeyPassword
+			// 
+			this.tbSslKeyPassword.Location = new System.Drawing.Point(148, 102);
+			this.tbSslKeyPassword.Name = "tbSslKeyPassword";
+			this.tbSslKeyPassword.Size = new System.Drawing.Size(356, 20);
+			this.tbSslKeyPassword.TabIndex = 4;
+			// 
+			// tbSaslUsername
+			// 
+			this.tbSaslUsername.Location = new System.Drawing.Point(148, 151);
+			this.tbSaslUsername.Name = "tbSaslUsername";
+			this.tbSaslUsername.Size = new System.Drawing.Size(356, 20);
+			this.tbSaslUsername.TabIndex = 6;
+			// 
+			// tbSaslPassword
+			// 
+			this.tbSaslPassword.Location = new System.Drawing.Point(148, 178);
+			this.tbSaslPassword.Name = "tbSaslPassword";
+			this.tbSaslPassword.Size = new System.Drawing.Size(356, 20);
+			this.tbSaslPassword.TabIndex = 7;
+			// 
+			// btnClear
+			// 
+			this.btnClear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnClear.Location = new System.Drawing.Point(384, 3);
+			this.btnClear.Name = "btnClear";
+			this.btnClear.Size = new System.Drawing.Size(57, 22);
+			this.btnClear.TabIndex = 8;
+			this.btnClear.Text = "Clear";
+			this.btnClear.UseVisualStyleBackColor = true;
+			this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+			// 
+			// btn_Save
+			// 
+			this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btn_Save.Location = new System.Drawing.Point(447, 3);
+			this.btn_Save.Name = "btn_Save";
+			this.btn_Save.Size = new System.Drawing.Size(57, 22);
+			this.btn_Save.TabIndex = 9;
+			this.btn_Save.Text = "Save";
+			this.btn_Save.UseVisualStyleBackColor = true;
+			this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+			// 
+			// label2
+			// 
+			this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label2.Location = new System.Drawing.Point(12, 209);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(130, 13);
+			this.label2.TabIndex = 27;
+			this.label2.Text = "debug:";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// tbDebug
+			// 
+			this.tbDebug.Location = new System.Drawing.Point(148, 205);
+			this.tbDebug.Name = "tbDebug";
+			this.tbDebug.Size = new System.Drawing.Size(356, 20);
+			this.tbDebug.TabIndex = 28;
+			// 
+			// KafkaSettingForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.ClientSize = new System.Drawing.Size(509, 238);
+			this.Controls.Add(this.tbDebug);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.btn_Save);
+			this.Controls.Add(this.btnClear);
+			this.Controls.Add(this.tbSaslPassword);
+			this.Controls.Add(this.tbSaslUsername);
+			this.Controls.Add(this.tbSslKeyPassword);
+			this.Controls.Add(this.tbSslKeyLocation);
+			this.Controls.Add(this.tbSslCertificateLocation);
+			this.Controls.Add(this.tbSslCaLocation);
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.lbSaslUsername);
+			this.Controls.Add(this.lstSaslMechanism);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.lbSslKeyLocation);
+			this.Controls.Add(this.lbSslCertificateLocation);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.lstSecurityProtocol);
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "KafkaSettingForm";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			this.Text = "Settings";
+			this.TopMost = true;
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KafkaSettingForm_FormClosing);
+			this.Load += new System.EventHandler(this.KafkaSettingForm_Load);
+			((System.ComponentModel.ISupportInitialize)(this.lstSecurityProtocol)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.lstSaslMechanism)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslCaLocation)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslCertificateLocation)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslKeyLocation)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSslKeyPassword)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSaslUsername)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbSaslPassword)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbDebug)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -311,5 +334,7 @@
         private Telerik.WinControls.UI.RadTextBox tbSaslPassword;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btn_Save;
-    }
+		private System.Windows.Forms.Label label2;
+		private Telerik.WinControls.UI.RadTextBox tbDebug;
+	}
 }

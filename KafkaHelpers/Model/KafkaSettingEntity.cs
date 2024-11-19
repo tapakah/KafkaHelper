@@ -14,15 +14,16 @@ namespace KafkaHelpers.Model
         public string SaslMechanism { get; set; }
         public string SaslUsername { get; set; }
         public string SaslPassword { get; set; }
+		public string Debug { get; set; }
 
-        public static SecurityProtocol? SettingToSecurityProtocol(string securityProtocolString)
+		public static SecurityProtocol? SettingToSecurityProtocol(string securityProtocolString)
         {
             switch (securityProtocolString)
             {
                 case KafkaProtocol.SSL: return Confluent.Kafka.SecurityProtocol.Ssl;
                 case KafkaProtocol.PLAINTEXT: return Confluent.Kafka.SecurityProtocol.Plaintext;
                 case KafkaProtocol.SASL_SSL: return Confluent.Kafka.SecurityProtocol.SaslSsl;
-                case KafkaProtocol.SASL_PLAINTEXT: return Confluent.Kafka.SecurityProtocol.Plaintext;
+                case KafkaProtocol.SASL_PLAINTEXT: return Confluent.Kafka.SecurityProtocol.SaslPlaintext;
 
                 default: return null;
             };
