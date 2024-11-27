@@ -104,10 +104,10 @@
 			this.tabPageStatistics = new System.Windows.Forms.TabPage();
 			this._radChartView = new Telerik.WinControls.UI.RadChartView();
 			this.tabPageLog = new System.Windows.Forms.TabPage();
+			this.tbConsoleLog = new System.Windows.Forms.TextBox();
 			this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
 			this._telerikMetroTheme = new Telerik.WinControls.Themes.TelerikMetroTheme();
 			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017 = new Telerik.WinControls.RootRadElement();
-			this.tbConsoleLog = new System.Windows.Forms.TextBox();
 			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
 			this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Topic = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,6 +116,7 @@
 			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
 			this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.tbTopicInfo = new System.Windows.Forms.TextBox();
 			this.tabControl.SuspendLayout();
 			this.tabPageSetting.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radMessageSetting)).BeginInit();
@@ -167,6 +168,7 @@
 			// tabPageSetting
 			// 
 			this.tabPageSetting.BackColor = System.Drawing.SystemColors.Control;
+			this.tabPageSetting.Controls.Add(this.tbTopicInfo);
 			this.tabPageSetting.Controls.Add(this.btn_Setting);
 			this.tabPageSetting.Controls.Add(this.radMessageSetting);
 			this.tabPageSetting.Controls.Add(this.panel1);
@@ -575,7 +577,7 @@
 			this.chklTopics.Location = new System.Drawing.Point(62, 185);
 			this.chklTopics.Name = "chklTopics";
 			this.chklTopics.ScrollAlwaysVisible = true;
-			this.chklTopics.Size = new System.Drawing.Size(539, 429);
+			this.chklTopics.Size = new System.Drawing.Size(539, 293);
 			this.chklTopics.TabIndex = 5;
 			// 
 			// label2
@@ -952,7 +954,7 @@
 			this._radChartView.ShowPanZoom = true;
 			this._radChartView.ShowToolTip = true;
 			this._radChartView.ShowTrackBall = true;
-			this._radChartView.Size = new System.Drawing.Size(975, 608);
+			this._radChartView.Size = new System.Drawing.Size(975, 611);
 			this._radChartView.TabIndex = 0;
 			this._radChartView.ThemeName = "TelerikMetro";
 			// 
@@ -967,12 +969,6 @@
 			this.tabPageLog.Text = "Logs";
 			this.tabPageLog.UseVisualStyleBackColor = true;
 			// 
-			// object_e312bac3_151b_4c5a_91ba_fa2dfce57017
-			// 
-			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.Name = "object_e312bac3_151b_4c5a_91ba_fa2dfce57017";
-			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchHorizontally = true;
-			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchVertically = true;
-			// 
 			// tbConsoleLog
 			// 
 			this.tbConsoleLog.BackColor = System.Drawing.SystemColors.Control;
@@ -985,6 +981,12 @@
 			this.tbConsoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.tbConsoleLog.Size = new System.Drawing.Size(975, 611);
 			this.tbConsoleLog.TabIndex = 10;
+			// 
+			// object_e312bac3_151b_4c5a_91ba_fa2dfce57017
+			// 
+			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.Name = "object_e312bac3_151b_4c5a_91ba_fa2dfce57017";
+			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchHorizontally = true;
+			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchVertically = true;
 			// 
 			// _dataGridViewSubscriber
 			// 
@@ -1076,6 +1078,19 @@
 			// 
 			this.messagesBindingSource.DataMember = "Messages";
 			this.messagesBindingSource.DataSource = this._consumerDataSet;
+			// 
+			// tbTopicInfo
+			// 
+			this.tbTopicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.tbTopicInfo.BackColor = System.Drawing.SystemColors.Control;
+			this.tbTopicInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.tbTopicInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+			this.tbTopicInfo.Location = new System.Drawing.Point(62, 484);
+			this.tbTopicInfo.Multiline = true;
+			this.tbTopicInfo.Name = "tbTopicInfo";
+			this.tbTopicInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.tbTopicInfo.Size = new System.Drawing.Size(538, 130);
+			this.tbTopicInfo.TabIndex = 10;
 			// 
 			// MainForm
 			// 
@@ -1215,6 +1230,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 		private System.Windows.Forms.TabPage tabPageLog;
 		private System.Windows.Forms.TextBox tbConsoleLog;
+		private System.Windows.Forms.TextBox tbTopicInfo;
 	}
 }
 

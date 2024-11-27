@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using KafkaHelpers.Helpers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KafkaHelpers
 {
@@ -35,7 +36,7 @@ namespace KafkaHelpers
 		private readonly string KAFKA_CHKED_TOPICS = string.Empty;
 		private string KAFKA_KEY_TYPE = string.Empty;
 		private const string KAFKA_SETTING_CONFIG = "KafkaSettingList";
-
+		private System.Windows.Forms.ToolTip TOPIC_ToolTip = new System.Windows.Forms.ToolTip();
 		private Terms settingTerms = new Terms();
 
 		private KafkaSettingEntity kafkaSetting { get; set; }
@@ -48,6 +49,7 @@ namespace KafkaHelpers
 		public static event EventHandler<string> StatusTextChanged;
 
 		private readonly List<string> TOPICS = new List<string>();
+		private readonly List<TopicMetadata> TOPICSMETADATA = new List<TopicMetadata>();
 		private readonly List<string> TopicsSubscriber = new List<string>();
 
 		public static event EventHandler<string> ConsumerStatusTextChanged;
@@ -103,6 +105,7 @@ namespace KafkaHelpers
 		public MainForm()
 		{
 			InitializeComponent();
+			chklTopics.MouseClick += chklTopics_GetInfo;
 
 			KAFKA_SERVER_LIST = GetSettingValue("KafkaServerList");
 
@@ -199,6 +202,20 @@ namespace KafkaHelpers
 			_dataGridViewSubscriber.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
 			this._radChartView.Series.Clear();
+		}
+
+		private void chklTopics_GetInfo(object sender, MouseEventArgs e)
+		{
+			int index = chklTopics.IndexFromPoint(e.Location);
+
+			if (index >= 0 && index < chklTopics.Items.Count)
+			{				
+				tbTopicInfo.Text = GetTopicInfo(chklTopics.Items[index].ToString());
+			}
+			else
+			{
+				tbTopicInfo.Text = string.Empty;
+			}
 		}
 
 		private void CheckWorker(bool toDo)
@@ -425,7 +442,7 @@ namespace KafkaHelpers
 						{
 							stoppingToken.ThrowIfCancellationRequested();
 						}
-					}				
+					}
 
 				}
 				catch (OperationCanceledException)
@@ -533,7 +550,7 @@ namespace KafkaHelpers
 		}
 
 		private void btnReadTopics_Click(object sender, EventArgs e)
-		{			
+		{
 			ReadTopics();
 		}
 
@@ -541,6 +558,7 @@ namespace KafkaHelpers
 		{
 			LogHelper.ClearLog();
 			TOPICS.Clear();
+			TOPICSMETADATA.Clear();
 
 			var config = KafkaHelper.GetProducerConfig(ctbKafkaServer.Text, KafkaSetting);
 
@@ -555,7 +573,8 @@ namespace KafkaHelpers
 				{
 					var topicsMeta = adminClient.GetMetadata(TimeSpan.FromSeconds(20)).Topics;
 
-					TOPICS.Clear();
+					if (topicsMeta != null) { TOPICSMETADATA.AddRange(topicsMeta); }
+
 					TOPICS.AddRange(topicsMeta.Select(x => x.Topic.Trim()).ToList());
 
 					FillTopicBox(TOPICS);
@@ -595,6 +614,35 @@ namespace KafkaHelpers
 			{
 				AddUpdateAppSettings("SelectedServerIndex", ctbKafkaServer.SelectedIndex.ToString());
 				FillTopicBox(TOPICS);
+			}
+		}
+
+		private string GetTopicInfo(string topic)
+		{
+			var topicInfo = TOPICSMETADATA.FirstOrDefault(t => t.Topic == topic);
+
+			if (topicInfo != null)
+			{
+				var sb = new System.Text.StringBuilder();
+
+				sb.AppendLine($"Topic: {topicInfo.Topic}");
+				sb.AppendLine($"Error: {topicInfo.Error}");
+				sb.AppendLine($"Number of Partitions: {topicInfo.Partitions.Count}");
+
+				foreach (var partition in topicInfo.Partitions)
+				{
+					sb.AppendLine($"  Partition ID: {partition.PartitionId}");
+					sb.AppendLine($"  Leader: {partition.Leader}");
+					sb.AppendLine($"  Replicas: {string.Join(", ", partition.Replicas)}");
+					sb.AppendLine($"  In-Sync Replicas: {string.Join(", ", partition.InSyncReplicas)}");
+					sb.AppendLine();
+				}
+
+				return sb.ToString();
+			}
+			else
+			{
+				return $"Topic '{topic}' not found in metaata.";
 			}
 		}
 
@@ -781,7 +829,7 @@ namespace KafkaHelpers
 			}
 
 			// only allow one decimal point
-			if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+			if ((e.KeyChar == '.') && ((sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1))
 			{
 				e.Handled = true;
 			}
