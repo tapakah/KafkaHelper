@@ -50,6 +50,8 @@ namespace KafkaHelpers
 
 		private readonly List<string> TOPICS = new List<string>();
 		private readonly List<TopicMetadata> TOPICSMETADATA = new List<TopicMetadata>();
+		private readonly List<BrokerMetadata> BROKERMETADATA = new List<BrokerMetadata>();
+
 		private readonly List<string> TopicsSubscriber = new List<string>();
 
 		public static event EventHandler<string> ConsumerStatusTextChanged;
@@ -209,7 +211,7 @@ namespace KafkaHelpers
 			int index = chklTopics.IndexFromPoint(e.Location);
 
 			if (index >= 0 && index < chklTopics.Items.Count)
-			{				
+			{
 				tbTopicInfo.Text = GetTopicInfo(chklTopics.Items[index].ToString());
 			}
 			else
@@ -572,8 +574,10 @@ namespace KafkaHelpers
 					.Build())
 				{
 					var topicsMeta = adminClient.GetMetadata(TimeSpan.FromSeconds(20)).Topics;
+					var brokerMeta = adminClient.GetMetadata(TimeSpan.FromSeconds(20)).Brokers;
 
 					if (topicsMeta != null) { TOPICSMETADATA.AddRange(topicsMeta); }
+					if (brokerMeta != null) { BROKERMETADATA.AddRange(brokerMeta); }
 
 					TOPICS.AddRange(topicsMeta.Select(x => x.Topic.Trim()).ToList());
 
@@ -621,10 +625,10 @@ namespace KafkaHelpers
 		{
 			var topicInfo = TOPICSMETADATA.FirstOrDefault(t => t.Topic == topic);
 
+			var sb = new System.Text.StringBuilder();
+
 			if (topicInfo != null)
 			{
-				var sb = new System.Text.StringBuilder();
-
 				sb.AppendLine($"Topic: {topicInfo.Topic}");
 				sb.AppendLine($"Error: {topicInfo.Error}");
 				sb.AppendLine($"Number of Partitions: {topicInfo.Partitions.Count}");
@@ -637,13 +641,18 @@ namespace KafkaHelpers
 					sb.AppendLine($"  In-Sync Replicas: {string.Join(", ", partition.InSyncReplicas)}");
 					sb.AppendLine();
 				}
-
-				return sb.ToString();
 			}
 			else
 			{
-				return $"Topic '{topic}' not found in metaata.";
+				sb.AppendLine($"Topic '{topic}' not found in metaata. Click `Read topics`");
 			}
+
+			foreach (var broker in BROKERMETADATA)
+			{
+				sb.AppendLine(broker.ToString());
+			}
+
+			return sb.ToString();
 		}
 
 		private void FillTopicBox(List<string> topics)

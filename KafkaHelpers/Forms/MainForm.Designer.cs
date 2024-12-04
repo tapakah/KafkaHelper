@@ -30,12 +30,13 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPageSetting = new System.Windows.Forms.TabPage();
+			this.tbTopicInfo = new System.Windows.Forms.TextBox();
 			this.btn_Setting = new System.Windows.Forms.Button();
 			this.radMessageSetting = new Telerik.WinControls.UI.RadCollapsiblePanel();
 			this.rbKey = new Telerik.WinControls.UI.RadGroupBox();
@@ -74,6 +75,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnSubscribe = new System.Windows.Forms.Button();
 			this.tabPageSubsriber = new System.Windows.Forms.TabPage();
+			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
+			this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Topic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
 			this._panel = new System.Windows.Forms.Panel();
 			this.chbDefaultJsonParse = new System.Windows.Forms.CheckBox();
 			this.btnView = new System.Windows.Forms.Button();
@@ -108,15 +116,7 @@
 			this.filetoSendDialog = new System.Windows.Forms.OpenFileDialog();
 			this._telerikMetroTheme = new Telerik.WinControls.Themes.TelerikMetroTheme();
 			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017 = new Telerik.WinControls.RootRadElement();
-			this._dataGridViewSubscriber = new System.Windows.Forms.DataGridView();
-			this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Topic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this._consumerDataSet = new KafkaHelpers.Model.ConsumerDataSet();
 			this.messagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.tbTopicInfo = new System.Windows.Forms.TextBox();
 			this.tabControl.SuspendLayout();
 			this.tabPageSetting.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radMessageSetting)).BeginInit();
@@ -136,6 +136,8 @@
 			this.groupBox2.SuspendLayout();
 			this.groupBoxTime.SuspendLayout();
 			this.tabPageSubsriber.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
 			this._panel.SuspendLayout();
 			this._statusStrip.SuspendLayout();
 			this.tabPageProducer.SuspendLayout();
@@ -143,8 +145,6 @@
 			this.tabPageStatistics.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this._radChartView)).BeginInit();
 			this.tabPageLog.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -185,12 +185,25 @@
 			this.tabPageSetting.Controls.Add(this.label1);
 			this.tabPageSetting.Controls.Add(this.btnSubscribe);
 			this.tabPageSetting.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tabPageSetting.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSetting.Location = new System.Drawing.Point(4, 28);
 			this.tabPageSetting.Name = "tabPageSetting";
 			this.tabPageSetting.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSetting.Size = new System.Drawing.Size(981, 617);
+			this.tabPageSetting.Size = new System.Drawing.Size(981, 611);
 			this.tabPageSetting.TabIndex = 0;
 			this.tabPageSetting.Text = "Setting";
+			// 
+			// tbTopicInfo
+			// 
+			this.tbTopicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.tbTopicInfo.BackColor = System.Drawing.SystemColors.Control;
+			this.tbTopicInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.tbTopicInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+			this.tbTopicInfo.Location = new System.Drawing.Point(62, 484);
+			this.tbTopicInfo.Multiline = true;
+			this.tbTopicInfo.Name = "tbTopicInfo";
+			this.tbTopicInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.tbTopicInfo.Size = new System.Drawing.Size(538, 130);
+			this.tbTopicInfo.TabIndex = 10;
 			// 
 			// btn_Setting
 			// 
@@ -240,7 +253,7 @@
 			this.rbKeyIgnore.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
 			this.rbKeyIgnore.Location = new System.Drawing.Point(13, 93);
 			this.rbKeyIgnore.Name = "rbKeyIgnore";
-			this.rbKeyIgnore.Size = new System.Drawing.Size(55, 18);
+			this.rbKeyIgnore.Size = new System.Drawing.Size(64, 22);
 			this.rbKeyIgnore.TabIndex = 3;
 			this.rbKeyIgnore.TabStop = false;
 			this.rbKeyIgnore.Text = "ignore";
@@ -250,7 +263,7 @@
 			this.rbKeyInt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
 			this.rbKeyInt.Location = new System.Drawing.Point(13, 69);
 			this.rbKeyInt.Name = "rbKeyInt";
-			this.rbKeyInt.Size = new System.Drawing.Size(35, 18);
+			this.rbKeyInt.Size = new System.Drawing.Size(39, 22);
 			this.rbKeyInt.TabIndex = 2;
 			this.rbKeyInt.TabStop = false;
 			this.rbKeyInt.Text = "int";
@@ -261,7 +274,7 @@
 			this.rbKeyString.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
 			this.rbKeyString.Location = new System.Drawing.Point(13, 21);
 			this.rbKeyString.Name = "rbKeyString";
-			this.rbKeyString.Size = new System.Drawing.Size(51, 18);
+			this.rbKeyString.Size = new System.Drawing.Size(60, 22);
 			this.rbKeyString.TabIndex = 0;
 			this.rbKeyString.TabStop = false;
 			this.rbKeyString.Text = "string";
@@ -273,7 +286,7 @@
 			this.rbKeyLong.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
 			this.rbKeyLong.Location = new System.Drawing.Point(13, 45);
 			this.rbKeyLong.Name = "rbKeyLong";
-			this.rbKeyLong.Size = new System.Drawing.Size(44, 18);
+			this.rbKeyLong.Size = new System.Drawing.Size(51, 22);
 			this.rbKeyLong.TabIndex = 1;
 			this.rbKeyLong.Text = "long";
 			this.rbKeyLong.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
@@ -315,7 +328,7 @@
 			// 
 			this.tbFilterTopics.Location = new System.Drawing.Point(90, 161);
 			this.tbFilterTopics.Name = "tbFilterTopics";
-			this.tbFilterTopics.Size = new System.Drawing.Size(347, 22);
+			this.tbFilterTopics.Size = new System.Drawing.Size(347, 26);
 			this.tbFilterTopics.TabIndex = 10;
 			this.tbFilterTopics.TextChanged += new System.EventHandler(this.tbFilterTopics_TextChanged);
 			// 
@@ -324,7 +337,7 @@
 			this.ctbKafkaServer.FormattingEnabled = true;
 			this.ctbKafkaServer.Location = new System.Drawing.Point(62, 9);
 			this.ctbKafkaServer.Name = "ctbKafkaServer";
-			this.ctbKafkaServer.Size = new System.Drawing.Size(215, 21);
+			this.ctbKafkaServer.Size = new System.Drawing.Size(215, 27);
 			this.ctbKafkaServer.TabIndex = 0;
 			this.ctbKafkaServer.SelectedValueChanged += new System.EventHandler(this.ctbKafkaServer_SelectedValueChanged);
 			this.ctbKafkaServer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ctbKafkaServer_KeyPress);
@@ -383,7 +396,7 @@
 			// 
 			this.tbMaxRows.Location = new System.Drawing.Point(6, 15);
 			this.tbMaxRows.Name = "tbMaxRows";
-			this.tbMaxRows.Size = new System.Drawing.Size(53, 22);
+			this.tbMaxRows.Size = new System.Drawing.Size(53, 26);
 			this.tbMaxRows.TabIndex = 11;
 			this.tbMaxRows.TextChanged += new System.EventHandler(this.tbTop_TextChanged);
 			// 
@@ -402,7 +415,7 @@
 			// 
 			this.tbCounter.Location = new System.Drawing.Point(6, 15);
 			this.tbCounter.Name = "tbCounter";
-			this.tbCounter.Size = new System.Drawing.Size(53, 22);
+			this.tbCounter.Size = new System.Drawing.Size(53, 26);
 			this.tbCounter.TabIndex = 11;
 			this.tbCounter.TextChanged += new System.EventHandler(this.tbCounter_TextChanged);
 			// 
@@ -410,7 +423,7 @@
 			// 
 			this.tbValue.Location = new System.Drawing.Point(60, 94);
 			this.tbValue.Name = "tbValue";
-			this.tbValue.Size = new System.Drawing.Size(333, 22);
+			this.tbValue.Size = new System.Drawing.Size(333, 26);
 			this.tbValue.TabIndex = 1;
 			// 
 			// label3
@@ -419,7 +432,7 @@
 			this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label3.Location = new System.Drawing.Point(16, 97);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(38, 13);
+			this.label3.Size = new System.Drawing.Size(49, 19);
 			this.label3.TabIndex = 21;
 			this.label3.Text = "Value:";
 			// 
@@ -427,7 +440,7 @@
 			// 
 			this.tbKey.Location = new System.Drawing.Point(60, 70);
 			this.tbKey.Name = "tbKey";
-			this.tbKey.Size = new System.Drawing.Size(333, 22);
+			this.tbKey.Size = new System.Drawing.Size(333, 26);
 			this.tbKey.TabIndex = 0;
 			// 
 			// groupBoxTime
@@ -463,7 +476,7 @@
 			this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label8.Location = new System.Drawing.Point(186, 20);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(30, 13);
+			this.label8.Size = new System.Drawing.Size(37, 19);
 			this.label8.TabIndex = 18;
 			this.label8.Text = "End:";
 			// 
@@ -473,7 +486,7 @@
 			this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label7.Location = new System.Drawing.Point(15, 20);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(34, 13);
+			this.label7.Size = new System.Drawing.Size(45, 19);
 			this.label7.TabIndex = 17;
 			this.label7.Text = "Start:";
 			// 
@@ -482,7 +495,7 @@
 			this.chkTimestamp.AutoSize = true;
 			this.chkTimestamp.Location = new System.Drawing.Point(79, 0);
 			this.chkTimestamp.Name = "chkTimestamp";
-			this.chkTimestamp.Size = new System.Drawing.Size(15, 14);
+			this.chkTimestamp.Size = new System.Drawing.Size(18, 17);
 			this.chkTimestamp.TabIndex = 0;
 			this.chkTimestamp.UseVisualStyleBackColor = true;
 			this.chkTimestamp.CheckedChanged += new System.EventHandler(this.chkTimestamp_CheckedChanged);
@@ -495,7 +508,7 @@
 			this.dateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimeEnd.Location = new System.Drawing.Point(222, 16);
 			this.dateTimeEnd.Name = "dateTimeEnd";
-			this.dateTimeEnd.Size = new System.Drawing.Size(126, 20);
+			this.dateTimeEnd.Size = new System.Drawing.Size(126, 23);
 			this.dateTimeEnd.TabIndex = 2;
 			// 
 			// dateTimeStart
@@ -506,7 +519,7 @@
 			this.dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimeStart.Location = new System.Drawing.Point(54, 16);
 			this.dateTimeStart.Name = "dateTimeStart";
-			this.dateTimeStart.Size = new System.Drawing.Size(126, 20);
+			this.dateTimeStart.Size = new System.Drawing.Size(126, 23);
 			this.dateTimeStart.TabIndex = 1;
 			// 
 			// label9
@@ -515,7 +528,7 @@
 			this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label9.Location = new System.Drawing.Point(27, 73);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(29, 13);
+			this.label9.Size = new System.Drawing.Size(38, 19);
 			this.label9.TabIndex = 19;
 			this.label9.Text = "Key:";
 			// 
@@ -577,7 +590,7 @@
 			this.chklTopics.Location = new System.Drawing.Point(62, 185);
 			this.chklTopics.Name = "chklTopics";
 			this.chklTopics.ScrollAlwaysVisible = true;
-			this.chklTopics.Size = new System.Drawing.Size(539, 293);
+			this.chklTopics.Size = new System.Drawing.Size(539, 277);
 			this.chklTopics.TabIndex = 5;
 			// 
 			// label2
@@ -586,7 +599,7 @@
 			this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.Location = new System.Drawing.Point(15, 166);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(42, 13);
+			this.label2.Size = new System.Drawing.Size(55, 19);
 			this.label2.TabIndex = 5;
 			this.label2.Text = "Topics:";
 			// 
@@ -596,7 +609,7 @@
 			this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.Location = new System.Drawing.Point(15, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(42, 13);
+			this.label1.Size = new System.Drawing.Size(59, 19);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Server:";
 			// 
@@ -620,12 +633,103 @@
 			this.tabPageSubsriber.Controls.Add(this._dataGridViewSubscriber);
 			this.tabPageSubsriber.Controls.Add(this._panel);
 			this.tabPageSubsriber.Controls.Add(this._statusStrip);
-			this.tabPageSubsriber.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSubsriber.Location = new System.Drawing.Point(4, 28);
 			this.tabPageSubsriber.Name = "tabPageSubsriber";
 			this.tabPageSubsriber.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSubsriber.Size = new System.Drawing.Size(981, 617);
+			this.tabPageSubsriber.Size = new System.Drawing.Size(981, 611);
 			this.tabPageSubsriber.TabIndex = 1;
 			this.tabPageSubsriber.Text = "Subscriber";
+			// 
+			// _dataGridViewSubscriber
+			// 
+			this._dataGridViewSubscriber.AllowUserToAddRows = false;
+			this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
+			this._dataGridViewSubscriber.AllowUserToResizeRows = false;
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
+			this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this._dataGridViewSubscriber.AutoGenerateColumns = false;
+			this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
+			this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TimeStamp,
+            this.Topic,
+            this.Key,
+            this.Size,
+            this.Value});
+			this._dataGridViewSubscriber.DataMember = "Messages";
+			this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
+			this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
+			this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
+			this._dataGridViewSubscriber.ReadOnly = true;
+			this._dataGridViewSubscriber.RowHeadersVisible = false;
+			this._dataGridViewSubscriber.RowHeadersWidth = 30;
+			this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this._dataGridViewSubscriber.ShowCellToolTips = false;
+			this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
+			this._dataGridViewSubscriber.TabIndex = 22;
+			this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
+			this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridViewSubscriber_CellToolTipTextNeeded);
+			// 
+			// TimeStamp
+			// 
+			this.TimeStamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.TimeStamp.DataPropertyName = "Recived";
+			dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
+			dataGridViewCellStyle2.NullValue = null;
+			this.TimeStamp.DefaultCellStyle = dataGridViewCellStyle2;
+			this.TimeStamp.HeaderText = "TimeStamp";
+			this.TimeStamp.MinimumWidth = 6;
+			this.TimeStamp.Name = "TimeStamp";
+			this.TimeStamp.ReadOnly = true;
+			this.TimeStamp.Width = 106;
+			// 
+			// Topic
+			// 
+			this.Topic.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.Topic.DataPropertyName = "Topic";
+			this.Topic.HeaderText = "Topic";
+			this.Topic.MinimumWidth = 6;
+			this.Topic.Name = "Topic";
+			this.Topic.ReadOnly = true;
+			this.Topic.Width = 69;
+			// 
+			// Key
+			// 
+			this.Key.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.Key.DataPropertyName = "Key";
+			this.Key.HeaderText = "Key";
+			this.Key.MinimumWidth = 6;
+			this.Key.Name = "Key";
+			this.Key.ReadOnly = true;
+			this.Key.Width = 60;
+			// 
+			// Size
+			// 
+			this.Size.DataPropertyName = "Size";
+			this.Size.HeaderText = "Size";
+			this.Size.MinimumWidth = 6;
+			this.Size.Name = "Size";
+			this.Size.ReadOnly = true;
+			this.Size.Width = 61;
+			// 
+			// Value
+			// 
+			this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Value.DataPropertyName = "Value";
+			this.Value.HeaderText = "Value";
+			this.Value.MinimumWidth = 6;
+			this.Value.Name = "Value";
+			this.Value.ReadOnly = true;
+			// 
+			// _consumerDataSet
+			// 
+			this._consumerDataSet.DataSetName = "ConsumerDataSet";
+			this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// _panel
 			// 
@@ -650,9 +754,9 @@
 			this.chbDefaultJsonParse.Checked = true;
 			this.chbDefaultJsonParse.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.chbDefaultJsonParse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.chbDefaultJsonParse.Location = new System.Drawing.Point(779, 9);
+			this.chbDefaultJsonParse.Location = new System.Drawing.Point(743, 9);
 			this.chbDefaultJsonParse.Name = "chbDefaultJsonParse";
-			this.chbDefaultJsonParse.Size = new System.Drawing.Size(196, 17);
+			this.chbDefaultJsonParse.Size = new System.Drawing.Size(232, 23);
 			this.chbDefaultJsonParse.TabIndex = 4;
 			this.chbDefaultJsonParse.Text = "View with default JSON parse ON";
 			this.chbDefaultJsonParse.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -710,6 +814,7 @@
 			// 
 			// _statusStrip
 			// 
+			this._statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripKafkaServer,
             this._toolStripKafkaServerValue,
@@ -719,9 +824,9 @@
             this._tsStatusConsumer,
             this.toolStripStatusLabel1,
             this._toolStatisticsLabel});
-			this._statusStrip.Location = new System.Drawing.Point(3, 590);
+			this._statusStrip.Location = new System.Drawing.Point(3, 582);
 			this._statusStrip.Name = "_statusStrip";
-			this._statusStrip.Size = new System.Drawing.Size(975, 24);
+			this._statusStrip.Size = new System.Drawing.Size(975, 26);
 			this._statusStrip.TabIndex = 20;
 			this._statusStrip.Text = "statusStrip1";
 			// 
@@ -729,21 +834,21 @@
 			// 
 			this.toolStripKafkaServer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
 			this.toolStripKafkaServer.Name = "toolStripKafkaServer";
-			this.toolStripKafkaServer.Size = new System.Drawing.Size(43, 19);
+			this.toolStripKafkaServer.Size = new System.Drawing.Size(59, 20);
 			this.toolStripKafkaServer.Text = "Server:";
 			// 
 			// _toolStripKafkaServerValue
 			// 
 			this._toolStripKafkaServerValue.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
 			this._toolStripKafkaServerValue.Name = "_toolStripKafkaServerValue";
-			this._toolStripKafkaServerValue.Size = new System.Drawing.Size(0, 19);
+			this._toolStripKafkaServerValue.Size = new System.Drawing.Size(0, 20);
 			// 
 			// _toolStripLabel
 			// 
 			this._toolStripLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
 			this._toolStripLabel.ForeColor = System.Drawing.Color.Navy;
 			this._toolStripLabel.Name = "_toolStripLabel";
-			this._toolStripLabel.Size = new System.Drawing.Size(56, 19);
+			this._toolStripLabel.Size = new System.Drawing.Size(72, 20);
 			this._toolStripLabel.Text = "Message:";
 			// 
 			// _toolStripProgressBar
@@ -757,28 +862,28 @@
 			// 
 			this._toolStripStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this._toolStripStatus.Name = "_toolStripStatus";
-			this._toolStripStatus.Size = new System.Drawing.Size(0, 19);
+			this._toolStripStatus.Size = new System.Drawing.Size(0, 20);
 			// 
 			// _tsStatusConsumer
 			// 
 			this._tsStatusConsumer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
 			this._tsStatusConsumer.ForeColor = System.Drawing.Color.Navy;
 			this._tsStatusConsumer.Name = "_tsStatusConsumer";
-			this._tsStatusConsumer.Size = new System.Drawing.Size(0, 19);
+			this._tsStatusConsumer.Size = new System.Drawing.Size(0, 20);
 			// 
 			// toolStripStatusLabel1
 			// 
 			this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
 			this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Navy;
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(51, 19);
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(64, 20);
 			this.toolStripStatusLabel1.Text = "Statistis:";
 			// 
 			// _toolStatisticsLabel
 			// 
 			this._toolStatisticsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this._toolStatisticsLabel.Name = "_toolStatisticsLabel";
-			this._toolStatisticsLabel.Size = new System.Drawing.Size(14, 19);
+			this._toolStatisticsLabel.Size = new System.Drawing.Size(18, 20);
 			this._toolStatisticsLabel.Text = "0";
 			// 
 			// tabPageProducer
@@ -795,10 +900,10 @@
 			this.tabPageProducer.Controls.Add(this.cmbProducerTopic);
 			this.tabPageProducer.Controls.Add(this.buttonFile);
 			this.tabPageProducer.Controls.Add(this.btnSendMessage);
-			this.tabPageProducer.Location = new System.Drawing.Point(4, 22);
+			this.tabPageProducer.Location = new System.Drawing.Point(4, 28);
 			this.tabPageProducer.Name = "tabPageProducer";
 			this.tabPageProducer.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageProducer.Size = new System.Drawing.Size(981, 617);
+			this.tabPageProducer.Size = new System.Drawing.Size(981, 611);
 			this.tabPageProducer.TabIndex = 2;
 			this.tabPageProducer.Text = "Producer";
 			// 
@@ -819,7 +924,7 @@
 			this.textBoxFileToSend.Location = new System.Drawing.Point(504, 9);
 			this.textBoxFileToSend.Name = "textBoxFileToSend";
 			this.textBoxFileToSend.ReadOnly = true;
-			this.textBoxFileToSend.Size = new System.Drawing.Size(264, 22);
+			this.textBoxFileToSend.Size = new System.Drawing.Size(264, 26);
 			this.textBoxFileToSend.TabIndex = 7;
 			// 
 			// cntToSend
@@ -836,7 +941,7 @@
             0,
             0});
 			this.cntToSend.Name = "cntToSend";
-			this.cntToSend.Size = new System.Drawing.Size(120, 22);
+			this.cntToSend.Size = new System.Drawing.Size(120, 26);
 			this.cntToSend.TabIndex = 6;
 			this.cntToSend.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.cntToSend.ThousandsSeparator = true;
@@ -862,7 +967,7 @@
 			// 
 			this.tbProducerKey.Location = new System.Drawing.Point(107, 38);
 			this.tbProducerKey.Name = "tbProducerKey";
-			this.tbProducerKey.Size = new System.Drawing.Size(391, 22);
+			this.tbProducerKey.Size = new System.Drawing.Size(391, 26);
 			this.tbProducerKey.TabIndex = 1;
 			// 
 			// label6
@@ -871,7 +976,7 @@
 			this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label6.Location = new System.Drawing.Point(5, 73);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(87, 13);
+			this.label6.Size = new System.Drawing.Size(111, 19);
 			this.label6.TabIndex = 5;
 			this.label6.Text = "Message value:";
 			// 
@@ -881,7 +986,7 @@
 			this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label5.Location = new System.Drawing.Point(16, 42);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(77, 13);
+			this.label5.Size = new System.Drawing.Size(99, 19);
 			this.label5.TabIndex = 4;
 			this.label5.Text = "Message key:";
 			// 
@@ -891,7 +996,7 @@
 			this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label4.Location = new System.Drawing.Point(8, 14);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(85, 13);
+			this.label4.Size = new System.Drawing.Size(109, 19);
 			this.label4.TabIndex = 3;
 			this.label4.Text = "Message topic:";
 			// 
@@ -900,7 +1005,7 @@
 			this.cmbProducerTopic.FormattingEnabled = true;
 			this.cmbProducerTopic.Location = new System.Drawing.Point(107, 10);
 			this.cmbProducerTopic.Name = "cmbProducerTopic";
-			this.cmbProducerTopic.Size = new System.Drawing.Size(391, 21);
+			this.cmbProducerTopic.Size = new System.Drawing.Size(391, 27);
 			this.cmbProducerTopic.TabIndex = 0;
 			// 
 			// buttonFile
@@ -932,10 +1037,10 @@
 			// tabPageStatistics
 			// 
 			this.tabPageStatistics.Controls.Add(this._radChartView);
-			this.tabPageStatistics.Location = new System.Drawing.Point(4, 22);
+			this.tabPageStatistics.Location = new System.Drawing.Point(4, 28);
 			this.tabPageStatistics.Name = "tabPageStatistics";
 			this.tabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageStatistics.Size = new System.Drawing.Size(981, 617);
+			this.tabPageStatistics.Size = new System.Drawing.Size(981, 611);
 			this.tabPageStatistics.TabIndex = 3;
 			this.tabPageStatistics.Text = "Statistics";
 			this.tabPageStatistics.UseVisualStyleBackColor = true;
@@ -954,17 +1059,17 @@
 			this._radChartView.ShowPanZoom = true;
 			this._radChartView.ShowToolTip = true;
 			this._radChartView.ShowTrackBall = true;
-			this._radChartView.Size = new System.Drawing.Size(975, 611);
+			this._radChartView.Size = new System.Drawing.Size(975, 605);
 			this._radChartView.TabIndex = 0;
 			this._radChartView.ThemeName = "TelerikMetro";
 			// 
 			// tabPageLog
 			// 
 			this.tabPageLog.Controls.Add(this.tbConsoleLog);
-			this.tabPageLog.Location = new System.Drawing.Point(4, 22);
+			this.tabPageLog.Location = new System.Drawing.Point(4, 28);
 			this.tabPageLog.Name = "tabPageLog";
 			this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageLog.Size = new System.Drawing.Size(981, 617);
+			this.tabPageLog.Size = new System.Drawing.Size(981, 611);
 			this.tabPageLog.TabIndex = 4;
 			this.tabPageLog.Text = "Logs";
 			this.tabPageLog.UseVisualStyleBackColor = true;
@@ -979,7 +1084,7 @@
 			this.tbConsoleLog.Multiline = true;
 			this.tbConsoleLog.Name = "tbConsoleLog";
 			this.tbConsoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.tbConsoleLog.Size = new System.Drawing.Size(975, 611);
+			this.tbConsoleLog.Size = new System.Drawing.Size(975, 605);
 			this.tbConsoleLog.TabIndex = 10;
 			// 
 			// object_e312bac3_151b_4c5a_91ba_fa2dfce57017
@@ -988,113 +1093,14 @@
 			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchHorizontally = true;
 			this.object_e312bac3_151b_4c5a_91ba_fa2dfce57017.StretchVertically = true;
 			// 
-			// _dataGridViewSubscriber
-			// 
-			this._dataGridViewSubscriber.AllowUserToAddRows = false;
-			this._dataGridViewSubscriber.AllowUserToDeleteRows = false;
-			this._dataGridViewSubscriber.AllowUserToResizeRows = false;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.OldLace;
-			this._dataGridViewSubscriber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-			this._dataGridViewSubscriber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this._dataGridViewSubscriber.AutoGenerateColumns = false;
-			this._dataGridViewSubscriber.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-			this._dataGridViewSubscriber.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-			this._dataGridViewSubscriber.ColumnHeadersHeight = 25;
-			this._dataGridViewSubscriber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-			this._dataGridViewSubscriber.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TimeStamp,
-            this.Topic,
-            this.Key,
-            this.Size,
-            this.Value});
-			this._dataGridViewSubscriber.DataMember = "Messages";
-			this._dataGridViewSubscriber.DataSource = this._consumerDataSet;
-			this._dataGridViewSubscriber.Location = new System.Drawing.Point(5, 42);
-			this._dataGridViewSubscriber.Name = "_dataGridViewSubscriber";
-			this._dataGridViewSubscriber.ReadOnly = true;
-			this._dataGridViewSubscriber.RowHeadersVisible = false;
-			this._dataGridViewSubscriber.RowHeadersWidth = 30;
-			this._dataGridViewSubscriber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this._dataGridViewSubscriber.ShowCellToolTips = false;
-			this._dataGridViewSubscriber.Size = new System.Drawing.Size(980, 543);
-			this._dataGridViewSubscriber.TabIndex = 22;
-			this._dataGridViewSubscriber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubscriber_CellDoubleClick);
-			this._dataGridViewSubscriber.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridViewSubscriber_CellToolTipTextNeeded);
-			// 
-			// TimeStamp
-			// 
-			this.TimeStamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.TimeStamp.DataPropertyName = "Recived";
-			dataGridViewCellStyle2.Format = "dd.MM.yyyy HH:mm:ss.FFFF";
-			dataGridViewCellStyle2.NullValue = null;
-			this.TimeStamp.DefaultCellStyle = dataGridViewCellStyle2;
-			this.TimeStamp.HeaderText = "TimeStamp";
-			this.TimeStamp.Name = "TimeStamp";
-			this.TimeStamp.ReadOnly = true;
-			this.TimeStamp.Width = 88;
-			// 
-			// Topic
-			// 
-			this.Topic.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.Topic.DataPropertyName = "Topic";
-			this.Topic.HeaderText = "Topic";
-			this.Topic.Name = "Topic";
-			this.Topic.ReadOnly = true;
-			this.Topic.Width = 59;
-			// 
-			// Key
-			// 
-			this.Key.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.Key.DataPropertyName = "Key";
-			this.Key.HeaderText = "Key";
-			this.Key.Name = "Key";
-			this.Key.ReadOnly = true;
-			this.Key.Width = 49;
-			// 
-			// Size
-			// 
-			this.Size.DataPropertyName = "Size";
-			this.Size.HeaderText = "Size";
-			this.Size.Name = "Size";
-			this.Size.ReadOnly = true;
-			this.Size.Width = 52;
-			// 
-			// Value
-			// 
-			this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Value.DataPropertyName = "Value";
-			this.Value.HeaderText = "Value";
-			this.Value.Name = "Value";
-			this.Value.ReadOnly = true;
-			// 
-			// _consumerDataSet
-			// 
-			this._consumerDataSet.DataSetName = "ConsumerDataSet";
-			this._consumerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			// 
 			// messagesBindingSource
 			// 
 			this.messagesBindingSource.DataMember = "Messages";
 			this.messagesBindingSource.DataSource = this._consumerDataSet;
 			// 
-			// tbTopicInfo
-			// 
-			this.tbTopicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.tbTopicInfo.BackColor = System.Drawing.SystemColors.Control;
-			this.tbTopicInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.tbTopicInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
-			this.tbTopicInfo.Location = new System.Drawing.Point(62, 484);
-			this.tbTopicInfo.Multiline = true;
-			this.tbTopicInfo.Name = "tbTopicInfo";
-			this.tbTopicInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.tbTopicInfo.Size = new System.Drawing.Size(538, 130);
-			this.tbTopicInfo.TabIndex = 10;
-			// 
 			// MainForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(989, 644);
 			this.Controls.Add(this.tabControl);
@@ -1129,6 +1135,8 @@
 			this.groupBoxTime.PerformLayout();
 			this.tabPageSubsriber.ResumeLayout(false);
 			this.tabPageSubsriber.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
 			this._panel.ResumeLayout(false);
 			this._panel.PerformLayout();
 			this._statusStrip.ResumeLayout(false);
@@ -1140,8 +1148,6 @@
 			((System.ComponentModel.ISupportInitialize)(this._radChartView)).EndInit();
 			this.tabPageLog.ResumeLayout(false);
 			this.tabPageLog.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this._dataGridViewSubscriber)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this._consumerDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.messagesBindingSource)).EndInit();
 			this.ResumeLayout(false);
 

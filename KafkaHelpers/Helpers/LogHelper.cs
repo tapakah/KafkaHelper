@@ -13,7 +13,7 @@ namespace KafkaHelpers.Helpers
 
 		public static void AppendLog(string message)
 		{
-			log.AppendLine(message) ;
+			log.AppendLine($"[{DateTime.Now.ToString("dd.MM.yy HH:mm:ss:ffff")}]{message}") ;
 		}
 
 		public static void ClearLog()
