@@ -502,6 +502,13 @@ namespace KafkaHelpers
 
 					if (_consumerDataSet.Messages.Rows.Count > settingTerms.MaxRows)
 					{
+						var errMessage = $"Max rows limit reached {settingTerms.MaxRows}. Unsubscribe.";
+						MessageBox.Show(
+										errMessage,
+										"KafkaException",
+										MessageBoxButtons.OK,
+										MessageBoxIcon.Error
+										);
 						UnSubscribe();
 						return;
 					}

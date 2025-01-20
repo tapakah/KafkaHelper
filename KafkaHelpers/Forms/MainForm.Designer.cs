@@ -202,7 +202,7 @@
 			this.tbTopicInfo.Multiline = true;
 			this.tbTopicInfo.Name = "tbTopicInfo";
 			this.tbTopicInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.tbTopicInfo.Size = new System.Drawing.Size(538, 130);
+			this.tbTopicInfo.Size = new System.Drawing.Size(538, 118);
 			this.tbTopicInfo.TabIndex = 10;
 			// 
 			// btn_Setting
@@ -1232,11 +1232,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn Topic;
         private System.Windows.Forms.DataGridViewTextBoxColumn Key;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MainSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 		private System.Windows.Forms.TabPage tabPageLog;
 		private System.Windows.Forms.TextBox tbConsoleLog;
 		private System.Windows.Forms.TextBox tbTopicInfo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Size;
 	}
 }
 

@@ -14,7 +14,7 @@ namespace KafkaHelpers.Helpers
 
 		public static void AppendLog(string message)
 		{
-			log.AppendLine($"[{DateTime.Now.ToString("dd.MM.yy HH:mm:ss:ffff")}]{message}") ;
+			log.AppendLine($"[{DateTime.Now.ToString("dd.MM.yy HH:mm:ss:ffff")}]{message}");
 			RemoveExcessLines(log, MAXLINES);
 		}
 
@@ -30,18 +30,30 @@ namespace KafkaHelpers.Helpers
 
 		static void RemoveExcessLines(StringBuilder sb, int maxLines)
 		{
-			string[] lines = sb.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-			if (lines.Length > maxLines)
+			try
 			{
-				string[] lastLines = lines.Skip(lines.Length - maxLines).ToArray();
-
-				sb.Clear();
-				foreach (string line in lastLines)
+				if (sb == null || sb.Length == 0)
 				{
-					sb.AppendLine(line);
+					throw new InvalidOperationException("No lines were found in the log.");
+				}
+				else
+				{
+					string content = sb.ToString().Replace("\r\n", "\n").Replace("\r", "\n");
+					string[] lines = content.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+					if (lines.Length > maxLines)
+					{
+						string[] lastLines = lines.Skip(lines.Length - maxLines).ToArray();
+
+						sb.Clear();
+						foreach (string line in lastLines)
+						{
+							sb.AppendLine(line);
+						}
+					}
 				}
 			}
+			catch { }
 		}
 	}
 }
